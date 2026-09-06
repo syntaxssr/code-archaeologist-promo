@@ -1,4 +1,5 @@
-import { WireframeBlock } from "./WireframeBlock";
+import { UserRound } from "lucide-react";
+import { SectionHeading } from "./SectionHeading";
 
 const team = [
   { name: "ณัฐวุฒิ รอดทอง (อุด้ง)", role: "Lead Tech — Skill Development" },
@@ -7,20 +8,24 @@ const team = [
 
 export function Team() {
   return (
-    <WireframeBlock id="team" index="07" title="Team">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {team.map((member) => (
-          <div
-            key={member.name}
-            className="flex h-32 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-white/20 text-center"
-          >
-            <span className="text-sm font-medium text-white/80">
-              {member.name}
-            </span>
-            <span className="text-xs text-white/50">{member.role}</span>
-          </div>
-        ))}
+    <section id="team" className="scroll-mt-20 bg-white px-6 py-24">
+      <div className="mx-auto max-w-4xl">
+        <SectionHeading kicker="Team 3" title="ทีมของเรา" />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {team.map((m) => (
+            <div
+              key={m.name}
+              className="flex flex-col items-center gap-3 rounded-2xl bg-[#F7F5FF] p-8 text-center"
+            >
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-700">
+                <UserRound className="text-white" size={30} />
+              </div>
+              <p className="font-bold text-[#18181B]">{m.name}</p>
+              <p className="text-sm text-[#6B7280]">{m.role}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </WireframeBlock>
+    </section>
   );
 }
