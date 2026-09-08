@@ -11,7 +11,6 @@ const links = [
   { href: "#features", label: "Features" },
   { href: "#demo", label: "Demo" },
   { href: "#impact", label: "Impact" },
-  { href: "#team", label: "Team" },
 ];
 
 const REPO = "https://github.com/non-nattawut/Code-Archaeologist-LLM-Agent-Skill";
@@ -38,11 +37,7 @@ export function Nav() {
         if (s.getBoundingClientRect().top <= line) current = `#${s.id}`;
       }
 
-      // The last section can never reach the line — the page runs out of scroll
-      // first — so at the bottom, light it regardless.
-      const atBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
-      setActive(atBottom ? `#${sections[sections.length - 1].id}` : current);
+      setActive(current);
     };
 
     const onScroll = () => {
