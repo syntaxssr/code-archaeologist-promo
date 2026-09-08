@@ -1,49 +1,58 @@
 import { PlayCircle } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { ButtonLink } from "./ui/Button";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-[#0a0a0f] px-6 text-center"
+      className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-bg px-6 text-center"
     >
+      {/* Warm light from above the trench, fading into the ground. */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 70% 20%, rgba(139,92,246,0.25), transparent 45%), radial-gradient(circle at 20% 80%, rgba(109,40,217,0.2), transparent 45%)",
+            "radial-gradient(ellipse 70% 45% at 50% -5%, rgba(245,158,11,0.16), transparent 70%)",
         }}
       />
-      <span className="relative z-10 text-xs font-semibold tracking-[0.2em] text-violet-400">
-        ICONEXT AI CHALLENGE DAY 2026 &middot; TEAM 3
+      {/* Strata receding into the dark. */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
+        style={{
+          background:
+            "repeating-linear-gradient(to bottom, rgba(68,64,60,0.35) 0 1px, transparent 1px 88px)",
+          maskImage: "linear-gradient(to bottom, transparent, black)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black)",
+        }}
+      />
+
+      <span className="relative z-10 font-mono text-xs font-medium tracking-[0.18em] text-accent">
+        ICONEXT AI CHALLENGE DAY 2026 · TEAM 3
       </span>
-      <h1 className="relative z-10 mt-6 text-5xl font-bold text-white sm:text-6xl">
+      <h1 className="relative z-10 mt-6 font-mono text-5xl font-bold tracking-[-0.02em] text-fg sm:text-6xl">
         Code Archaeologist
       </h1>
-      <p className="relative z-10 mt-6 max-w-xl text-lg text-white/60">
-        Agent Skill ที่ให้ AI เข้าใจสถาปัตยกรรมทั้ง repo
-        โดยไม่ต้องอ่านโค้ดทั้งหมด — Zero-RAG, deterministic, 90%+ token ที่ลดลง
+      <p className="relative z-10 mt-6 max-w-xl text-lg leading-[1.7] text-fg-muted">
+        ขุดค้นสถาปัตยกรรมของ repo ทีละชั้น ให้ AI เข้าใจโค้ดทั้งโปรเจ็ค
+        โดยไม่ต้องอ่านทั้งหมด — Zero-RAG, deterministic, ลด token กว่า 90%
       </p>
-      <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="#how-it-works"
-          className="flex items-center gap-2 rounded-md bg-violet-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-violet-400"
-        >
-          <PlayCircle size={18} />
+      <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-4">
+        <ButtonLink href="#how-it-works">
+          <PlayCircle size={18} strokeWidth={1.8} />
           ดูวิธีทำงาน
-        </a>
-        <a
+        </ButtonLink>
+        <ButtonLink
           href="https://github.com/non-nattawut/Code-Archaeologist-LLM-Agent-Skill"
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-2 rounded-md border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-violet-400/60 hover:text-white"
+          variant="ghost"
+          external
         >
           <GithubIcon size={18} />
           GitHub
-        </a>
+        </ButtonLink>
       </div>
-      <p className="relative z-10 mt-14 text-xs text-white/30">
-        พีรพล จันทะแจ่ม (BB) &middot; ณัฐวุฒิ รอดทอง (อุด้ง)
+      <p className="relative z-10 mt-14 text-xs text-fg-faint">
+        พีรพล จันทะแจ่ม (BB) · ณัฐวุฒิ รอดทอง (อุด้ง)
       </p>
     </section>
   );

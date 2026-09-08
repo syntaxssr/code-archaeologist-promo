@@ -7,7 +7,10 @@ import {
   Flame,
   type LucideIcon,
 } from "lucide-react";
-import { SectionHeading } from "./SectionHeading";
+import { Section } from "./ui/Section";
+import { SectionHeading } from "./ui/SectionHeading";
+import { Card } from "./ui/Card";
+import { IconBadge } from "./ui/IconBadge";
 
 const features: { title: string; desc: string; icon: LucideIcon }[] = [
   { title: "Structure Map", desc: "class-level: ใครอ้างอิงใคร", icon: Network },
@@ -20,26 +23,19 @@ const features: { title: string; desc: string; icon: LucideIcon }[] = [
 
 export function Features() {
   return (
-    <section id="features" className="scroll-mt-20 bg-[#F7F5FF] px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading kicker="Key Features" title="6 ความสามารถหลัก" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-2xl bg-white p-6 shadow-sm shadow-violet-900/5"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-violet-700">
-                <f.icon className="text-white" size={20} />
-              </div>
-              <h3 className="mt-4 text-base font-bold text-[#18181B]">
-                {f.title}
-              </h3>
-              <p className="mt-1.5 text-sm text-[#6B7280]">{f.desc}</p>
-            </div>
-          ))}
-        </div>
+    <Section id="features">
+      <SectionHeading kicker="Key Features" title="6 ความสามารถหลัก" />
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <Card key={f.title}>
+            <IconBadge icon={f.icon} />
+            <h3 className="mt-4 font-mono text-base font-semibold text-fg">
+              {f.title}
+            </h3>
+            <p className="mt-1.5 text-sm leading-[1.7] text-fg-muted">{f.desc}</p>
+          </Card>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

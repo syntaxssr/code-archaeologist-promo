@@ -1,5 +1,8 @@
 import { AlertTriangle } from "lucide-react";
-import { SectionHeading } from "./SectionHeading";
+import { Section } from "./ui/Section";
+import { SectionHeading } from "./ui/SectionHeading";
+import { Card } from "./ui/Card";
+import { IconBadge } from "./ui/IconBadge";
 
 const bullets = [
   "คำถามเชิงสถาปัตยกรรม เช่น “controller เชื่อมกับ database ยังไง” ต้องให้ agent อ่านทั้ง repository",
@@ -9,34 +12,31 @@ const bullets = [
 
 export function Problem() {
   return (
-    <section
-      id="problem"
-      className="scroll-mt-20 bg-white px-6 py-24"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading kicker="The Problem" title="Agent อ่านโค้ดทั้ง repo เพื่อตอบคำถามเดียว" center={false} />
-        <div className="mt-12 grid gap-10 sm:grid-cols-[1.3fr_1fr]">
-          <ul className="space-y-5">
-            {bullets.map((b) => (
-              <li key={b} className="flex gap-3 text-base leading-relaxed text-[#18181B]">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col items-center justify-center rounded-2xl bg-[#F7F5FF] p-8 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-600">
-              <AlertTriangle className="text-white" size={28} />
-            </div>
-            <p className="mt-5 text-5xl font-bold text-violet-700">90%+</p>
-            <p className="mt-3 text-sm text-[#6B7280]">
-              token ที่เสียไปโดยไม่จำเป็น
-              <br />
-              เมื่อ agent อ่านซอร์สทั้ง repo
-            </p>
-          </div>
-        </div>
+    <Section id="problem" tone="layer">
+      <SectionHeading
+        kicker="The Problem"
+        title="Agent อ่านโค้ดทั้ง repo เพื่อตอบคำถามเดียว"
+        center={false}
+      />
+      <div className="mt-12 grid gap-10 sm:grid-cols-[1.3fr_1fr]">
+        <ul className="space-y-5">
+          {bullets.map((b) => (
+            <li key={b} className="flex gap-3.5 leading-[1.7] text-fg-muted">
+              <span className="mt-3 h-px w-4 shrink-0 bg-accent" />
+              {b}
+            </li>
+          ))}
+        </ul>
+        <Card className="flex flex-col items-center justify-center text-center">
+          <IconBadge icon={AlertTriangle} size={56} />
+          <p className="mt-5 font-mono text-5xl font-bold text-accent">90%+</p>
+          <p className="mt-3 text-sm leading-[1.7] text-fg-muted">
+            token ที่เสียไปโดยไม่จำเป็น
+            <br />
+            เมื่อ agent อ่านซอร์สทั้ง repo
+          </p>
+        </Card>
       </div>
-    </section>
+    </Section>
   );
 }

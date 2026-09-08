@@ -1,5 +1,8 @@
 import { UserRound } from "lucide-react";
-import { SectionHeading } from "./SectionHeading";
+import { Section } from "./ui/Section";
+import { SectionHeading } from "./ui/SectionHeading";
+import { Card } from "./ui/Card";
+import { IconBadge } from "./ui/IconBadge";
 
 const team = [
   { name: "ณัฐวุฒิ รอดทอง (อุด้ง)", role: "Lead Tech — Skill Development" },
@@ -8,24 +11,17 @@ const team = [
 
 export function Team() {
   return (
-    <section id="team" className="scroll-mt-20 bg-white px-6 py-24">
-      <div className="mx-auto max-w-4xl">
-        <SectionHeading kicker="Team 3" title="ทีมของเรา" />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {team.map((m) => (
-            <div
-              key={m.name}
-              className="flex flex-col items-center gap-3 rounded-2xl bg-[#F7F5FF] p-8 text-center"
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-700">
-                <UserRound className="text-white" size={30} />
-              </div>
-              <p className="font-bold text-[#18181B]">{m.name}</p>
-              <p className="text-sm text-[#6B7280]">{m.role}</p>
-            </div>
-          ))}
-        </div>
+    <Section id="team" tone="layer" width="narrow">
+      <SectionHeading kicker="Team 3" title="ทีมของเรา" />
+      <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        {team.map((m) => (
+          <Card key={m.name} className="flex flex-col items-center gap-3 text-center">
+            <IconBadge icon={UserRound} size={56} />
+            <p className="mt-2 font-semibold text-fg">{m.name}</p>
+            <p className="font-mono text-xs text-fg-muted">{m.role}</p>
+          </Card>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

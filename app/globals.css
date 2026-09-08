@@ -1,19 +1,77 @@
 @import "tailwindcss";
 
+/* Design tokens — see design-system/MASTER.md. Do not hardcode brand colors in components. */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --bg: #0c0a09;
+  --layer: #131110;
+  --surface: #1c1917;
+  --surface-2: #292524;
+  --border: #44403c;
+  --border-soft: #292524;
+
+  --fg: #fafaf9;
+  --fg-muted: #a8a29e;
+  --fg-faint: #78716c;
+
+  --accent: #f59e0b;
+  --accent-hover: #fbbf24;
+  --accent-deep: #b45309;
+  --on-accent: #1c1917;
+
+  --success: #84cc16;
+  --danger: #dc2626;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-layer: var(--layer);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-deep: var(--accent-deep);
+  --color-on-accent: var(--on-accent);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-plex-thai), var(--font-plex-sans);
+  --font-mono: var(--font-jetbrains);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-plex-thai), var(--font-plex-sans), system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+/* Stratum rule — the one repeated motif. Sits above a section kicker. */
+.stratum {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0,
+    var(--accent) 28px,
+    var(--border) 28px,
+    var(--border) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
