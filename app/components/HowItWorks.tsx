@@ -3,32 +3,14 @@ import { Section } from "./ui/Section";
 import { SectionHeading } from "./ui/SectionHeading";
 import { IconBadge } from "./ui/IconBadge";
 
+// One action per step. The mechanism behind them is argued in Solution above —
+// repeating it here just made the page say the same thing twice.
 const steps = [
-  {
-    label: "Source",
-    icon: FileCode2,
-    desc: "รับ repo ทั้งก้อน ไม่ต้องตั้ง server ไม่ต้อง index ล่วงหน้า",
-  },
-  {
-    label: "Scan (AST)",
-    icon: Search,
-    desc: "แยกเป็น entity ตาม AST — class, method อยู่ครบทั้งก้อน ไม่โดนตัดกลาง scope",
-  },
-  {
-    label: "Graph",
-    icon: Waypoints,
-    desc: "เขียนเป็น Markdown note เชื่อมกันด้วย [[wikilink]] + dependency edge",
-  },
-  {
-    label: "Trace",
-    icon: Route,
-    desc: "BFS ไล่จากจุดตั้งต้น ได้ path จริง ไม่ใช่ similarity search",
-  },
-  {
-    label: "Answer",
-    icon: CheckCircle2,
-    desc: "ตอบพร้อม path ที่อ้างอิงได้ อ่านเฉพาะ node บนเส้นทางนั้น",
-  },
+  { label: "Source", icon: FileCode2, desc: "ชี้ไปที่ repo ไม่ต้องตั้ง server" },
+  { label: "Scan (AST)", icon: Search, desc: "แยกเป็น entity ตามโครงสร้างจริงของภาษา" },
+  { label: "Graph", icon: Waypoints, desc: "เขียนความสัมพันธ์ทุกเส้นลงเป็น note" },
+  { label: "Trace", icon: Route, desc: "ไล่ตาม edge จากจุดตั้งต้นไปจนสุดปลายทาง" },
+  { label: "Answer", icon: CheckCircle2, desc: "ตอบพร้อม path ที่ตรวจย้อนได้" },
 ];
 
 export function HowItWorks() {

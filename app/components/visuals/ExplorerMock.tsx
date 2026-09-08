@@ -37,11 +37,12 @@ const edges = [
   ["svc", "mail", false],
 ] as const;
 
+// Concrete results, not a second copy of the feature list in the section above.
 const findings = [
-  { label: "Blast radius", value: "7 ไฟล์" },
-  { label: "Health grade", value: "C" },
-  { label: "Security", value: "1 eval sink" },
-  { label: "Hotspot rank", value: "#2" },
+  { label: "แก้ไฟล์นี้ กระทบ", value: "7 ไฟล์ · 12 method" },
+  { label: "เกรด", value: "C — god object, 340 บรรทัด" },
+  { label: "พบ", value: "eval() บรรทัด 142" },
+  { label: "แก้ไปแล้ว", value: "23 ครั้งใน 90 วัน" },
 ];
 
 function nodeById(id: string) {

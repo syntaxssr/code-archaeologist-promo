@@ -17,7 +17,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-xl border p-7 transition-colors duration-200 ${
+      className={`rounded-xl border p-5 transition-colors duration-200 sm:p-7 ${
         accent ? "border-accent-deep bg-surface" : "border-border-soft bg-surface"
       } ${hover ? "hover:border-border" : ""} ${className ?? ""}`}
     >

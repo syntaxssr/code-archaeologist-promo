@@ -19,7 +19,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`scroll-mt-20 px-6 py-24 ${tone === "layer" ? "bg-layer" : "bg-bg"}`}
+      className={`scroll-mt-20 px-6 py-16 sm:py-24 ${tone === "layer" ? "bg-layer" : "bg-bg"}`}
     >
       <Reveal className={`mx-auto ${width === "narrow" ? "max-w-4xl" : "max-w-6xl"}`}>
         {children}

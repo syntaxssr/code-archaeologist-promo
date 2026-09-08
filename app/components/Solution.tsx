@@ -1,8 +1,7 @@
-import { AlertTriangle } from "lucide-react";
 import { Section } from "./ui/Section";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Card } from "./ui/Card";
-import { IconBadge } from "./ui/IconBadge";
+import { WikiNote } from "./visuals/WikiNote";
 
 const problems = [
   "คำถามเชิงสถาปัตยกรรม เช่น “controller เชื่อมกับ database ยังไง” ต้องให้ agent ไล่อ่านทั้ง repository",
@@ -62,15 +61,7 @@ export function Solution() {
           </p>
         </div>
 
-        <Card className="flex flex-col items-center justify-center text-center">
-          <IconBadge icon={AlertTriangle} size={56} />
-          <p className="mt-5 font-mono text-5xl font-bold text-accent">90%+</p>
-          <p className="mt-3 text-sm leading-[1.7] text-fg-muted">
-            token ที่เสียไปโดยไม่จำเป็น
-            <br />
-            เมื่อ agent อ่านซอร์สทั้ง repo
-          </p>
-        </Card>
+        <WikiNote />
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

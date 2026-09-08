@@ -3,8 +3,8 @@ import { Section } from "./ui/Section";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Card } from "./ui/Card";
 
+// The token saving is the bar above — it does not need a card restating it.
 const stats = [
-  { value: "90%+", label: "Token ที่ลดลง เทียบกับอ่าน source ทั้งไฟล์" },
   { value: "A–F", label: "Health grade ประเมินคุณภาพสถาปัตยกรรมอัตโนมัติ" },
   { value: "0", label: "External dependency — Python stdlib ล้วน ติดตั้งเร็ว" },
 ];
@@ -44,7 +44,7 @@ export function Impact() {
         ))}
       </div>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-3">
+      <div className="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-2">
         {stats.map((s) => (
           <Card key={s.label} className="text-center">
             <p className="font-mono text-5xl font-bold text-accent">{s.value}</p>
@@ -52,7 +52,7 @@ export function Impact() {
           </Card>
         ))}
       </div>
-      <div className="mt-5 rounded-xl border border-accent-deep bg-surface p-7">
+      <div className="mx-auto mt-5 max-w-3xl rounded-xl border border-accent-deep bg-surface p-5 sm:p-7">
         <p className="font-semibold text-fg">
           ตรงกับเกณฑ์ &ldquo;Impact ต่อบริษัท&rdquo; ของงานนี้
         </p>
