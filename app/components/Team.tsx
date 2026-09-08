@@ -11,7 +11,7 @@ const team = [
 
 export function Team() {
   return (
-    <Section id="team" tone="layer" width="narrow">
+    <Section id="team" width="narrow">
       <SectionHeading kicker="Team 3" title="ทีมของเรา" />
       <div className="mt-12 grid gap-6 sm:grid-cols-2">
         {team.map((m) => (

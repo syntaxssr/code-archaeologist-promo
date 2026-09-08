@@ -6,7 +6,6 @@ import { GithubIcon } from "./icons/GithubIcon";
 import { Logo } from "./brand/Logo";
 
 const links = [
-  { href: "#problem", label: "Problem" },
   { href: "#solution", label: "Solution" },
   { href: "#how-it-works", label: "How it Works" },
   { href: "#features", label: "Features" },

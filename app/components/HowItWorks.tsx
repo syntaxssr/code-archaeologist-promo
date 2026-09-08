@@ -33,7 +33,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <Section id="how-it-works" tone="layer">
+    <Section id="how-it-works">
       <SectionHeading kicker="How it Works" title="จาก Source ถึงคำตอบ ใน 5 ขั้น" />
 
       <ol className="mx-auto mt-14 max-w-3xl">

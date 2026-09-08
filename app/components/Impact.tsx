@@ -13,7 +13,7 @@ const criteria = ["ลดเวลาทำงาน", "ลดต้นทุน
 
 export function Impact() {
   return (
-    <Section id="impact">
+    <Section id="impact" tone="layer">
       <SectionHeading kicker="Impact" title="ผลลัพธ์ที่วัดได้" />
 
       {/* Before / after, at the same scale — the whole argument in one picture. */}

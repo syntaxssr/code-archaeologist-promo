@@ -4,7 +4,7 @@ import { ExplorerMock } from "./visuals/ExplorerMock";
 
 export function Demo() {
   return (
-    <Section id="demo" tone="layer">
+    <Section id="demo">
       <SectionHeading kicker="Demo" title="Explorer — ไฟล์ HTML เดียว เปิดดูได้เลย" />
       <div className="mx-auto mt-12 max-w-5xl">
         <ExplorerMock />

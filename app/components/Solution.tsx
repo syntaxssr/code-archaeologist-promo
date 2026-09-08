@@ -1,6 +1,13 @@
+import { AlertTriangle } from "lucide-react";
 import { Section } from "./ui/Section";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Card } from "./ui/Card";
+import { IconBadge } from "./ui/IconBadge";
+
+const problems = [
+  "คำถามเชิงสถาปัตยกรรม เช่น “controller เชื่อมกับ database ยังไง” ต้องให้ agent ไล่อ่านทั้ง repository",
+  "RAG แบบ chunk ตัดโค้ดเป็นก้อน ~500 token ทำลาย function scope และ call hierarchy",
+];
 
 const cards = [
   {
@@ -27,18 +34,46 @@ const cards = [
 
 export function Solution() {
   return (
-    <Section id="solution">
-      <SectionHeading kicker="The Solution" title="Code Archaeologist คืออะไร" />
-      <p className="mx-auto mt-7 max-w-2xl leading-[1.7] text-fg-muted">
-        สแกนโค้ดเบสด้วย AST แปลงเป็น Markdown wiki ที่เชื่อมกันด้วย{" "}
-        <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-accent">
-          [[wikilink]]
-        </code>{" "}
-        พร้อม dependency graph ที่ agent เรียก query ได้ตรงๆ แบบ{" "}
-        <strong className="font-semibold text-fg">Zero-RAG</strong> — ไม่ต้องเดา
-        ไม่ต้อง similarity search
-      </p>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
+    <Section id="solution" tone="layer">
+      <SectionHeading
+        kicker="Problem → Solution"
+        title="Agent อ่านโค้ดทั้ง repo เพื่อตอบคำถามเดียว"
+        center={false}
+      />
+
+      <div className="mt-10 grid gap-10 sm:grid-cols-[1.3fr_1fr]">
+        <div>
+          <ul className="space-y-5">
+            {problems.map((p) => (
+              <li key={p} className="flex gap-3.5 leading-[1.7] text-fg-muted">
+                <span className="mt-3 h-px w-4 shrink-0 bg-accent" />
+                {p}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 leading-[1.7] text-fg-muted">
+            Code Archaeologist สแกนโค้ดเบสด้วย AST แปลงเป็น Markdown wiki ที่เชื่อมกันด้วย{" "}
+            <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-accent">
+              [[wikilink]]
+            </code>{" "}
+            พร้อม dependency graph ที่ agent เรียก query ได้ตรงๆ แบบ{" "}
+            <strong className="font-semibold text-fg">Zero-RAG</strong> — ไม่ต้องเดา
+            ไม่ต้อง similarity search
+          </p>
+        </div>
+
+        <Card className="flex flex-col items-center justify-center text-center">
+          <IconBadge icon={AlertTriangle} size={56} />
+          <p className="mt-5 font-mono text-5xl font-bold text-accent">90%+</p>
+          <p className="mt-3 text-sm leading-[1.7] text-fg-muted">
+            token ที่เสียไปโดยไม่จำเป็น
+            <br />
+            เมื่อ agent อ่านซอร์สทั้ง repo
+          </p>
+        </Card>
+      </div>
+
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {cards.map((c) => (
           <Card key={c.title} accent={c.ours}>
             <h3
