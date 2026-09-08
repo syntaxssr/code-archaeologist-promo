@@ -21,19 +21,19 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
         style={{
           background:
-            "repeating-linear-gradient(to bottom, rgba(68,64,60,0.35) 0 1px, transparent 1px 88px)",
+            "repeating-linear-gradient(to bottom, rgba(68,64,60,0.22) 0 1px, transparent 1px 112px)",
           maskImage: "linear-gradient(to bottom, transparent, black)",
           WebkitMaskImage: "linear-gradient(to bottom, transparent, black)",
         }}
       />
 
-      <span className="relative z-10 font-mono text-xs font-medium tracking-[0.18em] text-accent">
+      <span className="relative z-10 font-mono text-[11px] font-medium tracking-[0.18em] text-accent sm:text-xs">
         ICONEXT AI CHALLENGE DAY 2026 · TEAM 3
       </span>
-      <h1 className="relative z-10 mt-6 font-mono text-5xl font-bold tracking-[-0.02em] text-fg sm:text-6xl">
+      <h1 className="relative z-10 mt-6 font-mono text-4xl font-bold tracking-[-0.02em] text-fg sm:text-5xl lg:text-6xl">
         Code Archaeologist
       </h1>
-      <p className="relative z-10 mt-6 max-w-xl text-lg leading-[1.7] text-fg-muted">
+      <p className="relative z-10 mt-6 max-w-xl leading-[1.7] text-fg-muted sm:text-lg">
         ขุดค้นสถาปัตยกรรมของ repo ทีละชั้น ให้ AI เข้าใจโค้ดทั้งโปรเจ็ค
         โดยไม่ต้องอ่านทั้งหมด — Zero-RAG, deterministic, ลด token กว่า 90%
       </p>

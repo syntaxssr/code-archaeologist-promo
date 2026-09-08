@@ -27,7 +27,7 @@ export function Features() {
       <SectionHeading kicker="Key Features" title="6 ความสามารถหลัก" />
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f) => (
-          <Card key={f.title}>
+          <Card key={f.title} hover>
             <IconBadge icon={f.icon} />
             <h3 className="mt-4 font-mono text-base font-semibold text-fg">
               {f.title}

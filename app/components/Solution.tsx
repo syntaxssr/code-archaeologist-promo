@@ -43,7 +43,7 @@ export function Solution() {
           <Card key={c.title} accent={c.ours}>
             <h3
               className={`font-mono text-lg font-semibold ${
-                c.ours ? "text-accent" : "text-fg-faint"
+                c.ours ? "text-accent" : "text-fg-muted"
               }`}
             >
               {c.title}

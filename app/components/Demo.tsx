@@ -9,18 +9,18 @@ export function Demo() {
       <SectionHeading kicker="Demo" title="Explorer — ไฟล์ HTML เดียว เปิดดูได้เลย" />
       {/* Placeholder frame — swap for the real Explorer screenshot once อุด้ง sends it. */}
       <div className="mx-auto mt-12 flex h-96 max-w-5xl overflow-hidden rounded-xl border border-border-soft bg-surface">
-        <div className="w-[20%] border-r border-border-soft p-4 font-mono text-xs text-fg-faint">
+        <div className="w-[20%] border-r border-border-soft p-4 font-mono text-xs text-fg-muted">
           Health A&ndash;
           <br />
           File Tree
         </div>
         <div className="flex flex-1 flex-col items-center justify-center gap-3 border-r border-border-soft">
           <IconBadge icon={Waypoints} size={56} />
-          <span className="font-mono text-xs text-fg-faint">
+          <span className="font-mono text-xs text-fg-muted">
             Graph View (force / tree / matrix / flow)
           </span>
         </div>
-        <div className="w-[24%] p-4 font-mono text-xs text-fg-faint">
+        <div className="w-[24%] p-4 font-mono text-xs text-fg-muted">
           FILE / PATTERNS
           <br />/ SECURITY
         </div>

@@ -41,7 +41,7 @@ per section worth remembering. Never as a background wash.
 | `--color-border-soft` | `#292524` | Low-emphasis dividers |
 | `--color-fg` | `#FAFAF9` | Primary text |
 | `--color-fg-muted` | `#A8A29E` | Secondary text, captions |
-| `--color-fg-faint` | `#78716C` | Metadata, footers, disabled |
+| `--color-fg-faint` | `#8C847E` | Metadata, footers, disabled |
 | `--color-accent` | `#F59E0B` | Primary CTA, active nav, key stat, the "find" |
 | `--color-accent-hover` | `#FBBF24` | Hover / focus state of accent surfaces |
 | `--color-accent-deep` | `#B45309` | Accent borders, pressed state, gradient far stop |
@@ -53,7 +53,8 @@ per section worth remembering. Never as a background wash.
 
 - One accent. If something needs a second color, it needs a different weight or size instead.
 - Amber fill always carries `--color-on-accent` text, never white (`#F59E0B` + white = 2.1:1, fails WCAG).
-- `--color-fg-muted` on `--color-bg` = 9.1:1, safe for body text. `--color-fg-faint` is 5.4:1 — captions only, never body.
+- Every text token clears WCAG AA (4.5:1) on every ground it is allowed on — verified with axe-core, not by eye. `fg-muted` is 6.9:1 on `surface`; `fg-faint` is 5.4:1 on `bg`, 5.1:1 on `layer`, 4.8:1 on `surface`; amber is 9.2:1 on `bg`, and `on-accent` is 8.1:1 on an amber fill.
+- `fg-faint` is for metadata and captions regardless — it passes, but it is not a body-text color.
 - Depth comes from surface steps (`bg → surface → surface-2`), not from shadows. Shadows on a warm-black ground read as smudges.
 
 ## 3. Typography

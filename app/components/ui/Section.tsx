@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "./Reveal";
 
 /**
  * Page section on one of the two grounds — see design-system/MASTER.md §2.
@@ -20,9 +21,9 @@ export function Section({
       id={id}
       className={`scroll-mt-20 px-6 py-24 ${tone === "layer" ? "bg-layer" : "bg-bg"}`}
     >
-      <div className={`mx-auto ${width === "narrow" ? "max-w-4xl" : "max-w-6xl"}`}>
+      <Reveal className={`mx-auto ${width === "narrow" ? "max-w-4xl" : "max-w-6xl"}`}>
         {children}
-      </div>
+      </Reveal>
     </section>
   );
 }

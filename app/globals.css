@@ -11,7 +11,7 @@
 
   --fg: #fafaf9;
   --fg-muted: #a8a29e;
-  --fg-faint: #78716c;
+  --fg-faint: #8c847e;
 
   --accent: #f59e0b;
   --accent-hover: #fbbf24;
@@ -46,6 +46,17 @@
   --font-mono: var(--font-jetbrains);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Amber ring, matching the accent — never remove the focus indicator. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -68,6 +79,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {

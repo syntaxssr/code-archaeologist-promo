@@ -6,18 +6,20 @@ import type { ReactNode } from "react";
  */
 export function Card({
   accent = false,
+  hover = false,
   className,
   children,
 }: {
   accent?: boolean;
+  hover?: boolean;
   className?: string;
   children: ReactNode;
 }) {
   return (
     <div
-      className={`rounded-xl border p-7 ${
+      className={`rounded-xl border p-7 transition-colors duration-200 ${
         accent ? "border-accent-deep bg-surface" : "border-border-soft bg-surface"
-      } ${className ?? ""}`}
+      } ${hover ? "hover:border-border" : ""} ${className ?? ""}`}
     >
       {children}
     </div>

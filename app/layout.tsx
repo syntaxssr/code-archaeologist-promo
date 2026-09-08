@@ -38,6 +38,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="th"
       className={`${plexSans.variable} ${plexThai.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Scroll-reveal starts hidden; without JS it must never stay that way. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="min-h-full flex flex-col">
         <Nav />
         {children}

@@ -16,7 +16,7 @@ export function ButtonLink({
   children: ReactNode;
 }) {
   const base =
-    "flex cursor-pointer items-center gap-2 rounded-md px-5 py-2.5 font-mono text-sm font-semibold transition-colors duration-200";
+    "flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-5 py-2.5 font-mono text-sm font-semibold transition-colors duration-200";
   const styles =
     variant === "primary"
       ? "bg-accent text-on-accent hover:bg-accent-hover"

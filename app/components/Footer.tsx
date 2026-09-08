@@ -12,7 +12,7 @@ export function Footer() {
         href="https://github.com/non-nattawut/Code-Archaeologist-LLM-Agent-Skill"
         target="_blank"
         rel="noreferrer"
-        className="mt-5 inline-flex cursor-pointer items-center gap-2 font-mono text-sm text-fg-muted transition-colors duration-200 hover:text-accent"
+        className="mt-4 inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-fg-muted transition-colors duration-200 hover:text-accent"
       >
         <GithubIcon size={16} />
         non-nattawut/Code-Archaeologist-LLM-Agent-Skill
