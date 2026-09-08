@@ -6,9 +6,12 @@ import { GithubIcon } from "./icons/GithubIcon";
 import { Logo } from "./brand/Logo";
 
 const links = [
-  { href: "#features", label: "Features" },
+  { href: "#problem", label: "Problem" },
+  { href: "#solution", label: "Solution" },
   { href: "#how-it-works", label: "How it Works" },
+  { href: "#features", label: "Features" },
   { href: "#demo", label: "Demo" },
+  { href: "#impact", label: "Impact" },
   { href: "#team", label: "Team" },
 ];
 
@@ -19,24 +22,42 @@ export function Nav() {
   const [active, setActive] = useState<string | null>(null);
 
   // Mark the section currently under the nav, so the menu says where you are.
+  // Measured on scroll rather than by intersection ratio: neighbouring sections
+  // are often both on screen, and the taller one would win the ratio contest.
   useEffect(() => {
     const sections = links
       .map((l) => document.querySelector<HTMLElement>(l.href))
       .filter((el): el is HTMLElement => el !== null);
-    if (sections.length === 0 || typeof IntersectionObserver === "undefined") return;
+    if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(`#${visible.target.id}`);
-      },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0.05, 0.3] },
-    );
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const line = 120; // just below the fixed header
+      let current: string | null = null;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= line) current = `#${s.id}`;
+      }
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+      // The last section can never reach the line — the page runs out of scroll
+      // first — so at the bottom, light it regardless.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+      setActive(atBottom ? `#${sections[sections.length - 1].id}` : current);
+    };
+
+    const onScroll = () => {
+      if (frame === 0) frame = requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -50,7 +71,9 @@ export function Nav() {
           <Logo />
         </a>
 
-        <ul className="hidden items-center gap-8 font-mono text-sm text-fg-muted sm:flex">
+        {/* Seven links need more room than the sm breakpoint gives — the
+            hamburger carries the menu until lg. */}
+        <ul className="hidden items-center gap-6 font-mono text-[13px] text-fg-muted lg:flex">
           {links.map((link) => (
             <li key={link.href}>
               <a
@@ -82,7 +105,7 @@ export function Nav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "ปิดเมนู" : "เปิดเมนู"}
-            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-fg-muted transition-colors duration-200 hover:text-fg sm:hidden"
+            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-fg-muted transition-colors duration-200 hover:text-fg lg:hidden"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -92,7 +115,7 @@ export function Nav() {
       <ul
         id="mobile-menu"
         hidden={!open}
-        className="border-t border-border-soft bg-bg px-6 pb-4 font-mono text-sm sm:hidden"
+        className="border-t border-border-soft bg-bg px-6 pb-4 font-mono text-sm lg:hidden"
       >
         {links.map((link) => (
           <li key={link.href}>
