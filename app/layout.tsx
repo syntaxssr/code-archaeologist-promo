@@ -25,11 +25,37 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : "http://localhost:3000";
 
+const description =
+  "Agent Skill ที่ให้ AI เข้าใจสถาปัตยกรรมทั้ง repo โดยไม่ต้องอ่านโค้ดทั้งหมด — Zero-RAG, deterministic, ลด token 90%+";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Code Archaeologist",
-  description:
-    "Agent Skill ที่ให้ AI เข้าใจสถาปัตยกรรมทั้ง repo โดยไม่ต้องอ่านโค้ดทั้งหมด — Zero-RAG, deterministic, ลด token 90%+",
+  description,
+  applicationName: "Code Archaeologist",
+  authors: [{ name: "ณัฐวุฒิ รอดทอง" }, { name: "พีรพล จันทะแจ่ม" }],
+  keywords: [
+    "Code Archaeologist",
+    "LLM agent skill",
+    "Zero-RAG",
+    "dependency graph",
+    "code architecture",
+    "iCONEXT AI Challenge Day 2026",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "th_TH",
+    url: siteUrl,
+    siteName: "Code Archaeologist",
+    title: "Code Archaeologist",
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Code Archaeologist",
+    description,
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

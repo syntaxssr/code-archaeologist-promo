@@ -44,7 +44,6 @@ export function Nav() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
           href="#hero"
-          aria-label="Code Archaeologist — หน้าแรก"
           onClick={() => setOpen(false)}
           className="flex min-h-11 items-center"
         >

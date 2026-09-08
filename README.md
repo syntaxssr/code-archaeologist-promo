@@ -20,19 +20,35 @@ Repo นี้เป็น **เว็บโปรโมทแยกต่าง
 | ชื่อ | บทบาท |
 |---|---|
 | ณัฐวุฒิ รอดทอง (อุด้ง) | Lead Tech — พัฒนา Skill |
-| พีรพล จันทะแจ่ม (BB) | Presentation — PPT, เว็บโปรโมท, สคริปพูด, ตารางงาน |
+| พีรพล จันทะแจ่ม (BB) | Presentation — PPT, เว็บโปรโมท |
+
+## สิ่งที่อยู่ใน repo นี้
+
+| Path | คืออะไร |
+|---|---|
+| `app/` | เว็บโปรโมท (Next.js App Router) |
+| `design-system/MASTER.md` | **แบรนด์และ design token — อ่านก่อนแก้ UI ทุกครั้ง** |
+| `presentation/CodeArchaeologist-Pitch.pptx` | สไลด์พิทช์ 11 หน้า |
+| `presentation/speech-script.md` | สคริปพูดคู่กับสไลด์ |
 
 ## Tech Stack
 
-Static HTML/CSS/JS หน้าเดียว (landing page) — ไม่มี build step, deploy ผ่าน GitHub Pages
+- **Next.js 16** (App Router, Turbopack) + TypeScript
+- **Tailwind CSS v4** — สีทั้งหมดมาจาก token ใน `app/globals.css` ห้าม hardcode
+- **IBM Plex Sans / Sans Thai + JetBrains Mono** ผ่าน `next/font`
+- ไอคอน `lucide-react`, favicon + OG image สร้างจากโค้ด (`app/icon.svg`, `app/opengraph-image.tsx`)
 
 ## Development
 
-เปิด `index.html` ในเบราว์เซอร์ตรงๆ ได้เลย ไม่ต้องมี server
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # ต้องผ่านก่อน commit
+```
 
 ## Deploy
 
-GitHub Pages จาก branch `main` (ตั้งค่าใน repo Settings → Pages)
+Vercel — ดูขั้นตอนใน [`docs/deploy.md`](docs/deploy.md)
 
 ## License
 
