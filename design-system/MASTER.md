@@ -107,6 +107,21 @@ Repeat exactly one thing across every section: **the stratum rule** — a thin
 `--color-border` hairline with a short amber segment at its left edge, sitting above each
 section kicker. It echoes the strata in the mark. Do not add a second decorative device.
 
+## 5b. Signature visuals
+
+Two hand-built SVGs carry the concept; both live in `app/components/visuals/` and
+draw from the tokens, so they re-theme with the palette.
+
+- **`TrenchDiagram`** (hero) — a cross-section of a codebase: three strata of entities
+  with one traced call path cutting down through them, ending in an amber node. The
+  trace routes chip-edge to chip-edge so it never crosses a label.
+- **`ExplorerMock`** (demo) — tree · graph · findings, the shape of the real Explorer
+  output. It is a mock and the section copy says so; replace it with a real screenshot
+  as soon as one exists.
+
+Numbers on cards and steps are set as two-digit monospace catalogue marks (`01`, `02`)
+— the same field-notes register as the kickers.
+
 ## 6. Assets
 
 | Asset | Path | Status |

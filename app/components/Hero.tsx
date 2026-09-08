@@ -1,12 +1,13 @@
 import { PlayCircle } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 import { ButtonLink } from "./ui/Button";
+import { TrenchDiagram } from "./visuals/TrenchDiagram";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-bg px-6 text-center"
+      className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-bg px-6 pt-28 pb-16 text-center"
     >
       {/* Warm light from above the trench, fading into the ground. */}
       <div
@@ -14,16 +15,6 @@ export function Hero() {
         style={{
           background:
             "radial-gradient(ellipse 70% 45% at 50% -5%, rgba(245,158,11,0.16), transparent 70%)",
-        }}
-      />
-      {/* Strata receding into the dark. */}
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
-        style={{
-          background:
-            "repeating-linear-gradient(to bottom, rgba(68,64,60,0.22) 0 1px, transparent 1px 112px)",
-          maskImage: "linear-gradient(to bottom, transparent, black)",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent, black)",
         }}
       />
 
@@ -51,7 +42,20 @@ export function Hero() {
           GitHub
         </ButtonLink>
       </div>
-      <p className="relative z-10 mt-14 text-xs text-fg-faint">
+
+      {/* The idea itself, before a single word of explanation. */}
+      {/* Scrolls sideways on narrow screens — scaling it to fit would make the
+          entity names unreadable. Focusable so it is reachable by keyboard. */}
+      <div
+        className="relative z-10 mt-14 w-full max-w-5xl overflow-x-auto"
+        tabIndex={0}
+        role="region"
+        aria-label="ภาพตัดขวางของโค้ดเบส"
+      >
+        <TrenchDiagram className="h-auto w-full min-w-[760px]" />
+      </div>
+
+      <p className="relative z-10 mt-10 text-xs text-fg-faint">
         พีรพล จันทะแจ่ม (BB) · ณัฐวุฒิ รอดทอง (อุด้ง)
       </p>
     </section>

@@ -26,9 +26,15 @@ export function Features() {
     <Section id="features">
       <SectionHeading kicker="Key Features" title="6 ความสามารถหลัก" />
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((f) => (
+        {features.map((f, i) => (
           <Card key={f.title} hover>
-            <IconBadge icon={f.icon} />
+            <div className="flex items-start justify-between">
+              <IconBadge icon={f.icon} />
+              {/* Catalogue number — field-notes motif. */}
+              <span className="font-mono text-[10px] tracking-[0.18em] text-fg-faint">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
             <h3 className="mt-4 font-mono text-base font-semibold text-fg">
               {f.title}
             </h3>
