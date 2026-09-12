@@ -114,13 +114,21 @@ draw from the tokens, so they re-theme with the palette.
 
 - **`TrenchDiagram`** (hero) — a cross-section of a codebase: three strata of entities
   with one traced call path cutting down through them, ending in an amber node. The
-  trace routes chip-edge to chip-edge so it never crosses a label.
+  trace routes chip-edge to chip-edge so it never crosses a label. A depth scale
+  (`SURFACE → LAYER 01–03 → BEDROCK`) runs down the left gutter, sharing its column
+  with the layer names. Below `md` it renders a compact variant carrying only the
+  traced entities — the full cross-section would push the trace off a phone screen.
 - **`ExplorerMock`** (demo) — tree · graph · findings, the shape of the real Explorer
   output. It is a mock and the section copy says so; replace it with a real screenshot
   as soon as one exists.
 
 Numbers on cards and steps are set as two-digit monospace catalogue marks (`01`, `02`)
 — the same field-notes register as the kickers.
+
+**The hero is a dig site, not a page with a picture of one.** Everything above the
+ground line (headline, pitch, CTAs) sits on a gradient lit from the top; the stratum
+rule runs the full width as ground level; below it the ground is `bg`, with an inset
+shadow at the top edge where the light stops reaching. Scrolling down is descending.
 
 ## 6. Assets
 
