@@ -3,7 +3,16 @@
  * Mark = "trench": site grid, three strata, a dashed shaft tracing down to the amber find.
  */
 
-export function LogoMark({ size = 24, className }: { size?: number; className?: string }) {
+export function LogoMark({
+  size = 24,
+  accent = "var(--accent)",
+  className,
+}: {
+  size?: number;
+  /** Amber is too pale on daylight — pass --accent-deep there. */
+  accent?: string;
+  className?: string;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -26,22 +35,34 @@ export function LogoMark({ size = 24, className }: { size?: number; className?: 
       <path d="M3 15.5H21" stroke="currentColor" strokeWidth="1.3" opacity="0.35" />
       <path
         d="M12 5.5V15"
-        stroke="var(--accent)"
+        stroke={accent}
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeDasharray="2 2.4"
       />
-      <circle cx="12" cy="17.6" r="2.3" fill="var(--accent)" />
+      <circle cx="12" cy="17.6" r="2.3" fill={accent} />
     </svg>
   );
 }
 
-export function Logo({ size = 24, className }: { size?: number; className?: string }) {
+export function Logo({
+  size = 24,
+  onSky = false,
+  className,
+}: {
+  size?: number;
+  /** Sitting on the daylight ground rather than the dark one. */
+  onSky?: boolean;
+  className?: string;
+}) {
+  const ink = onSky ? "text-sky-fg" : "text-fg";
+  const mark = onSky ? "text-accent-deep" : "text-accent";
+
   return (
     <span className={`inline-flex items-center gap-2 ${className ?? ""}`}>
-      <LogoMark size={size} className="text-fg" />
-      <span className="font-mono text-sm font-semibold tracking-[-0.01em] text-fg">
-        Code<span className="text-accent">Archaeologist</span>
+      <LogoMark size={size} accent={onSky ? "var(--accent-deep)" : "var(--accent)"} className={ink} />
+      <span className={`font-mono text-sm font-semibold tracking-[-0.01em] ${ink}`}>
+        Code<span className={mark}>Archaeologist</span>
       </span>
     </span>
   );

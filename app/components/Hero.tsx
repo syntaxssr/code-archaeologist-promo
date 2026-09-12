@@ -11,35 +11,37 @@ export function Hero() {
       id="hero"
       className="relative flex h-svh scroll-mt-20 flex-col overflow-hidden bg-bg"
     >
-      {/* Above ground: lit from the sky, where the pitch is made. Sized by its
-          own content — on a short window the trench gives up height, the pitch
-          never does. */}
+      {/* Above ground: daylight, where the pitch is made. Sized by its own
+          content — on a short window the trench gives up height, the pitch
+          never does. `data-hero-sky` is what the nav watches to know whether it
+          is currently over daylight or over earth. */}
       <div
-        className="relative flex flex-none flex-col items-center justify-center px-6 pt-[clamp(5.5rem,13svh,6.5rem)] pb-[clamp(1.25rem,3svh,2.5rem)] text-center"
+        data-hero-sky=""
+        className="relative flex flex-none flex-col items-center justify-center px-6 pt-[clamp(6rem,14svh,7rem)] pb-[clamp(1.5rem,4svh,3rem)] text-center"
         style={{
-          background:
-            "linear-gradient(to bottom, var(--surface) -55%, var(--layer) 35%, var(--bg))",
+          background: "linear-gradient(to bottom, var(--sky-surface), var(--sky) 45%, var(--sky-deep))",
         }}
       >
+        {/* Low sun across the site. */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 55% at 50% -10%, rgba(245,158,11,0.16), transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% -10%, rgba(245,158,11,0.20), transparent 70%)",
           }}
         />
 
-        <span className="relative z-10 font-mono text-[11px] font-medium tracking-[0.18em] text-accent sm:text-xs">
+        <span className="relative z-10 font-mono text-[11px] font-medium tracking-[0.18em] text-accent-deep sm:text-xs">
           ICONEXT AI CHALLENGE DAY 2026 · TEAM 3
         </span>
-        <h1 className="relative z-10 mt-6 font-mono text-4xl font-bold tracking-[-0.02em] text-fg sm:text-5xl lg:text-6xl">
+        <h1 className="relative z-10 mt-6 font-mono text-4xl font-bold tracking-[-0.03em] text-sky-fg sm:text-5xl lg:text-6xl">
           Code Archaeologist
         </h1>
-        <p className="relative z-10 mt-6 max-w-xl leading-[1.7] text-fg-muted sm:text-lg">
+        <p className="relative z-10 mt-6 max-w-xl leading-[1.7] text-sky-fg-muted sm:text-lg">
           ขุดค้นสถาปัตยกรรมของ repo ทีละชั้น ให้ AI เข้าใจโค้ดทั้งโปรเจ็ค
           โดยไม่ต้องอ่านทั้งหมด — Zero-RAG, deterministic, ลด token กว่า 90%
         </p>
-        <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-4">
+        <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-3">
           <ButtonLink href="#how-it-works">
             <PlayCircle size={18} strokeWidth={1.8} />
             ดูวิธีทำงาน
@@ -47,6 +49,7 @@ export function Hero() {
           <ButtonLink
             href="https://github.com/non-nattawut/Code-Archaeologist-LLM-Agent-Skill"
             variant="ghost"
+            onSky
             external
           >
             <GithubIcon size={18} />

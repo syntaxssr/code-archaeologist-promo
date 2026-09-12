@@ -20,6 +20,18 @@
 
   --success: #84cc16;
   --danger: #dc2626;
+
+  /* Daylight — the ground above the trench. Warm limestone, not blue-grey, so
+     it reads as the same site seen from above rather than a second brand.
+     Amber is too pale to carry text on it: use --accent-deep for type and keep
+     --accent for fills, which take --on-accent text. */
+  --sky: #faf7f2;
+  --sky-deep: #f1e9dd;
+  --sky-surface: #fffdfa;
+  --sky-border: #e3dace;
+  --sky-fg: #1c1917;
+  --sky-fg-muted: #57534e;
+  --sky-fg-faint: #78716c;
 }
 
 @theme inline {
@@ -41,6 +53,14 @@
 
   --color-success: var(--success);
   --color-danger: var(--danger);
+
+  --color-sky: var(--sky);
+  --color-sky-deep: var(--sky-deep);
+  --color-sky-surface: var(--sky-surface);
+  --color-sky-border: var(--sky-border);
+  --color-sky-fg: var(--sky-fg);
+  --color-sky-fg-muted: var(--sky-fg-muted);
+  --color-sky-fg-faint: var(--sky-fg-faint);
 
   /* Latin first: each next/font family ships an adjusted fallback that covers
      Latin, so putting the Thai face first let that fallback win every Latin

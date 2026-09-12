@@ -27,9 +27,13 @@ record that happens to run on a terminal.
 
 ## 2. Color
 
-Warm near-black earth as the ground, amber as the single accent — amber is the find,
-so it is used only for things that matter: primary CTA, the active state, the one number
-per section worth remembering. Never as a background wash.
+The page has **two grounds**. Above the hero's ground line it is daylight over the dig
+site; below it, and for every section after, it is earth. The cut between them is the
+whole concept in one edge, so the light palette is warm limestone rather than a blue-grey
+— the same site seen from above, not a second brand.
+
+Amber is the single accent on both, and it is the find: primary CTA, the active state,
+the one number per section worth remembering. Never a background wash.
 
 | Token | Hex | Use |
 | --- | --- | --- |
@@ -49,10 +53,23 @@ per section worth remembering. Never as a background wash.
 | `--color-success` | `#84CC16` | Health grade A/B, passing checks |
 | `--color-danger` | `#DC2626` | Blast radius warnings, failing checks |
 
+### Daylight (above the ground line)
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--color-sky` | `#FAF7F2` | Daylight ground — warm limestone |
+| `--color-sky-deep` | `#F1E9DD` | Bottom of the daylight gradient, nearest the cut |
+| `--color-sky-surface` | `#FFFDFA` | Nav bar, raised panels on daylight |
+| `--color-sky-border` | `#E3DACE` | Hairlines on daylight |
+| `--color-sky-fg` | `#1C1917` | Primary text on daylight |
+| `--color-sky-fg-muted` | `#57534E` | Secondary text on daylight (7.5:1) |
+| `--color-sky-fg-faint` | `#78716C` | Captions on daylight (4.9:1) |
+
 **Rules**
 
 - One accent. If something needs a second color, it needs a different weight or size instead.
 - Amber fill always carries `--color-on-accent` text, never white (`#F59E0B` + white = 2.1:1, fails WCAG).
+- **On daylight, amber cannot carry text** — `#F59E0B` on `--color-sky` is 2.0:1. Type and hairlines there use `--color-accent-deep` (5.3:1); amber stays for fills, which take `--color-on-accent`.
 - Every text token clears WCAG AA (4.5:1) on every ground it is allowed on — verified with axe-core, not by eye. `fg-muted` is 6.9:1 on `surface`; `fg-faint` is 5.4:1 on `bg`, 5.1:1 on `layer`, 4.8:1 on `surface`; amber is 9.2:1 on `bg`, and `on-accent` is 8.1:1 on an amber fill.
 - `fg-faint` is for metadata and captions regardless — it passes, but it is not a body-text color.
 - Depth comes from surface steps (`bg → surface → surface-2`), not from shadows. Shadows on a warm-black ground read as smudges.
@@ -126,9 +143,13 @@ Numbers on cards and steps are set as two-digit monospace catalogue marks (`01`,
 — the same field-notes register as the kickers.
 
 **The hero is a dig site, not a page with a picture of one.** Everything above the
-ground line (headline, pitch, CTAs) sits on a gradient lit from the top; the stratum
-rule runs the full width as ground level; below it the ground is `bg`, with an inset
-shadow at the top edge where the light stops reaching. Scrolling down is descending.
+ground line (headline, pitch, CTAs) sits in daylight; the stratum rule runs the full
+width as ground level; below it the ground is `bg`, with an inset shadow at the top edge
+where the light stops reaching. Scrolling down is descending, and the page never returns
+to daylight.
+
+The nav crosses that line, so it inverts: a limestone bar over daylight, a dark one over
+earth, switched by watching `[data-hero-sky]` rather than a hard-coded scroll offset.
 
 ## 6. Assets
 
@@ -140,9 +161,9 @@ shadow at the top edge where the light stops reaching. Scrolling down is descend
 
 ## 7. Anti-patterns
 
-- Cream or beige backgrounds — the ground is warm *black*, not warm light
+- A third ground. Daylight belongs above the hero's ground line; everything below is earth. A light section further down the page would read as a different site, not a deeper layer
 - Accent stripes down a card edge or a colored bar under a title
 - Emoji used as icons (use Lucide, stroke width 1.5)
-- Amber on amber, or amber text on any surface lighter than `--color-surface`
+- Amber on amber, amber text on any surface lighter than `--color-surface`, or amber text anywhere on daylight
 - Centered body paragraphs — titles center, prose stays left-aligned
 - Motion for decoration; 150–300ms, and respect `prefers-reduced-motion`
