@@ -83,7 +83,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="flex min-h-svh scroll-mt-4 flex-col px-6 pt-14 pb-12 sm:px-10 lg:pt-16"
+      className="flex min-h-svh scroll-mt-4 flex-col px-6 pt-[clamp(2.25rem,6svh,4rem)] pb-[clamp(1.5rem,4svh,3rem)] sm:px-10"
     >
       <div className="flex items-center gap-5">
         <span className="font-mono text-base font-medium uppercase tracking-[0.14em] text-faint tabular-nums">

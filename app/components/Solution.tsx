@@ -7,7 +7,7 @@ const notes: Note[] = [
     ref: "Trace 01 — solid",
     title: "เส้นทางจริง 4 hop",
     mono: "login() → verifyToken() → getUser() → db.query()",
-    body: "ทุก hop คือ edge จริงที่ชี้บรรทัดได้ ถามซ้ำได้คำตอบเดิม",
+    body: "ทุก hop คือ edge จริง ถามซ้ำได้คำตอบเดิม",
   },
   {
     ref: "Trace 02 — dashed",
@@ -19,7 +19,7 @@ const notes: Note[] = [
     ref: "Why RAG breaks",
     title: "chunk ตัดกลาง function",
     mono: "~500 tokens per chunk",
-    body: "การหั่นโค้ดทำลาย scope และ call hierarchy ชิ้นส่วนที่เหลือไม่รู้ว่าถูกเรียกจากไหน",
+    body: "หั่นโค้ดแล้ว scope และ call hierarchy หาย ชิ้นส่วนที่เหลือไม่รู้ที่มา",
   },
 ];
 

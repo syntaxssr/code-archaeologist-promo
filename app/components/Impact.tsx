@@ -9,19 +9,19 @@ const notes: Note[] = [
     ref: "Measured",
     title: "4 จาก 14 entity",
     mono: "4 / 14 nodes read",
-    body: "นับจากเส้นทางที่วาดอยู่บนผังแผ่นนี้จริงๆ ไม่ใช่ตัวเลขที่ตั้งขึ้น",
+    body: "นับจากเส้นทางบนผังแผ่นนี้จริงๆ ไม่ใช่ตัวเลขที่ตั้งขึ้น",
   },
   {
     ref: "Estimate",
     title: "token ที่ประหยัดได้ ยังเป็นค่าประมาณ",
-    mono: "not yet measured on a real repo",
+    mono: "not yet measured",
     body: "คำนวณจากสัดส่วน node ที่ต้องอ่าน ยังไม่ได้วัดกับ repository จริง ต้องวัดก่อนวันที่ 26",
   },
   {
     ref: "Why it holds",
     title: "ยิ่ง repo ใหญ่ ยิ่งได้เปรียบ",
     mono: "cost ∝ path length, not repo size",
-    body: "อ่านทั้ง repo แพงขึ้นตามขนาด เดินตามเส้นทางแพงขึ้นตามความยาวเส้นทาง",
+    body: "อ่านทั้ง repo แพงตามขนาด เดินตามเส้นทางแพงตามความยาวเส้นทาง",
   },
 ];
 

@@ -474,9 +474,14 @@ because the plan drawing carried four beats instead of one.
 
 - **axe-core: 0 violations** at 1920, 1536, 1440, 1280 and 390. No horizontal
   overflow at any width. **Lighthouse desktop 100 / 100 / 100 / 100.**
-- **One screen per section holds at 1920×1080 and 1536×960.** Below that, four
-  to six sections run 5–160px over, because the fixed chrome a beat carries does
-  not shrink with the viewport. Accepted: the pitch surface is a projector.
+- **One screen per section holds at every width from 1280 to 1920** — verified
+  at 1920×1080, 1680×1050, 1536×960, 1440×900, 1366×768 and 1280×800. Getting
+  there needed two changes: the chrome (padding, title size, grid gap) became
+  `clamp(…svh…)` so it shrinks with the viewport while landing on its old values
+  at 1080, and the margin register got *wider* rather than narrower — the
+  drawing is height-capped, so the width the register takes was never being
+  used, and a narrow register made the Thai notes wrap a line deeper. The
+  register, not the drawing, was what pushed every beat past one screen.
 - **The swap test passes.** With the typeface set to Helvetica and the accent
   deleted, the page still reads as a record — the sheet number, key map, scale
   bar, line weights, station numbers and margin register carry it on their own.

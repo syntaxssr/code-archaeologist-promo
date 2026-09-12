@@ -91,13 +91,25 @@ colour, type size or section layout.
 | --- | --- |
 | axe-core (WCAG 2.1 A + AA) | **0 violations** at 1920, 1536, 1440, 1280 and 390 |
 | Horizontal overflow | **none** at all five widths |
-| One screen per section | **holds at 1920x1080 and 1536x960** |
+| One screen per section | **holds at every width from 1280 to 1920** |
 | Lighthouse desktop | **100 / 100 / 100 / 100** |
 
-Below 1536 the fixed chrome a beat carries — header, legend, caption, padding —
-stops fitting, and four to six sections run 5–160px past one screen. That is a
-known, accepted degradation: the pitch surface is a projector at 1920x1080.
-Phone layout is a separate phase and has not been attempted.
+Widths verified: 1920x1080, 1680x1050, 1536x960, 1440x900, 1366x768, 1280x800,
+1024x768 and 390x844. One screen per section holds from 1280 up.
+
+Two things make that work, and both are easy to undo by accident:
+
+- **The chrome scales with viewport height.** Section padding, the title size
+  and the grid gap are `clamp(…svh…)` values that all land on their old fixed
+  numbers at 1080, so the pitch surface is untouched while a 768px laptop gets
+  about 50px back. Replacing any of them with a fixed rem breaks 1280–1366.
+- **The margin register is wide** — 360px at `xl`, 400px at `2xl`. The drawing
+  is height-capped, so the width the register takes was never being used by the
+  plan; narrowing it makes the Thai notes wrap a line deeper and that, not the
+  drawing, is what pushes a beat past one screen.
+
+At 1024 and below the register stacks under the drawing and sections run long.
+That range belongs to the deferred phone/tablet phase.
 
 ## 3. Typography
 

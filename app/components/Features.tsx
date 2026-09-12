@@ -4,9 +4,8 @@ import { BlastRadius } from "./plan/BlastRadius";
 import { findings, roomById } from "./plan/plan-data";
 
 const notes: Note[] = findings.map((f) => ({
-  ref: `Find ${f.n}`,
+  ref: `Find ${f.n} · ${f.feature}`,
   title: f.th,
-  mono: f.feature,
 }));
 
 /** Everything within the radius of AUTH/SESSION — seven of fourteen. Struck

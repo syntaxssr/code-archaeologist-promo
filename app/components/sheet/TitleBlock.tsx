@@ -18,11 +18,11 @@ export function TitleBlock() {
       {rows.map(([k, v], i) => (
         <div
           key={k}
-          className={`flex items-baseline gap-5 px-5 py-3 ${
+          className={`flex items-baseline gap-4 px-5 py-2 ${
             i === 0 ? "" : "border-t border-rule"
           }`}
         >
-          <span className="w-[130px] shrink-0 font-mono text-base uppercase tracking-[0.12em] text-faint">
+          <span className="w-[132px] shrink-0 font-mono text-base uppercase tracking-[0.12em] text-faint">
             {k}
           </span>
           <span

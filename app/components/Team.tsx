@@ -6,13 +6,13 @@ const recorders = [
     name: "ณัฐวุฒิ รอดทอง",
     nick: "อุด้ง",
     role: "LEAD TECH — THE SKILL",
-    th: "ออกแบบและเขียน skill ทั้งตัว ตั้งแต่ AST scan จนถึง Explorer",
+    th: "เขียน skill ทั้งตัว ตั้งแต่ AST scan ถึง Explorer",
   },
   {
     name: "พีรพล จันทะแจ่ม",
     nick: "BB",
     role: "PRESENTATION MATERIALS",
-    th: "เว็บโปรโมทแผ่นนี้ และสไลด์ที่ใช้นำเสนอบนเวที",
+    th: "เว็บแผ่นนี้ และสไลด์ที่ใช้บนเวที",
   },
 ];
 
@@ -41,12 +41,12 @@ const notes: Note[] = [
 export function Team() {
   return (
     <Sheet id="team" no="07" titleTh="ช่องลงชื่อ" titleEn="The title block" notes={notes}>
-      <div className="grid gap-10 2xl:grid-cols-[minmax(0,1fr)_auto] 2xl:items-end">
+      <div className="grid gap-8 2xl:grid-cols-[minmax(0,1fr)_auto] 2xl:items-end">
         <div className="border border-line">
           {recorders.map((r, i) => (
             <div
               key={r.name}
-              className={`flex flex-wrap items-baseline gap-x-6 gap-y-2 px-6 py-6 ${
+              className={`flex flex-wrap items-baseline gap-x-6 gap-y-2 px-6 py-4 ${
                 i === 0 ? "" : "border-t border-rule"
               }`}
             >
@@ -54,14 +54,14 @@ export function Team() {
                 Recorder
               </span>
               <div className="min-w-0">
-                <p className="text-2xl font-medium text-ink">
+                <p className="text-xl font-medium text-ink">
                   {r.name}{" "}
                   <span className="font-mono text-lg text-traced-deep">({r.nick})</span>
                 </p>
                 <p className="mt-1.5 font-mono text-base uppercase tracking-[0.1em] text-muted">
                   {r.role}
                 </p>
-                <p className="mt-2 text-lg leading-[1.7] text-muted">{r.th}</p>
+                <p className="mt-1.5 text-lg leading-[1.65] text-muted">{r.th}</p>
               </div>
             </div>
           ))}
