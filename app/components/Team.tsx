@@ -1,27 +1,74 @@
-import { UserRound } from "lucide-react";
-import { Section } from "./ui/Section";
-import { SectionHeading } from "./ui/SectionHeading";
-import { Card } from "./ui/Card";
-import { IconBadge } from "./ui/IconBadge";
+import { Sheet, type Note } from "./sheet/Sheet";
+import { TitleBlock } from "./sheet/TitleBlock";
 
-const team = [
-  { name: "ณัฐวุฒิ รอดทอง (อุด้ง)", role: "Lead Tech — Skill Development" },
-  { name: "พีรพล จันทะแจ่ม (BB)", role: "Presentation — PPT, Web, Script" },
+const recorders = [
+  {
+    name: "ณัฐวุฒิ รอดทอง",
+    nick: "อุด้ง",
+    role: "LEAD TECH — THE SKILL",
+    th: "ออกแบบและเขียน skill ทั้งตัว ตั้งแต่ AST scan จนถึง Explorer",
+  },
+  {
+    name: "พีรพล จันทะแจ่ม",
+    nick: "BB",
+    role: "PRESENTATION MATERIALS",
+    th: "เว็บโปรโมทแผ่นนี้ และสไลด์ที่ใช้นำเสนอบนเวที",
+  },
 ];
 
+const notes: Note[] = [
+  {
+    ref: "Team 03",
+    title: "สองคน สองหน้าที่",
+    mono: "iCONEXT AI Challenge Day 2026",
+    body: "คนหนึ่งสร้างของ อีกคนทำให้คนอื่นเห็นว่ามันทำอะไรได้",
+  },
+  {
+    ref: "Convention",
+    title: "ทำไมส่วนนี้ถึงเป็นช่องลงชื่อ",
+    mono: "Recorder / Date / Initials",
+    body: "แบบฟอร์มบันทึกทางโบราณคดีจบด้วยสามช่องนี้เสมอ ส่วนนี้จึงไม่ได้ถูกคิดขึ้นใหม่",
+  },
+];
+
+/**
+ * Beat 07 — the title block.
+ *
+ * A real context record ends with Recorder / Date / Initials: who recorded it,
+ * when, and who checked it. The team section needed no invention — it was
+ * already the last row of the form.
+ */
 export function Team() {
   return (
-    <Section id="team" width="narrow">
-      <SectionHeading kicker="Team 3" title="ทีมของเรา" />
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
-        {team.map((m) => (
-          <Card key={m.name} className="flex flex-col items-center gap-3 text-center">
-            <IconBadge icon={UserRound} size={56} />
-            <p className="mt-2 font-semibold text-fg">{m.name}</p>
-            <p className="font-mono text-xs text-fg-muted">{m.role}</p>
-          </Card>
-        ))}
+    <Sheet id="team" no="07" titleTh="ช่องลงชื่อ" titleEn="The title block" notes={notes}>
+      <div className="grid gap-10 2xl:grid-cols-[minmax(0,1fr)_auto] 2xl:items-end">
+        <div className="border border-line">
+          {recorders.map((r, i) => (
+            <div
+              key={r.name}
+              className={`flex flex-wrap items-baseline gap-x-6 gap-y-2 px-6 py-6 ${
+                i === 0 ? "" : "border-t border-rule"
+              }`}
+            >
+              <span className="w-[110px] shrink-0 font-mono text-base uppercase tracking-[0.14em] text-faint">
+                Recorder
+              </span>
+              <div className="min-w-0">
+                <p className="text-2xl font-medium text-ink">
+                  {r.name}{" "}
+                  <span className="font-mono text-lg text-traced-deep">({r.nick})</span>
+                </p>
+                <p className="mt-1.5 font-mono text-base uppercase tracking-[0.1em] text-muted">
+                  {r.role}
+                </p>
+                <p className="mt-2 text-lg leading-[1.7] text-muted">{r.th}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <TitleBlock />
       </div>
-    </Section>
+    </Sheet>
   );
 }

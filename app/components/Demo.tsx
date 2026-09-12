@@ -1,20 +1,38 @@
-import { Section } from "./ui/Section";
-import { SectionHeading } from "./ui/SectionHeading";
-import { ExplorerMock } from "./visuals/ExplorerMock";
+import { Sheet, type Note } from "./sheet/Sheet";
+import { Overlays } from "./plan/Overlays";
 
+const notes: Note[] = [
+  {
+    ref: "Base plan",
+    title: "ผังฐานคือ file tree",
+    mono: "one plan, many films",
+    body: "วาดเป็นผังไม่ใช่ลิสต์ เพราะสิ่งที่ต้องอ่านคือ “อะไรต่อกับอะไร”",
+  },
+  {
+    ref: "Delivery",
+    title: "ไฟล์ HTML ไฟล์เดียว",
+    mono: "explorer.html · no server · no build",
+    body: "เปิดจากเครื่องได้เลย ส่งต่อให้ใครก็ได้",
+  },
+  {
+    ref: "Note",
+    title: "ภาพนี้คือรูปแบบผลลัพธ์ ไม่ใช่ภาพหน้าจอจริง",
+    mono: "drawn, not captured",
+    body: "โครงและชั้นข้อมูลตรงกับของจริง แต่ตัวเลขเป็นตัวอย่าง",
+  },
+];
+
+/**
+ * Beat 05 — the overlays.
+ *
+ * The Explorer shown the way an excavation is recorded: one base plan with
+ * independently toggleable films over it. This beat also removes a dependency —
+ * it draws its own evidence, so it does not wait on a screenshot.
+ */
 export function Demo() {
   return (
-    <Section id="demo">
-      <SectionHeading kicker="Demo" title="Explorer — ไฟล์ HTML เดียว เปิดดูได้เลย" />
-      <div className="mx-auto mt-8 max-w-5xl sm:mt-12">
-        <ExplorerMock />
-      </div>
-      <p className="mx-auto mt-5 max-w-2xl text-center text-sm sm:mt-6 leading-[1.7] text-fg-muted">
-        ไม่ต้องมี server ไม่ต้องเข้าถึง repo — commit ไว้ หรือส่งเป็นไฟล์เดียวก็เปิดดูได้
-        <span className="mt-1 block text-xs text-fg-faint">
-          (ภาพจำลองหน้าตา — ของจริงจะสลับเป็น screenshot จากตัว skill)
-        </span>
-      </p>
-    </Section>
+    <Sheet id="demo" no="05" titleTh="แผ่นใส" titleEn="The overlays" notes={notes}>
+      <Overlays />
+    </Sheet>
   );
 }

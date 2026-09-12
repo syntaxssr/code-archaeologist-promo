@@ -1,32 +1,31 @@
 import type { ReactNode } from "react";
 
 /**
- * Link-styled button. `primary` is the amber fill and there is at most one
- * per view — amber is the find, not decoration (design-system/MASTER.md §2).
+ * Link-styled button. Rectangular with a 2px radius rather than a pill: the
+ * sheet's whole vocabulary is hairline rectangles and a pill reads as imported
+ * SaaS furniture. It is still a plainly modern control — the archive frames
+ * the instrument, it never operates it (design-system/MASTER.md §8).
+ *
+ * `primary` is the one traced fill, and there is at most one per view.
  */
 export function ButtonLink({
   href,
   variant = "primary",
-  onSky = false,
   external = false,
   children,
 }: {
   href: string;
   variant?: "primary" | "ghost";
-  /** Sitting on the daylight ground rather than the dark one. */
-  onSky?: boolean;
   external?: boolean;
   children: ReactNode;
 }) {
   const base =
-    "flex min-h-11 cursor-pointer items-center gap-2 rounded-full px-6 py-2.5 font-mono text-sm font-semibold transition-colors duration-200";
+    "inline-flex min-h-12 cursor-pointer items-center gap-2.5 rounded-[2px] px-6 py-3 font-mono text-base font-medium uppercase tracking-[0.08em] transition-colors duration-200";
 
   const styles =
     variant === "primary"
-      ? "bg-accent text-on-accent hover:bg-accent-hover"
-      : onSky
-        ? "border border-sky-border bg-sky-surface text-sky-fg-muted hover:border-accent-deep hover:text-sky-fg"
-        : "border border-border text-fg-muted hover:border-accent hover:text-fg";
+      ? "bg-traced text-on-traced hover:bg-traced-deep"
+      : "border border-rule bg-sheet-raised text-muted hover:border-traced-deep hover:text-ink";
 
   return (
     <a

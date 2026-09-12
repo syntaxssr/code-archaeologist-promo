@@ -1,110 +1,142 @@
 @import "tailwindcss";
 
-/* Design tokens — see design-system/MASTER.md. Do not hardcode brand colors in components. */
+/* Design tokens — see design-system/MASTER.md.
+   The page is one survey sheet: warm paper, near-black ink, one industrial
+   accent that means exactly one thing (this is evidenced). Do not hardcode
+   brand colors in components. */
 :root {
-  --bg: #0c0a09;
-  --layer: #131110;
-  --surface: #1c1917;
-  --surface-2: #292524;
-  --border: #44403c;
-  --border-soft: #292524;
+  /* Grounds. There is no second ground — the sheet is one paper colour from
+     top to bottom. --sheet-2 is the fill inside a plan outline, not a section
+     background you can alternate with. */
+  --sheet: #fbfaf4;
+  --sheet-2: #f2efe7;
+  --sheet-raised: #fffefa;
 
-  --fg: #fafaf9;
-  --fg-muted: #a8a29e;
-  --fg-faint: #8c847e;
+  /* Rules. Never carry text. */
+  --grid: #e3dfd4;
+  --rule: #d4cfc2;
 
-  --accent: #f59e0b;
-  --accent-hover: #fbbf24;
-  --accent-deep: #b45309;
-  --on-accent: #1c1917;
+  /* Ink. Ratios against --sheet / --sheet-2 / --sheet-raised. */
+  --ink: #14120f; /* 17.9 / 16.3 / 18.5 */
+  --line: #4a4640; /* 8.96 / 8.15 / 9.28 — feature outlines */
+  --muted: #524d46; /* 8.00 / 7.28 / 8.29 — margin notes, field values */
+  --faint: #726b62; /* 5.03 / 4.57 / 5.21 — grid coordinates only */
 
-  --success: #84cc16;
-  --danger: #dc2626;
+  /* The one accent. It means: this is evidenced. Not "important", not
+     "interactive". If it is not traced, it is not accent. */
+  --traced: #c2410c; /* 4.95 / 4.51 / 5.13 — large text and 2px rules only */
+  --traced-deep: #9a3412; /* 6.99 / 6.36 / 7.24 — small text, hover, pressed */
+  --on-traced: #ffffff; /* 5.18 on a --traced fill */
 
-  /* Daylight — the ground above the trench. Warm limestone, not blue-grey, so
-     it reads as the same site seen from above rather than a second brand.
-     Amber is too pale to carry text on it: use --accent-deep for type and keep
-     --accent for fills, which take --on-accent text. */
-  --sky: #faf7f2;
-  --sky-deep: #f1e9dd;
-  --sky-surface: #fffdfa;
-  --sky-border: #e3dace;
-  --sky-fg: #1c1917;
-  --sky-fg-muted: #57534e;
-  --sky-fg-faint: #78716c;
+  --grade-good: #1f6b4e; /* 6.14 / 5.59 / 6.36 */
+  --grade-bad: #9e2b1e; /* 7.13 / 6.49 / 7.38 — sinks, grade E/F */
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-layer: var(--layer);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
-  --color-border-soft: var(--border-soft);
+  --color-sheet: var(--sheet);
+  --color-sheet-2: var(--sheet-2);
+  --color-sheet-raised: var(--sheet-raised);
 
-  --color-fg: var(--fg);
-  --color-fg-muted: var(--fg-muted);
-  --color-fg-faint: var(--fg-faint);
+  --color-grid: var(--grid);
+  --color-rule: var(--rule);
 
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-deep: var(--accent-deep);
-  --color-on-accent: var(--on-accent);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
 
-  --color-success: var(--success);
-  --color-danger: var(--danger);
+  --color-traced: var(--traced);
+  --color-traced-deep: var(--traced-deep);
+  --color-on-traced: var(--on-traced);
 
-  --color-sky: var(--sky);
-  --color-sky-deep: var(--sky-deep);
-  --color-sky-surface: var(--sky-surface);
-  --color-sky-border: var(--sky-border);
-  --color-sky-fg: var(--sky-fg);
-  --color-sky-fg-muted: var(--sky-fg-muted);
-  --color-sky-fg-faint: var(--sky-fg-faint);
+  --color-grade-good: var(--grade-good);
+  --color-grade-bad: var(--grade-bad);
 
   /* Latin first: each next/font family ships an adjusted fallback that covers
      Latin, so putting the Thai face first let that fallback win every Latin
      character before Plex Sans was ever reached. Thai still lands on Plex Thai —
      neither Plex Sans nor its Arial-metric fallback has Thai glyphs. */
   --font-sans: var(--font-plex-sans), var(--font-plex-thai);
-  --font-mono: var(--font-jetbrains);
+  --font-mono: var(--font-plex-mono);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Amber ring, matching the accent — never remove the focus indicator. */
+/* Never remove the focus indicator. 4.95:1 on the sheet — well past the 3:1
+   a non-text indicator needs. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--traced);
   outline-offset: 3px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--sheet);
+  color: var(--ink);
   font-family: var(--font-plex-sans), var(--font-plex-thai), system-ui, sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-/* Stratum rule — the one repeated motif. Sits above a section kicker. */
-.stratum {
-  display: block;
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    var(--accent) 0,
-    var(--accent) 28px,
-    var(--border) 28px,
-    var(--border) 100%
-  );
+/* The drawing grid is the layout grid. 72px module, rendered in --grid, which
+   is 1.27:1 against the sheet — present, never assertive. */
+.sheet-grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: center top;
+}
+
+/* Draw-on-scroll. A path starts fully retracted and plays out over its own
+   length; --draw-len is set per path from its measured length, --draw-dur and
+   --draw-delay tune the survey order. Nothing fades, nothing slides: the one
+   verb is draw. */
+[data-draw] {
+  stroke-dasharray: var(--draw-len, 1200);
+  stroke-dashoffset: var(--draw-len, 1200);
+}
+
+[data-draw-run] [data-draw] {
+  animation: draw var(--draw-dur, 700ms) cubic-bezier(0.4, 0, 0.2, 1)
+    var(--draw-delay, 0ms) forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Annotation that appears after its keyed feature finishes drawing. */
+[data-note] {
+  opacity: 0;
+}
+
+[data-draw-run] [data-note] {
+  animation: note 240ms ease-out var(--note-delay, 0ms) forwards;
+}
+
+@keyframes note {
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* Every path renders complete. The sheet must be fully legible with no
+     motion at all. */
+  [data-draw] {
+    stroke-dashoffset: 0;
+  }
+
+  [data-note] {
+    opacity: 1;
   }
 
   *,

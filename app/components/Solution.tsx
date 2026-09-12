@@ -1,104 +1,154 @@
-import { Section } from "./ui/Section";
-import { SectionHeading } from "./ui/SectionHeading";
-import { Card } from "./ui/Card";
-import { WikiNote } from "./visuals/WikiNote";
+import { Sheet, type Note } from "./sheet/Sheet";
+import { Plan } from "./plan/Plan";
+import { guessEnd, guessHits, guessPath, tracedPath, tracedStations } from "./plan/plan-data";
 
-const problems = [
-  "คำถามเชิงสถาปัตยกรรม เช่น “controller เชื่อมกับ database ยังไง” ต้องให้ agent ไล่อ่านทั้ง repository",
-  "RAG แบบ chunk ตัดโค้ดเป็นก้อน ~500 token ทำลาย function scope และ call hierarchy",
-];
-
-const cards = [
+const notes: Note[] = [
   {
-    ours: false,
-    title: "Standard RAG",
-    items: [
-      "แบ่งโค้ดเป็น chunk ขนาด ~500 token",
-      "ทำลาย call hierarchy และ scope",
-      "Similarity search — ไม่ deterministic",
-      "อ่าน context ก้อนใหญ่ทุกครั้งที่ถาม",
-    ],
+    ref: "Trace 01 — solid",
+    title: "เส้นทางจริง 4 hop",
+    mono: "login() → verifyToken() → getUser() → db.query()",
+    body: "ทุก hop คือ edge จริงที่ชี้บรรทัดได้ ถามซ้ำได้คำตอบเดิม",
   },
   {
-    ours: true,
-    title: "Code Archaeologist",
-    items: [
-      "เก็บทั้ง entity ไว้เป็น note เดียว ไม่ตัด",
-      "เข้ารหัสความสัมพันธ์เป็น graph ชัดเจน",
-      "BFS graph traversal — deterministic",
-      "อ่านเฉพาะ node บน path ที่ trace เจอ",
-    ],
+    ref: "Trace 02 — dashed",
+    title: "การเดาแบบ similarity search",
+    mono: "6 rooms opened · 0 edges followed",
+    body: "ไม่มี edge ให้เดิน จึงเปิดไฟล์ที่คล้ายแล้วย้อนกลับ สุดท้ายไม่ถึงปลายทาง",
+  },
+  {
+    ref: "Why RAG breaks",
+    title: "chunk ตัดกลาง function",
+    mono: "~500 tokens per chunk",
+    body: "การหั่นโค้ดทำลาย scope และ call hierarchy ชิ้นส่วนที่เหลือไม่รู้ว่าถูกเรียกจากไหน",
   },
 ];
 
 export function Solution() {
   return (
-    <Section id="solution" tone="layer">
-      <SectionHeading
-        kicker="Problem → Solution"
-        title="Agent อ่านโค้ดทั้ง repo เพื่อตอบคำถามเดียว"
-        center={false}
-      />
+    <Sheet id="solution" no="02" titleTh="สองเส้นทาง" titleEn="Two routes" notes={notes}>
+        <Plan ariaLabel="ผังโค้ดเบส มีสองเส้นทางจากจุดเริ่มเดียวกัน เส้นทึบคือเส้นทางที่ไล่ตาม dependency graph จริง เส้นประคือการเดาที่วนแล้วไม่ถึงปลายทาง">
+          {/* Conjectured first, so the evidenced line lands on top of it.
 
-      <div className="mt-8 grid gap-10 sm:mt-10 sm:grid-cols-[1.3fr_1fr]">
-        <div>
-          {/* The heading already states the problem; on a phone these restate it
-              at the cost of half a screen, so they start at md. */}
-          <ul className="hidden space-y-5 md:block">
-            {problems.map((p) => (
-              <li key={p} className="flex gap-3.5 leading-[1.7] text-fg-muted">
-                <span className="mt-3 h-px w-4 shrink-0 bg-accent" />
-                {p}
-              </li>
-            ))}
-          </ul>
-          <p className="text-sm leading-[1.7] text-fg-muted md:mt-8 md:text-base">
-            Code Archaeologist สแกนโค้ดเบสด้วย AST แปลงเป็น Markdown wiki ที่เชื่อมกันด้วย{" "}
-            <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-accent">
-              [[wikilink]]
-            </code>{" "}
-            พร้อม dependency graph ที่ agent เรียก query ได้ตรงๆ แบบ{" "}
-            <strong className="font-semibold text-fg">Zero-RAG</strong> — ไม่ต้องเดา
-            ไม่ต้อง similarity search
-          </p>
-        </div>
-
-        {/* Supporting evidence rather than the argument — md and up. */}
-        <div className="hidden sm:block">
-          <WikiNote />
-        </div>
-      </div>
-
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6">
-        {cards.map((c) => (
-          <Card key={c.title} accent={c.ours} className="p-4 sm:p-7">
-            <h3
-              className={`font-mono text-sm font-semibold sm:text-lg ${
-                c.ours ? "text-accent" : "text-fg-muted"
-              }`}
+              It is drawn through a mask rather than animated directly: the draw
+              animation works by setting stroke-dasharray, which would overwrite
+              this path's own dash pattern and render the guess as a solid line —
+              destroying the one convention the whole sheet rests on. */}
+          <defs>
+            <mask id="guess-reveal">
+              <path
+                d={guessPath}
+                fill="none"
+                stroke="#fff"
+                strokeWidth="16"
+                data-draw
+                style={{ "--draw-delay": "980ms", "--draw-dur": "1300ms" } as React.CSSProperties}
+              />
+            </mask>
+          </defs>
+          <path
+            d={guessPath}
+            fill="none"
+            stroke="var(--muted)"
+            strokeWidth="1.5"
+            strokeDasharray="4 2"
+            mask="url(#guess-reveal)"
+          />
+          {guessHits.map((h, i) => (
+            <circle
+              key={i}
+              cx={h.x}
+              cy={h.y}
+              r="7"
+              fill="var(--sheet)"
+              stroke="var(--muted)"
+              strokeWidth="1.5"
+              data-note
+              style={{ "--note-delay": `${1100 + i * 150}ms` } as React.CSSProperties}
+            />
+          ))}
+          <g data-note style={{ "--note-delay": "2300ms" } as React.CSSProperties}>
+            <circle
+              cx={guessEnd.x}
+              cy={guessEnd.y}
+              r="9"
+              fill="var(--sheet)"
+              stroke="var(--muted)"
+              strokeWidth="1.5"
+            />
+            <text
+              x={guessEnd.x + 18}
+              y={guessEnd.y + 7}
+              fontSize="21"
+              fontFamily="var(--font-plex-mono), monospace"
+              fill="var(--muted)"
             >
-              {c.title}
-            </h3>
-            <ul className="mt-3 space-y-2.5 sm:mt-5 sm:space-y-3.5">
-              {c.items.map((it) => (
-                <li
-                  key={it}
-                  className={`flex gap-2 text-xs leading-[1.6] sm:gap-3 sm:text-sm sm:leading-[1.7] ${
-                    c.ours ? "text-fg" : "text-fg-muted"
-                  }`}
-                >
-                  <span
-                    className={`mt-2 h-px w-2 shrink-0 sm:mt-2.5 sm:w-3 ${
-                      c.ours ? "bg-accent" : "bg-border"
-                    }`}
-                  />
-                  {it}
-                </li>
-              ))}
-            </ul>
-          </Card>
-        ))}
-      </div>
-    </Section>
+              ?
+            </text>
+          </g>
+
+          <path
+            d={tracedPath}
+            fill="none"
+            stroke="var(--traced)"
+            strokeWidth="2.5"
+            data-draw
+            style={{ "--draw-delay": "1500ms", "--draw-dur": "1100ms" } as React.CSSProperties}
+          />
+          {tracedStations.map((s, i) => (
+            <g
+              key={s.n}
+              data-note
+              style={{ "--note-delay": `${1750 + i * 240}ms` } as React.CSSProperties}
+            >
+              <rect x={s.x - 6} y={s.y - 6} width="12" height="12" fill="var(--traced)" />
+              {/* Above the line, never on it — the route is 2.5px and would
+                  otherwise run straight through its own caption. */}
+              <text
+                x={s.flip ? s.x - 14 : s.x + 14}
+                textAnchor={s.flip ? "end" : "start"}
+                y={s.y - 10}
+                fontSize="18"
+                fontWeight="500"
+                letterSpacing="1.2"
+                fontFamily="var(--font-plex-mono), monospace"
+                fill="var(--traced-deep)"
+              >
+                {s.n} {s.call}
+              </text>
+            </g>
+          ))}
+        </Plan>
+
+        {/* The convention, stated once, where it is first used. Everything else
+            on the sheet obeys it. */}
+        <dl className="mt-7 flex flex-wrap gap-x-12 gap-y-4 border-t border-rule pt-5">
+          <div className="flex items-center gap-3.5">
+            <svg width="52" height="10" aria-hidden="true">
+              <line x1="0" y1="5" x2="52" y2="5" stroke="var(--traced)" strokeWidth="2.5" />
+            </svg>
+            <dt className="font-mono text-base uppercase tracking-[0.12em] text-traced-deep">
+              Traced
+            </dt>
+            <dd className="text-lg text-ink">มีหลักฐาน</dd>
+          </div>
+          <div className="flex items-center gap-3.5">
+            <svg width="52" height="10" aria-hidden="true">
+              <line
+                x1="0"
+                y1="5"
+                x2="52"
+                y2="5"
+                stroke="var(--muted)"
+                strokeWidth="1.5"
+                strokeDasharray="4 2"
+              />
+            </svg>
+            <dt className="font-mono text-base uppercase tracking-[0.12em] text-muted">
+              Inferred
+            </dt>
+            <dd className="text-lg text-muted">การเดา</dd>
+          </div>
+        </dl>
+    </Sheet>
   );
 }

@@ -1,12 +1,10 @@
 # Redesign Plan — The Survey Sheet / ผังสำรวจ
 
-**Status:** agreed 12 September 2026. This is the plan for the full redesign of the
-promo site. No components have been rewritten yet.
+**Status:** agreed and built, 12 September 2026. Phases 1–6 are complete; the site now runs on this plan. Phase 7 (phone layout) is deferred.
 
-**Supersedes, once the build starts:** `MASTER.md` §2 (colour), §5b (signature
-visuals) and §7 (anti-patterns). `MASTER.md` still describes the *current* site
-and stays accurate until Phase 1 lands; it gets rewritten from this document, not
-patched.
+**`MASTER.md` has been rewritten from this document** and is now the reference
+you build against; this file keeps the reasoning, the narrative arc and the
+record of what verification found.
 
 **Fixed decisions carried in from the brief:**
 
@@ -457,39 +455,53 @@ Run this test at the end of every phase.
 
 ---
 
-## 11. Build plan
+## 11. Build plan — phases 1 to 6 complete
 
-Estimated 5–7 days of the 14 remaining, leaving a week for content, the PowerPoint
-and rehearsal. Hand-authored SVG is the entire cost; there is no image pipeline, no
-video, no 3D, and no library beyond what the repo already has.
+Built 12 September 2026. The estimate was 5–7 days; it landed in one session
+because the plan drawing carried four beats instead of one.
 
-| Phase | Work | Days |
+| Phase | Work | Status |
 | --- | --- | --- |
-| **1** | Rewrite `MASTER.md` from this document. Swap the tokens in `globals.css`. Verify contrast with axe-core before any component work | 0.5 |
-| **2** | Sheet furniture: grid, margin register, key map, title block, north arrow, scale bar, legend box. These are shared components every section sits inside | 1 |
-| **3** | **The plan drawing itself** — the single largest cost. Author the 14-room plan as SVG once; beats 2, 3, 4 and 5 are all views of it | 2–3 |
-| **4** | The draw-on-scroll system: one `stroke-dashoffset` hook plus `IntersectionObserver`. Blast radius scroll-link | 0.5 |
-| **5** | Content pass: rewrite every caption and margin note to the new type sizes. This is where the site becomes good — protect the time | 1 |
-| **6** | Verification: axe-core, Lighthouse, projector legibility check at 1920×1080, the swap test | 0.5 |
+| **1** | `MASTER.md` rewritten from this document; tokens swapped in `globals.css`; every contrast ratio computed before any component work; JetBrains Mono → IBM Plex Mono so the system is one superfamily | done |
+| **2** | Sheet furniture: grid, margin register, key map, north arrow, scale bar, legend, title block — `app/components/sheet/` | done |
+| **3** | The plan itself — `app/components/plan/plan-data.ts` and `Plan.tsx`. Fourteen rooms, fourteen edges, two routes. Beats 02–06 are all views of it | done |
+| **4** | `Draw.tsx` — one `IntersectionObserver` per beat, per-path length measurement, `stroke-dashoffset`. `BlastRadius.tsx` is the one scroll-linked moment | done |
+| **5** | Content pass — every caption and margin note rewritten to the new type floor | done |
+| **6** | axe-core, Lighthouse, projector legibility, the swap test | done |
 | **7** | Phone layout | deferred |
 
-**Do Phase 1 before anything else.** The current `MASTER.md` explicitly forbids a
-light ground below the hero; until it is rewritten, the two systems will fight in
-every file.
+### What verification found
 
----
+- **axe-core: 0 violations** at 1920, 1536, 1440, 1280 and 390. No horizontal
+  overflow at any width. **Lighthouse desktop 100 / 100 / 100 / 100.**
+- **One screen per section holds at 1920×1080 and 1536×960.** Below that, four
+  to six sections run 5–160px over, because the fixed chrome a beat carries does
+  not shrink with the viewport. Accepted: the pitch surface is a projector.
+- **The swap test passes.** With the typeface set to Helvetica and the accent
+  deleted, the page still reads as a record — the sheet number, key map, scale
+  bar, line weights, station numbers and margin register carry it on their own.
+  The fusion is structural, not a theme.
+- **One bug the drawing would not have survived.** The draw animation works by
+  setting `stroke-dasharray`, which silently overwrote the conjectured route's
+  own dash pattern and rendered the guess as a solid line — destroying the one
+  convention the whole sheet rests on. It is now revealed through a mask
+  instead, so the dashes survive.
 
 ## 12. Open items
 
-- Token figures for beat 6 need a real measured case, or an explicit method
-- IBM Plex Mono swap — recommended, not required
-- Phone layout deliberately deferred; five sections already exceed one screen at
-  390×667 on the current site and closing that needs content cuts, not spacing
-- The dev-tool landing reference sweep did not complete (hit a session limit) and
-  can be re-run, but the three that did complete converged strongly enough that it
-  is not blocking
-
----
+- **The token figures still need a real measured case.** Beat 06 now leads with
+  `4 / 14` — a count the drawing itself can prove — and the token saving sits in
+  the margin labelled as the estimate it is. Measure it against a real
+  repository before the 26th, or leave it stated as an estimate with its method.
+- **Phone layout.** Not attempted. Every section runs well past one screen at
+  390×844, and closing that needs content cuts, not spacing.
+- **1280–1440 laptops.** Sections run slightly past one screen. Worth a pass if
+  the pitch might be driven from a laptop display rather than the projector.
+- **The Explorer screenshot** from อุด้ง is no longer blocking — beat 05 draws
+  its own evidence — but would still strengthen it.
+- The dev-tool landing reference sweep never completed (it hit a session limit).
+  The three sweeps that did complete converged strongly enough that it did not
+  block the decision.
 
 ## Sources
 

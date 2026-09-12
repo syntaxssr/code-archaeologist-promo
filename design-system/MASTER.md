@@ -1,8 +1,12 @@
 # Code Archaeologist — Brand & Design System
 
-Source of truth for the promo site. Locked in Phase 0. Anything built later
-(components, slides, social images) must pull from this file rather than
-inventing new colors, fonts, or logo variants.
+Source of truth for the promo site. Anything built later (components, slides,
+social images) must pull from this file rather than inventing new colors, fonts,
+or logo variants.
+
+Rewritten 12 September 2026 for the Survey Sheet redesign. The reasoning, the
+narrative arc and the build plan live in [`REDESIGN-PLAN.md`](./REDESIGN-PLAN.md);
+this file is the reference you build against.
 
 - **Project:** Code Archaeologist — LLM Agent Skill that maps a codebase without reading all of it
 - **Event:** iCONEXT AI Challenge Day 2026 — Saturday 26 September 2026
@@ -13,157 +17,269 @@ inventing new colors, fonts, or logo variants.
 
 ## 1. Concept
 
-> **Excavating a codebase, layer by layer.**
+> **The site is one continuous survey drawing of a codebase, drawn in front of the judge, on a single sheet.**
 
-The product reads a repository the way an archaeologist reads a dig site: it does not
-haul the whole hill back to the lab (RAG), it opens a trench, records the strata, and
-traces one artifact to its context.
+The product knows a codebase's architecture without an agent reading the whole
+repository. Modern archaeology's most important move is the same one: ground
+radar, magnetometry and LiDAR image what is underground *without opening it*.
 
-**Tone keywords:** field notes, stratigraphy, precise, unearthed, catalogued, warm-dark.
+The metaphor is not "digging". It is **the refusal to dig**.
 
-**What this rules out:** generic SaaS blue, neon "hacker" green, glassmorphism, and any
-visual that says "another AI chatbot". The site should look like a well-kept excavation
-record that happens to run on a terminal.
+### The identity that makes it work
+
+A Harris matrix — archaeology's diagram of which deposit came before which — is a
+directed acyclic graph: numbered rectangles, latest at the top, edges only between
+contexts in direct contact. A dependency graph is the same object. "Overlain by /
+overlies" and "imported by / imports" are one relation.
+
+We are not decorating a dev tool with archaeology. We are pointing out that the two
+are already doing the same thing. **Every choice that looks decorative gets checked
+against this: is it pointing out a real overlap, or dressing up?**
+
+**Tone keywords:** surveyed, recorded, evidenced, captioned, measured, ordered.
+
+**Register:** museum — an exhibition hall. Light, ordered, spacious, every artefact
+captioned.
+
+**What this rules out:** generic SaaS blue, neon "hacker" green, glassmorphism, dark
+product-marketing gradients, and the entire adventure-archaeology register (see §7).
 
 ## 2. Color
 
-The page has **two grounds**. Above the hero's ground line it is daylight over the dig
-site; below it, and for every section after, it is earth. The cut between them is the
-whole concept in one edge, so the light palette is warm limestone rather than a blue-grey
-— the same site seen from above, not a second brand.
+Warm paper, near-black ink, one industrial accent. **There is no second ground** —
+the sheet is one paper colour from top to bottom. Every ratio below was computed,
+not estimated; re-verify with axe-core after any change.
 
-Amber is the single accent on both, and it is the find: primary CTA, the active state,
-the one number per section worth remembering. Never a background wash.
-
-| Token | Hex | Use |
-| --- | --- | --- |
-| `--color-bg` | `#0C0A09` | Page background (warm black, not blue-black) |
-| `--color-layer` | `#131110` | Alternating section ground — the next stratum down |
-| `--color-surface` | `#1C1917` | Cards, panels raised off the page |
-| `--color-surface-2` | `#292524` | Nested panels, code blocks, table stripes |
-| `--color-border` | `#44403C` | Hairlines, card outlines |
-| `--color-border-soft` | `#292524` | Low-emphasis dividers |
-| `--color-fg` | `#FAFAF9` | Primary text |
-| `--color-fg-muted` | `#A8A29E` | Secondary text, captions |
-| `--color-fg-faint` | `#8C847E` | Metadata, footers, disabled |
-| `--color-accent` | `#F59E0B` | Primary CTA, active nav, key stat, the "find" |
-| `--color-accent-hover` | `#FBBF24` | Hover / focus state of accent surfaces |
-| `--color-accent-deep` | `#B45309` | Accent borders, pressed state, gradient far stop |
-| `--color-on-accent` | `#1C1917` | Text on an amber fill (never white — fails contrast) |
-| `--color-success` | `#84CC16` | Health grade A/B, passing checks |
-| `--color-danger` | `#DC2626` | Blast radius warnings, failing checks |
-
-### Daylight (above the ground line)
-
-| Token | Hex | Use |
-| --- | --- | --- |
-| `--color-sky` | `#FAF7F2` | Daylight ground — warm limestone |
-| `--color-sky-deep` | `#F1E9DD` | Bottom of the daylight gradient, nearest the cut |
-| `--color-sky-surface` | `#FFFDFA` | Nav bar, raised panels on daylight |
-| `--color-sky-border` | `#E3DACE` | Hairlines on daylight |
-| `--color-sky-fg` | `#1C1917` | Primary text on daylight |
-| `--color-sky-fg-muted` | `#57534E` | Secondary text on daylight (7.5:1) |
-| `--color-sky-fg-faint` | `#78716C` | Captions on daylight (4.9:1) |
+| Token | Hex | Use | on `sheet` | on `sheet-2` | on `raised` |
+| --- | --- | --- | --- | --- | --- |
+| `--color-sheet` | `#FBFAF4` | The paper. Page ground, everywhere | — | — | — |
+| `--color-sheet-2` | `#F2EFE7` | Ground fill *inside a plan outline* | — | — | — |
+| `--color-sheet-raised` | `#FFFEFA` | Panels lifted off the sheet | — | — | — |
+| `--color-grid` | `#E3DFD4` | 72px module, 1px. Rule only | — | — | — |
+| `--color-rule` | `#D4CFC2` | Hairlines, register divider. Rule only | — | — | — |
+| `--color-ink` | `#14120F` | Heavy line, all body text | 17.9 | 16.3 | 18.5 |
+| `--color-line` | `#4A4640` | Standard feature outline | 8.96 | 8.15 | 9.28 |
+| `--color-muted` | `#524D46` | Margin notes, field values | 8.00 | 7.28 | 8.29 |
+| `--color-faint` | `#726B62` | Grid coordinates, least important labels | 5.03 | 4.57 | 5.21 |
+| `--color-traced` | `#C2410C` | The traced path, the find, the sink | 4.95 | 4.51 | 5.13 |
+| `--color-traced-deep` | `#9A3412` | Small accent text, hover, pressed | 6.99 | 6.36 | 7.24 |
+| `--color-on-traced` | `#FFFFFF` | Text on a traced fill (5.18 on the fill) | — | — | — |
+| `--color-grade-good` | `#1F6B4E` | Grade A / B | 6.14 | 5.59 | 6.36 |
+| `--color-grade-bad` | `#9E2B1E` | Grade E / F, security sinks | 7.13 | 6.49 | 7.38 |
 
 **Rules**
 
-- One accent. If something needs a second color, it needs a different weight or size instead.
-- Amber fill always carries `--color-on-accent` text, never white (`#F59E0B` + white = 2.1:1, fails WCAG).
-- **On daylight, amber cannot carry text** — `#F59E0B` on `--color-sky` is 2.0:1. Type and hairlines there use `--color-accent-deep` (5.3:1); amber stays for fills, which take `--color-on-accent`.
-- Every text token clears WCAG AA (4.5:1) on every ground it is allowed on — verified with axe-core, not by eye. `fg-muted` is 6.9:1 on `surface`; `fg-faint` is 5.4:1 on `bg`, 5.1:1 on `layer`, 4.8:1 on `surface`; amber is 9.2:1 on `bg`, and `on-accent` is 8.1:1 on an amber fill.
-- `fg-faint` is for metadata and captions regardless — it passes, but it is not a body-text color.
-- Depth comes from surface steps (`bg → surface → surface-2`), not from shadows. Shadows on a warm-black ground read as smudges.
+- **One accent, and it means one thing: this is evidenced.** Not "important", not
+  "interactive". If it is not traced, it is not accent.
+- `--color-traced` has no contrast headroom (4.51 at worst). Restrict it to **large
+  text (22px+), 2px rules, and fills**. Small accent text uses `--color-traced-deep`.
+- **Warm the paper; never age it.** The warmth is one flat hex applied once. Sepia
+  tinting, edge darkening and desaturation are filters, and filters read as costume.
+- **The accent is industrial, never vintage.** `#C2410C` is a colour no 19th-century
+  process could produce. Inverting this — a dusty accent on clean white — is the most
+  reliable way to look cheap.
+- `--color-grid` and `--color-rule` never carry text. They are rules.
+- Depth comes from line weight and desaturation, **not from shadows**. There are no
+  shadows on this site.
+
+### Verified
+
+Measured against the production build, not by eye. Re-run after any change to
+colour, type size or section layout.
+
+| Check | Result |
+| --- | --- |
+| axe-core (WCAG 2.1 A + AA) | **0 violations** at 1920, 1536, 1440, 1280 and 390 |
+| Horizontal overflow | **none** at all five widths |
+| One screen per section | **holds at 1920x1080 and 1536x960** |
+| Lighthouse desktop | **100 / 100 / 100 / 100** |
+
+Below 1536 the fixed chrome a beat carries — header, legend, caption, padding —
+stops fitting, and four to six sections run 5–160px past one screen. That is a
+known, accepted degradation: the pitch surface is a projector at 1920x1080.
+Phone layout is a separate phase and has not been attempted.
 
 ## 3. Typography
 
-Thai is a first-class language on this site, so the body family is chosen for having a
-real Thai cut rather than a fallback. IBM Plex Sans and IBM Plex Sans Thai are the same
-superfamily, so mixed Thai/English lines share a baseline and weight.
+One superfamily plus one Thai companion, and the Thai companion is built on the
+Latin one's outlines, so bilingual lockups share a skeleton.
 
 | Role | Family | Notes |
 | --- | --- | --- |
-| Display (hero, English-only) | JetBrains Mono 600–700 | Field-notes label feel. Tracking `-0.02em` at large sizes |
-| Section titles | IBM Plex Sans / Sans Thai 600 | These carry Thai, so they are never mono |
-| Body (English) | IBM Plex Sans 400–600 | |
-| Body (Thai) | IBM Plex Sans Thai 400–600 | Matches Plex metrics; set before the Latin fallback |
-| Code / labels / stats | JetBrains Mono 400–500 | Uppercase + `tracking-[0.18em]` for kickers |
+| Plan annotation, labels, numbers, coordinates, identifiers, field names | **IBM Plex Mono** 500, uppercase, `tracking-[0.12em]` | **Latin only.** This is the drafting lettering |
+| Latin prose and headings | **IBM Plex Sans** 400/500/600 | |
+| **All Thai** | **IBM Plex Sans Thai** (loopless) 400/500/600, `line-height: 1.75` | Never letterspaced, never uppercased |
 
-| Element | Size | Weight |
-| --- | --- | --- |
-| Hero display | 56–72px | 700 |
-| Section title | 32–40px | 600 |
-| Sub-head | 20–24px | 600 |
-| Body | 16–18px | 400 |
-| Caption / kicker | 12–13px | 500, uppercase, wide tracking |
+**No serif. No display face. No second historical typeface.** A survey sheet has
+none of these, and two historical faces at once is the reliable tell of a costume.
 
-**Rules**
+### The bilingual rule
 
-- Never set Thai text in JetBrains Mono — it has no Thai glyphs and falls back mid-line.
-- Body line-height 1.7 for Thai paragraphs (Thai needs more room for upper/lower vowel marks), 1.6 for English.
-- Kickers are mono + uppercase + amber; that pairing is the section-marker motif.
+> **English is the notation. Thai is the meaning.**
+
+Field names, coordinates, grid references, measurements, identifiers and grades stay
+in Latin mono and are **never translated** — exactly as a real record keeps its codes
+fixed while the interpretive text is in the local language. `CTX 147` needs no Thai
+version. Interpretation, consequence and recommendation are Thai.
+
+**Never mix the two within one line.**
+
+This is not a workaround for mono lacking Thai glyphs. It is a free semantic split
+that does most of the "this is a record" work at zero cost.
+
+### Sizes — set by projector legibility, not taste
+
+Perceived contrast drops about 30% under projection and thin strokes soften at the
+lens. The 8H rule — text at least 1/50 of screen height reads from the back row —
+means on a 1920-wide projected page:
+
+| Element | Size | Weight | Floor |
+| --- | --- | --- | --- |
+| Section title | 56–64px | 600 | — |
+| Sub-head | 28–32px | 600 | — |
+| Body prose | 22px | 400 | **22px** |
+| Margin note, caption | 18px | 400–500 | **18px** |
+| Annotation, field label | 16px | 500, uppercase, tracked | **16px** |
+
+**Anything below 16px is texture, not information, and must not carry meaning.**
+`text-xs` and `text-[10px]` are banned outside deliberate unreadable-texture blocks.
 
 ## 4. Logo
 
-**Mark — "trench".** A site grid square, two strata lines dividing it into three layers,
-and a dashed shaft tracing down from the surface to an amber node in the bottom layer:
-the artifact found in context. Reads at 16px.
+**Mark — "trench".** A site grid square, two strata lines dividing it into three
+layers, and a dashed shaft tracing down from the surface to a node in the bottom
+layer: the artifact found in context. Reads at 16px.
 
 - Grid, strata: `currentColor` at descending opacity (1 / 0.55 / 0.35)
-- Shaft + node: `--color-accent`
+- Shaft + node: `--color-traced`
 - Minimum size 16px; clear space on all sides = 25% of mark height
-- Never recolor the node to anything but amber; never fill the grid square
+- Never recolor the node; never fill the grid square
 
-**Wordmark.** `Code` in `--color-fg` + `Archaeologist` in `--color-accent`, JetBrains Mono
-600, tracking `-0.01em`. Lockup is mark + 8px gap + wordmark, vertically centered.
+**Wordmark.** `Code` in `--color-ink` + `Archaeologist` in `--color-traced-deep`,
+IBM Plex Mono 600, tracking `-0.01em`. Lockup is mark + 8px gap + wordmark,
+vertically centered.
 
-Implementation: `app/components/brand/Logo.tsx` (`<Logo />`, `<LogoMark />`).
+Implementation: `app/components/brand/Logo.tsx`.
 
-## 5. Motif
+## 5. Sheet anatomy
 
-Repeat exactly one thing across every section: **the stratum rule** — a thin
-`--color-border` hairline with a short amber segment at its left edge, sitting above each
-section kicker. It echoes the strata in the mark. Do not add a second decorative device.
+The furniture that never leaves. It runs **continuously** across every section —
+that is what makes seven scroll-stops read as one sheet rather than seven pages.
 
-## 5b. Signature visuals
+| Element | Position | Content |
+| --- | --- | --- |
+| **Grid** | Whole page | 72px module, 1px `--color-grid`. Every element snaps to it |
+| **Margin register** | Right 3 columns, full height | Numbered notes, field values, keys. **Never body prose** |
+| **Key map** | Top right | A miniature of the sheet with the current position marked. Advances on scroll — this is also the nav |
+| **North arrow** | Top right corner | Fixed |
+| **Scale bar** | Bottom left | `0 ———— 12,400 LOC` |
+| **Legend box** | Once, in Features | Line weights, condition key, symbols |
+| **Title block** | Bottom right of the final section | Project · Sheet 01 of 01 · Scale · Date |
 
-Two hand-built SVGs carry the concept; both live in `app/components/visuals/` and
-draw from the tokens, so they re-theme with the palette.
+### Line weights are strict and meaningful
 
-- **`TrenchDiagram`** (hero) — a cross-section of a codebase: three strata of entities
-  with one traced call path cutting down through them, ending in an amber node. The
-  trace routes chip-edge to chip-edge so it never crosses a label. A depth scale
-  (`SURFACE → LAYER 01–03 → BEDROCK`) runs down the left gutter, sharing its column
-  with the layer names. Below `md` it renders a compact variant carrying only the
-  traced entities — the full cross-section would push the trace off a phone screen.
-- **`ExplorerMock`** (demo) — tree · graph · findings, the shape of the real Explorer
-  output. It is a mock and the section copy says so; replace it with a real screenshot
-  as soon as one exists.
+| Weight | Meaning |
+| --- | --- |
+| 0.75px | Grid |
+| 1.5px | Feature outline, wall |
+| **2.5px solid** | **Traced path — evidenced** |
+| **1.5px dashed 4-2** | **Conjectured — a guess** |
+| 2px `--color-traced` | Blast radius, the find |
 
-Numbers on cards and steps are set as two-digit monospace catalogue marks (`01`, `02`)
-— the same field-notes register as the kickers.
+No other weights exist. If a line needs a weight not on this list, the drawing is
+wrong.
 
-**The hero is a dig site, not a page with a picture of one.** Everything above the
-ground line (headline, pitch, CTAs) sits in daylight; the stratum rule runs the full
-width as ground level; below it the ground is `bg`, with an inset shadow at the top edge
-where the light stops reaching. Scrolling down is descending, and the page never returns
-to daylight.
+The solid/dashed split is the site's most valuable device: it settles the Zero-RAG
+argument in two strokes with no explanation.
 
-The nav crosses that line, so it inverts: a limestone bar over daylight, a dark one over
-earth, switched by watching `[data-hero-sky]` rather than a hard-coded scroll offset.
+## 5b. Motion
 
-## 6. Assets
+**One verb: draw.** Every line is an SVG path animated on `stroke-dashoffset`,
+triggered by `IntersectionObserver`, **in the order a surveyor would draw it**.
+Nothing fades in. Nothing slides.
+
+| Element | Behaviour |
+| --- | --- |
+| Plan lines | Draw in survey order: grid, outline, walls, finds |
+| Margin notes | Appear 200ms after their keyed feature completes |
+| Blast radius | A circle strikes from centre outward, 400ms |
+| Hotspot contours | Draw from the outside in, tightening |
+| Key map | The marker advances along the sheet; it never teleports |
+| Counters | Mono digits tick up over 600ms when their figure enters |
+
+Motion always carries the same meaning: **this is being recorded, in front of you,
+in order.**
+
+**The one operated moment:** the Blast Radius reveal is scroll-linked rather than
+time-linked, so the presenter drives it with the scroll wheel. That is the only
+point where a judge watches the presenter *operate* the page rather than play it.
+One such moment is enough; two would be a gimmick.
+
+Primitives live in `globals.css`: `[data-draw]` + `[data-draw-run]` for paths,
+`[data-note]` for annotation. Under `prefers-reduced-motion` every path renders
+complete — the sheet must be fully legible with no motion at all.
+
+## 6. Content rules
+
+1. **Every drawn line carries a caption. No caption means delete the line.** This is
+   the one rule that keeps the sheet a museum and not a blueprint.
+2. **Every number must be real.** Decorative identifiers that encode nothing are the
+   tell of a costume. If we print `CTX 031`, it resolves to something.
+3. **State the coverage honestly.** The product maps a repository without reading all
+   of it; saying so plainly, the way museum records carry an accuracy note, is a
+   differentiator rather than an apology.
+4. **The archival register never touches controls.** Buttons say what happens. Errors
+   say what broke. No "เริ่มการขุดค้น!" on a CTA.
+5. **Density is authenticity.** A spacious page with one archival flourish reads as a
+   theme restaurant. At least one genuinely dense, tabular, cross-referenced section.
+
+## 7. Assets
 
 | Asset | Path | Status |
 | --- | --- | --- |
-| Favicon | `app/icon.svg` | Phase 0 |
-| OG image (1200×630) | `app/opengraph-image.tsx` | Phase 0 |
-| Demo screenshot / GIF of the real skill | — | **Blocked — request from อุด้ง** |
+| Favicon | `app/icon.svg` | Needs repaint for the sheet palette |
+| OG image (1200×630) | `app/opengraph-image.tsx` | Needs repaint for the sheet palette |
+| Demo screenshot of the real Explorer | — | Requested from อุด้ง — **no longer blocking**, the Demo section draws its own evidence |
 
-## 7. Anti-patterns
+## 8. Anti-patterns
 
-- A third ground. Daylight belongs above the hero's ground line; everything below is earth. A light section further down the page would read as a different site, not a deeper layer
-- Accent stripes down a card edge or a colored bar under a title
-- Emoji used as icons (use Lucide, stroke width 1.5)
-- Amber on amber, amber text on any surface lighter than `--color-surface`, or amber text anywhere on daylight
-- Centered body paragraphs — titles center, prose stays left-aligned
-- Motion for decoration; 150–300ms, and respect `prefers-reduced-motion`
+**Never, under any circumstance:**
+
+Pith helmets · bullwhips · fedoras · treasure · gold · skulls · pyramids · amphorae ·
+rope borders · wax seals · decorative compass roses · wood grain · torn or singed
+paper edges · crumpled-parchment backgrounds · crackle overlays · sepia filters ·
+sand gradients · floating dust particles · a magnifying glass over a map · trowel and
+brush icons · "ขุดลึกลงไป" / "unearth the secrets of your codebase" · loaders that
+shovel or brush away dust.
+
+Real archaeology's visual language is **bureaucratic, not romantic** — forms,
+numbers, hairlines and grids made by cold, tired people in a muddy field who need the
+record to survive fifty years in a box. Every item above comes from adventure fiction
+about archaeology, not from archaeology.
+
+**Also forbidden:**
+
+| | Why |
+| --- | --- |
+| Any texture overlay — grain, noise, paper JPEG, vignette | Fifteen reference sites studied, zero instances. Fastest way to look like a template |
+| A second historical typeface | Two periods colliding is a costume shop |
+| Body copy in mono | The moment a machine face sets a paragraph, the convention becomes a costume |
+| Serif UI — buttons, nav, form labels, errors | The archive frames the instrument; it never operates it |
+| Tinting or ageing the product screenshots | The product appears at full modern fidelity, always |
+| Letterspaced Thai, uppercased Thai, Thai on a monospace grid | None of these concepts exist in Thai. All read as festival signage |
+| A third ground, or alternating section backgrounds | The sheet is one paper colour top to bottom |
+| Shadows, glows, gradients on UI | Depth is line weight and desaturation |
+| Accent stripes down a card edge, coloured bars under a title | Reads as filler |
+| Emoji as icons | Use drawn symbols from the legend |
+| Centered body paragraphs | Titles center, prose stays left-aligned |
+| Text below 16px carrying meaning | Illegible from the back of the room |
+| Half-committing | A partial system reads as an unfinished idea; a total one reads as rigour |
+
+### The swap test
+
+Set the type to Helvetica and delete the accent colour. **If the page still reads as
+a record** — because of the numbering, the margin register, the line weights, the
+captions — the fusion is structural and will hold. If it collapses into a generic
+landing page, we built a theme, not a design.
+
+Run this at the end of every phase.

@@ -11,7 +11,7 @@ arbitrary substitute face. It happened during development.
 | --- | --- | --- | --- |
 | IBM Plex Sans | latin | 400, 500, 600, 700 | Latin body text |
 | IBM Plex Sans Thai | thai | 400, 500, 600, 700 | Thai body text and section titles |
-| JetBrains Mono | latin | 400, 500, 600, 700 | Display, kickers, labels, code |
+| IBM Plex Mono | latin | 400, 500, 600, 700 | Plan annotation, labels, numbers, identifiers |
 
 **Plex Thai carries the Thai subset only.** Latin characters inside a Thai line
 fall through to Plex Sans — the same superfamily, so the metrics match — which
@@ -26,7 +26,7 @@ Both families are under the [SIL Open Font License 1.1](https://openfontlicense.
 which permits bundling and redistribution with the site.
 
 - IBM Plex — https://github.com/IBM/plex
-- JetBrains Mono — https://github.com/JetBrains/JetBrainsMono
+- IBM Plex Mono — https://github.com/IBM/plex
 
 ## Updating
 

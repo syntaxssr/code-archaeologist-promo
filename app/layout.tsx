@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Nav } from "./components/Nav";
+import { SheetRail } from "./components/sheet/SheetRail";
 import "./globals.css";
 
 // Self-hosted from app/fonts (see the README there). next/font/google fetches
@@ -35,14 +35,18 @@ const plexThai = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
-const jetbrainsMono = localFont({
+// Latin only. Mono is the drafting lettering of the sheet — annotation,
+// labels, numbers, coordinates, identifiers — and never sets Thai or a
+// paragraph. Plex Mono rather than JetBrains so the whole system is one
+// superfamily and mixed lines share a skeleton.
+const plexMono = localFont({
   src: [
-    { path: "./fonts/JetBrainsMono-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/JetBrainsMono-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/JetBrainsMono-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/JetBrainsMono-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/IBMPlexMono-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/IBMPlexMono-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/IBMPlexMono-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/IBMPlexMono-700.woff2", weight: "700", style: "normal" },
   ],
-  variable: "--font-jetbrains",
+  variable: "--font-plex-mono",
   display: "swap",
   preload: false,
   fallback: ["ui-monospace", "monospace"],
@@ -53,7 +57,7 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   : "http://localhost:3000";
 
 const description =
-  "Agent Skill ที่ให้ AI เข้าใจสถาปัตยกรรมทั้ง repo โดยไม่ต้องอ่านโค้ดทั้งหมด — Zero-RAG, deterministic, ลด token 90%+";
+  "Agent Skill ที่ให้ AI เข้าใจสถาปัตยกรรมทั้ง repository โดยไม่ต้องอ่านโค้ดทั้งหมด — AST scan, Markdown wiki, dependency graph, Zero-RAG";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -89,16 +93,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="th"
-      className={`${plexSans.variable} ${plexThai.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${plexThai.variable} ${plexMono.variable} h-full antialiased`}
     >
       <head>
-        {/* Scroll-reveal starts hidden; without JS it must never stay that way. */}
+        {/* Lines start retracted and notes start hidden; without JS the sheet
+            must still render complete. */}
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal],[data-note]{opacity:1!important;transform:none!important}[data-draw]{stroke-dashoffset:0!important}`}</style>
         </noscript>
       </head>
       <body className="min-h-full flex flex-col">
-        <Nav />
+        <SheetRail />
         {children}
       </body>
     </html>
