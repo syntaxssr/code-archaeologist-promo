@@ -42,7 +42,11 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
 
-  --font-sans: var(--font-plex-thai), var(--font-plex-sans);
+  /* Latin first: each next/font family ships an adjusted fallback that covers
+     Latin, so putting the Thai face first let that fallback win every Latin
+     character before Plex Sans was ever reached. Thai still lands on Plex Thai —
+     neither Plex Sans nor its Arial-metric fallback has Thai glyphs. */
+  --font-sans: var(--font-plex-sans), var(--font-plex-thai);
   --font-mono: var(--font-jetbrains);
 }
 
@@ -60,7 +64,7 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-plex-thai), var(--font-plex-sans), system-ui, sans-serif;
+  font-family: var(--font-plex-sans), var(--font-plex-thai), system-ui, sans-serif;
   line-height: 1.7;
 }
 

@@ -1,24 +1,51 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Sans_Thai, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Nav } from "./components/Nav";
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
+// Self-hosted from app/fonts (see the README there). next/font/google fetches
+// from Google at build time, which silently drops the site to system fonts
+// whenever that fetch fails — offline, behind a proxy, or from a cached failure.
+// next/font requires literal values, so each weight is spelled out.
+const plexSans = localFont({
+  src: [
+    { path: "./fonts/IBMPlexSans-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/IBMPlexSans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/IBMPlexSans-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/IBMPlexSans-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-plex-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const plexThai = IBM_Plex_Sans_Thai({
+// Thai glyphs only — Latin in a Thai paragraph falls through to Plex Sans,
+// which is the same superfamily, so the line keeps one set of metrics.
+const plexThai = localFont({
+  src: [
+    { path: "./fonts/IBMPlexSansThai-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/IBMPlexSansThai-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/IBMPlexSansThai-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/IBMPlexSansThai-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-plex-thai",
-  subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
+  src: [
+    { path: "./fonts/JetBrainsMono-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/JetBrainsMono-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/JetBrainsMono-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/JetBrainsMono-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  fallback: ["ui-monospace", "monospace"],
 });
 
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
