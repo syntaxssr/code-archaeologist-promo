@@ -17,7 +17,7 @@ export function Impact() {
       <SectionHeading kicker="Impact" title="ผลลัพธ์ที่วัดได้" />
 
       {/* Before / after, at the same scale — the whole argument in one picture. */}
-      <div className="mx-auto mt-12 max-w-3xl space-y-5">
+      <div className="mx-auto mt-10 max-w-3xl space-y-4 sm:mt-12 sm:space-y-5">
         {[
           { label: "อ่าน source ทั้ง repo", width: "100%", tone: "muted" as const },
           { label: "Code Archaeologist", width: "8%", tone: "accent" as const },
@@ -44,15 +44,15 @@ export function Impact() {
         ))}
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-2">
+      <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5">
         {stats.map((s) => (
           <Card key={s.label} className="text-center">
-            <p className="font-mono text-5xl font-bold text-accent">{s.value}</p>
-            <p className="mt-3 text-sm leading-[1.7] text-fg-muted">{s.label}</p>
+            <p className="font-mono text-4xl font-bold text-accent sm:text-5xl">{s.value}</p>
+            <p className="mt-2 text-sm leading-[1.7] text-fg-muted sm:mt-3">{s.label}</p>
           </Card>
         ))}
       </div>
-      <div className="mx-auto mt-5 max-w-3xl rounded-xl border border-accent-deep bg-surface p-5 sm:p-7">
+      <div className="mx-auto mt-4 max-w-3xl rounded-xl sm:mt-5 border border-accent-deep bg-surface p-5 sm:p-7">
         <p className="font-semibold text-fg">
           ตรงกับเกณฑ์ &ldquo;Impact ต่อบริษัท&rdquo; ของงานนี้
         </p>

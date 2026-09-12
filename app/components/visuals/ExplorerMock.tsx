@@ -60,7 +60,9 @@ export function ExplorerMock() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)_minmax(0,0.8fr)]">
-        <div className="border-b border-border-soft p-4 sm:border-r sm:border-b-0">
+        {/* The tree is the least informative pane and the tallest — on a phone
+            it pushed the section past one screen, so it starts at sm. */}
+        <div className="hidden border-b border-border-soft p-4 sm:block sm:border-r sm:border-b-0">
           <p className="font-mono text-[10px] tracking-[0.18em] text-fg-faint">FILE TREE</p>
           <ul className="mt-3 space-y-1.5">
             {tree.map((f) => (
@@ -78,8 +80,8 @@ export function ExplorerMock() {
           </ul>
         </div>
 
-        <div className="flex flex-col items-center justify-center border-b border-border-soft p-4 lg:border-r lg:border-b-0">
-          <svg viewBox="-40 20 340 236" className="w-full" role="img" aria-label="กราฟความสัมพันธ์ระหว่าง entity">
+        <div className="flex flex-col items-center justify-center border-b border-border-soft p-3 sm:p-4 lg:border-r lg:border-b-0">
+          <svg viewBox="-40 20 340 236" className="max-h-40 w-full sm:max-h-none" role="img" aria-label="กราฟความสัมพันธ์ระหว่าง entity">
             {edges.map(([from, to, onPath]) => {
               const a = nodeById(from);
               const b = nodeById(to);
@@ -118,16 +120,16 @@ export function ExplorerMock() {
               </g>
             ))}
           </svg>
-          <p className="mt-2 font-mono text-[10px] text-fg-faint">
+          <p className="mt-2 hidden font-mono text-[10px] text-fg-faint sm:block">
             force / tree / matrix / flow
           </p>
         </div>
 
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           <p className="font-mono text-[10px] tracking-[0.18em] text-fg-faint">
             ORDERSERVICE.PY
           </p>
-          <dl className="mt-3 space-y-3">
+          <dl className="mt-3 space-y-2 sm:space-y-3">
             {findings.map((f) => (
               <div key={f.label}>
                 <dt className="font-mono text-[10px] text-fg-faint">{f.label}</dt>

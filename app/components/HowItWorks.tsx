@@ -18,7 +18,7 @@ export function HowItWorks() {
     <Section id="how-it-works">
       <SectionHeading kicker="How it Works" title="จาก Source ถึงคำตอบ ใน 5 ขั้น" />
 
-      <ol className="mx-auto mt-14 max-w-3xl">
+      <ol className="mx-auto mt-10 max-w-3xl sm:mt-14">
         {steps.map((step, i) => {
           const isLast = i === steps.length - 1;
           return (
@@ -29,7 +29,7 @@ export function HowItWorks() {
                 {!isLast && <span className="w-px flex-1 bg-border" />}
               </div>
 
-              <div className={isLast ? "pb-0" : "pb-9"}>
+              <div className={isLast ? "pb-0" : "pb-6 sm:pb-9"}>
                 <div className="flex items-baseline gap-3">
                   <span className="font-mono text-xs text-accent">
                     {String(i + 1).padStart(2, "0")}
@@ -43,7 +43,7 @@ export function HowItWorks() {
         })}
       </ol>
 
-      <p className="mx-auto mt-12 max-w-3xl rounded-lg border border-border-soft bg-surface-2 px-6 py-4 text-center font-mono text-sm leading-[2] break-words text-fg-muted">
+      <p className="mx-auto mt-8 max-w-3xl rounded-lg sm:mt-12 border border-border-soft bg-surface-2 px-6 py-4 text-center font-mono text-sm leading-[2] break-words text-fg-muted">
         submitOrder <span className="text-accent">&rarr;</span> createOrder{" "}
         <span className="text-accent">&rarr;</span> OrderController.create_order{" "}
         <span className="text-accent">&rarr;</span> OrderService.place_order{" "}
