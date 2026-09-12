@@ -3,15 +3,19 @@ import { GithubIcon } from "./icons/GithubIcon";
 import { ButtonLink } from "./ui/Button";
 import { TrenchDiagram } from "./visuals/TrenchDiagram";
 
+// Exactly one screen: the trench is the last thing above the fold, and the first
+// scroll moves on. svh, not vh, so a phone's collapsing URL bar cannot overflow it.
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen scroll-mt-20 flex-col overflow-hidden bg-bg"
+      className="relative flex h-svh scroll-mt-20 flex-col overflow-hidden bg-bg"
     >
-      {/* Above ground: lit from the sky, where the pitch is made. */}
+      {/* Above ground: lit from the sky, where the pitch is made. Sized by its
+          own content — on a short window the trench gives up height, the pitch
+          never does. */}
       <div
-        className="relative flex flex-1 flex-col items-center justify-center px-6 pt-28 pb-14 text-center"
+        className="relative flex flex-none flex-col items-center justify-center px-6 pt-[clamp(5.5rem,13svh,6.5rem)] pb-[clamp(1.25rem,3svh,2.5rem)] text-center"
         style={{
           background:
             "linear-gradient(to bottom, var(--surface) -55%, var(--layer) 35%, var(--bg))",
@@ -56,7 +60,7 @@ export function Hero() {
 
       {/* Below ground: darker, where the light stops reaching. */}
       <div
-        className="relative px-6 pt-12 pb-14"
+        className="relative flex min-h-0 flex-1 flex-col justify-center px-6 py-[clamp(1rem,3svh,2rem)]"
         style={{ boxShadow: "inset 0 24px 32px -24px rgba(0,0,0,0.9)" }}
       >
         {/* Strata receding into the dark. */}
@@ -70,21 +74,26 @@ export function Hero() {
           }}
         />
 
-        <TrenchDiagram variant="compact" className="relative z-10 h-auto w-full md:hidden" />
+        {/* Takes whatever height is left. The SVG scales to fit it rather than
+            overflowing, so the hero stays one screen on short windows. */}
+        <TrenchDiagram
+          variant="compact"
+          className="relative z-10 min-h-0 w-full flex-1 md:hidden"
+        />
 
         {/* Scrolls sideways between md and the diagram's own width — scaling it
             to fit would make the entity names unreadable. Focusable so it is
             reachable by keyboard. */}
         <div
-          className="relative z-10 mx-auto hidden w-full max-w-5xl overflow-x-auto md:block"
+          className="relative z-10 mx-auto hidden min-h-0 w-full max-w-5xl flex-1 overflow-x-auto md:block"
           tabIndex={0}
           role="region"
           aria-label="ภาพตัดขวางของโค้ดเบส"
         >
-          <TrenchDiagram className="h-auto w-full min-w-[820px]" />
+          <TrenchDiagram className="h-full w-full min-w-[820px]" />
         </div>
 
-        <p className="relative z-10 mt-8 text-center text-xs text-fg-faint">
+        <p className="relative z-10 mt-[clamp(0.75rem,2svh,1.5rem)] text-center text-xs text-fg-faint">
           พีรพล จันทะแจ่ม (BB) · ณัฐวุฒิ รอดทอง (อุด้ง)
         </p>
       </div>
