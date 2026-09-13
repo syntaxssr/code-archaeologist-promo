@@ -77,11 +77,30 @@ and the screens' English names, are notes to the presenter, and the room can
 read anything that is on the projector. A content screen's header is its number
 and a rule, nothing else.
 
-**Two screens are waiting on real material.** Screen 08 separates what the demo
-can prove from the token figure, which is still an estimate and is labelled as
-one; measure it before the 26th. Screen 10's criteria are a stand-in — replace
-them with the organisers' published list, because a mapping to the wrong
-criteria is worse than none.
+**One screen is still waiting on real material.** Screen 08 separates what the
+demo can prove from the token figure, which is an estimate and is labelled as
+one; measure it against a real repository before the 26th.
+
+**Screen 10 now carries the organisers' published weights** (received 13
+September 2026), not a guess:
+
+| Criterion | Points |
+| --- | --- |
+| Impact ต่อบริษัท | 30 |
+| แนวทางต่อยอดหรือใช้งานได้จริง | 30 |
+| ความคิดสร้างสรรค์ | 20 |
+| Presentation | 10 |
+| คะแนนจากผู้เข้าร่วมงาน | 10 |
+
+Sixty of the hundred points are for worth and adoption, twenty for invention,
+and the last twenty are decided by the room rather than by the panel — so the
+deck is built for people who do not already know the problem, and the demo is
+what the audience vote will actually be cast on.
+
+The brief also requires the work to produce at least one of: ลดเวลาทำงาน,
+ลดต้นทุน, เพิ่มคุณภาพ, เพิ่มรายได้, เปิดโอกาสธุรกิจใหม่. This one claims two —
+ลดเวลาทำงาน and เพิ่มคุณภาพ — and screen 10 says so in a single line rather
+than claiming all five.
 
 ## Tone
 

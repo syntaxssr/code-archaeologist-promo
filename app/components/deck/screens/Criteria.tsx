@@ -4,21 +4,47 @@ import type { ScreenProps } from "./index";
 /**
  * Screen 10 — against the criteria.
  *
- * The judges score against something. This screen answers it directly rather
- * than hoping they join the dots themselves, and each row points at the screen
- * that already proved it — so it reads as a summary of what was shown, not as a
- * fresh claim at the end.
+ * These are the organisers' published weights, received 13 September 2026, not
+ * a guess: Impact 30, a real path to adoption 30, creativity 20, presentation
+ * 10, audience vote 10.
  *
- * The four criteria below are the ones an internal AI challenge usually scores
- * on. **They are a stand-in: replace them with the organisers' published list
- * as soon as we have it**, because a mapping to the wrong criteria is worse
- * than no mapping at all.
+ * The shape of that list is itself the argument, so the screen says it out
+ * loud: sixty of the hundred points are for whether the thing is worth having
+ * and can actually be adopted. Cleverness is worth twenty. Each row points at
+ * the screen that already proved it, so this reads as a summary of what the
+ * room has seen rather than a fresh claim made at the end.
  */
-const rows: [string, string, string][] = [
-  ["ใช้ได้จริง", "รันกับ repo ของทีมได้วันนี้ ไม่ต้องติดตั้งอะไร", "09"],
-  ["ความคิดสร้างสรรค์", "ตอบด้วยการเดินตาม graph แทนการค้นด้วยความคล้าย", "05"],
-  ["ผลกระทบ", "ลดเวลาที่หมดไปกับการหาว่าอะไรกระทบอะไร", "01"],
-  ["ความสมบูรณ์", "ทำงานได้ครบตั้งแต่สแกนจนถึงหน้าที่เปิดดูได้", "06"],
+const rows: { k: string; th: string; ref: string; pts: number }[] = [
+  {
+    k: "Impact ต่อบริษัท",
+    th: "เวลาที่หมดไปกับการหาว่าแก้ตรงนี้แล้วอะไรพัง หายไปจากทุกงานแก้",
+    ref: "08",
+    pts: 30,
+  },
+  {
+    k: "ต่อยอด / ใช้ได้จริง",
+    th: "รันกับ repo ของทีมได้วันนี้ ไม่ต้องย้ายระบบ ไม่ต้องตั้งเซิร์ฟเวอร์",
+    ref: "09",
+    pts: 30,
+  },
+  {
+    k: "ความคิดสร้างสรรค์",
+    th: "เดินตามการเรียกจริงในโค้ด แทนการค้นด้วยความคล้ายของข้อความ",
+    ref: "05",
+    pts: 20,
+  },
+  {
+    k: "Presentation",
+    th: "นี่คือตัวงานจริง ไม่ใช่สไลด์ที่พูดถึงงาน",
+    ref: "ทั้งเด็ค",
+    pts: 10,
+  },
+  {
+    k: "คะแนนผู้เข้าร่วม",
+    th: "คนดูโหวตจากของที่เห็นว่าทำงานจริงตรงหน้า",
+    ref: "06",
+    pts: 10,
+  },
 ];
 
 export function Criteria({ slide }: ScreenProps) {
@@ -27,28 +53,40 @@ export function Criteria({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="text-[clamp(1.75rem,4.2vw,3.75rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        className="text-[clamp(1.5rem,3.4vw,3rem)] leading-[1.15] font-semibold tracking-[-0.02em] text-ink"
       >
-        ทุกข้อ ชี้กลับไปที่จอที่เพิ่งดูไป
+        60 จาก 100 ไม่ได้วัดว่าฉลาดแค่ไหน วัดว่าเอาไปใช้ได้จริงไหม
       </h2>
 
-      <dl className="mt-[clamp(1.25rem,3.5svh,2.25rem)] border-t border-rule">
-        {rows.map(([k, th, ref], n) => (
+      <dl className="mt-[clamp(1rem,3svh,1.75rem)] border-t border-rule">
+        {rows.map(({ k, th, ref, pts }, n) => (
           <div
             key={k}
             data-enter
-            style={{ "--enter-delay": `${380 + n * 160}ms` } as React.CSSProperties}
-            className="flex flex-wrap items-baseline gap-x-[clamp(1rem,2.2vw,2.25rem)] gap-y-1 border-b border-rule py-[clamp(0.65rem,2svh,1.25rem)]"
+            style={{ "--enter-delay": `${360 + n * 140}ms` } as React.CSSProperties}
+            className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.5rem,1.7svh,1rem)]"
           >
-            <dt className="w-[10em] shrink-0 text-[clamp(1.0625rem,1.5vw,1.625rem)] font-medium text-ink">
+            <dt className="w-[9.5em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] font-medium text-ink">
               {k}
             </dt>
-            <dd className="min-w-0 flex-1 text-[clamp(1rem,1.35vw,1.375rem)] leading-[1.5] text-muted">
+            <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.5] text-muted">
               {th}
             </dd>
             {/* Points back at the screen that already showed it. */}
-            <dd className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] tracking-[0.14em] tabular-nums text-traced-deep">
+            <dd
+              className={`w-[6.5em] shrink-0 whitespace-nowrap text-right font-mono text-[clamp(0.75rem,1vw,1.0625rem)] tabular-nums text-traced-deep ${
+                /^\d+$/.test(ref) ? "tracking-[0.12em]" : ""
+              }`}
+            >
               → {ref}
+            </dd>
+            {/* Weight carried by contrast, not colour — the two thirties lead. */}
+            <dd
+              className={`w-[2.5em] shrink-0 text-right font-mono text-[clamp(1.25rem,2.1vw,2.25rem)] leading-none tabular-nums ${
+                pts >= 20 ? "text-ink" : "text-faint"
+              }`}
+            >
+              {pts}
             </dd>
           </div>
         ))}
@@ -56,10 +94,12 @@ export function Criteria({ slide }: ScreenProps) {
 
       <p
         data-enter
-        style={{ "--enter-delay": "1080ms" } as React.CSSProperties}
-        className="mt-[clamp(0.875rem,2.4svh,1.5rem)] text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.6] text-faint"
+        style={{ "--enter-delay": "1160ms" } as React.CSSProperties}
+        className="mt-[clamp(0.75rem,2.2svh,1.25rem)] text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.6] text-faint"
       >
-        เกณฑ์ข้างบนเป็นฉบับร่าง — เปลี่ยนเป็นเกณฑ์จริงของผู้จัดทันทีที่ได้มา
+        โจทย์ขอให้เกิดอย่างน้อย 1 ข้อ — อันนี้ตอบ 2 ข้อ:{" "}
+        <span className="text-line">ลดเวลาทำงาน</span> และ{" "}
+        <span className="text-line">เพิ่มคุณภาพ</span>
       </p>
     </Frame>
   );
