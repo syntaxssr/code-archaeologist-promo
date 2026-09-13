@@ -6,6 +6,7 @@ import { Category } from "./Category";
 import { Close } from "./Close";
 import { Demo } from "./Demo";
 import { How } from "./How";
+import { Local } from "./Local";
 import { Numbers } from "./Numbers";
 import { Output } from "./Output";
 import { Pain } from "./Pain";
@@ -38,6 +39,7 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   output: Output,
   numbers: Numbers,
   use: Use,
+  local: Local,
   ask: Ask,
   "ask-review": AskReview,
   team: Team,

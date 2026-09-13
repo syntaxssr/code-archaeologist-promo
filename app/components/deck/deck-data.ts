@@ -41,7 +41,10 @@ export const slides: Slide[] = [
   { id: "demo", no: "06", th: "เดโม", en: "DEMO", seconds: 150 },
   { id: "output", no: "07", th: "ได้อะไรออกมา", en: "WHAT YOU GET", seconds: 45 },
   { id: "numbers", no: "08", th: "ตัวเลข", en: "THE NUMBERS", seconds: 45 },
-  { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 60 },
+  // Section 09 runs to two screens. Adoption is the question, and in a company
+  // the first thing that blocks adoption is "where does our code go".
+  { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 45 },
+  { id: "local", no: "09", th: "โค้ดเราออกจากเครื่องแค่ไหน", en: "IT STAYS LOCAL", seconds: 35 },
   // Section 10 runs to two screens: the commands that walk the graph, then
   // the ones that judge it. The split is the skill's own — scripts/query
   // against scripts/review.

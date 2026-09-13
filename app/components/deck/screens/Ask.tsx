@@ -6,27 +6,27 @@ import matrix from "@/public/shots/matrix-canvas.png";
 /**
  * Screen 10 · 1/2 — the commands that walk the graph.
  *
- * This slot used to map the work onto the judges' scoring criteria. That was
- * the wrong thing to put on a projector: the criteria belong to the panel, not
- * to us, and reciting them back is not evidence of anything. The room's real
- * question at this point is simpler and had gone unanswered — what can the
- * thing actually do, and how do you drive it.
+ * Two layers, because the first draft of this screen only showed the second
+ * one. USAGE.md opens by saying most people never run these by hand — the agent
+ * does — and a hall that is half non-developers reading a column of `--flags`
+ * concludes it has to memorise them, which is the opposite of the pitch.
  *
- * So every row is a question a developer already asks out loud, paired with the
- * single command that answers it. The commands are real and copied from the
- * skill's own usage reference; none of them is an invented flag.
+ * So the left column is what a person actually types, in their own words, and
+ * the right is what the skill tells the agent to run. A non-developer can read
+ * the left and stop; a developer gets the proof on the right that the answer
+ * came from a command and not from a model's memory.
  *
  * This page is `scripts/query` — finding things and walking between them. The
  * second page is `scripts/review`, which judges what it finds. The split is the
  * skill's own, not one invented for the slide.
  */
 const asks: [string, string][] = [
-  ["อยู่ตรงไหน", "search.py --name X"],
-  ["A ไปถึง B ยังไง", "trace_path.py --from A --to B"],
-  ["แก้แล้วพังตรงไหน", "trace_path.py --impact-of X"],
-  ["PR นี้กระทบอะไร", "trace_path.py --impact-of-diff"],
-  ["ขอทุกอย่างของโหนดเดียว", "context.py --node X"],
-  ["แผนที่เก่ารึยัง", "archaeologist.py check"],
+  ["โค้ดที่จัดการเรื่องนี้อยู่ไฟล์ไหน", "search.py --name X"],
+  ["จากหน้าเว็บวิ่งไปถึง database ยังไง", "trace_path.py --from A --to B"],
+  ["ถ้าแก้ตรงนี้ จะพังตรงไหนบ้าง", "trace_path.py --impact-of X"],
+  ["PR ที่เปิดอยู่ กระทบอะไรบ้าง", "trace_path.py --impact-of-diff"],
+  ["เล่าให้ฟังหน่อยว่าตัวนี้ทำอะไร", "context.py --node X"],
+  ["แผนที่ยังตรงกับโค้ดล่าสุดไหม", "archaeologist.py check"],
 ];
 
 export function Ask({ slide }: ScreenProps) {
@@ -35,24 +35,33 @@ export function Ask({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(1.5rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        className="flex-none text-[clamp(1.5rem,3.4vw,3rem)] leading-[1.15] font-semibold tracking-[-0.02em] text-ink"
       >
-        ถามเป็นคำสั่ง ตอบจากกราฟ ไม่ใช่จากการเดา
+        ไม่มีคำสั่งให้ท่อง — พิมพ์เป็นภาษาคน แล้ว AI ไปเรียกเอง
       </h2>
 
-      <div className="mt-[clamp(1rem,3svh,2rem)] flex min-h-0 flex-1 items-stretch gap-[clamp(1.5rem,3.5vw,3.5rem)]">
+      <div className="mt-[clamp(0.875rem,2.6svh,1.75rem)] flex min-h-0 flex-1 items-stretch gap-[clamp(1.5rem,3vw,3rem)]">
         <dl className="flex min-w-0 flex-1 flex-col justify-center border-t border-rule">
-          {asks.map(([th, cmd], n) => (
+          <div className="flex flex-none gap-[clamp(0.75rem,1.8vw,1.75rem)] border-b border-rule py-[clamp(0.3rem,1svh,0.6rem)]">
+            <dt className="min-w-0 flex-[1.25] font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-faint uppercase">
+              คนพิมพ์แบบนี้
+            </dt>
+            <dd className="min-w-0 flex-1 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-traced-deep uppercase">
+              AI เรียกอันนี้ให้เอง
+            </dd>
+          </div>
+
+          {asks.map(([said, cmd], n) => (
             <div
               key={cmd}
               data-enter
               style={{ "--enter-delay": `${340 + n * 130}ms` } as React.CSSProperties}
-              className="flex flex-wrap items-baseline gap-x-[clamp(0.75rem,1.8vw,1.75rem)] gap-y-1 border-b border-rule py-[clamp(0.45rem,1.5svh,0.9rem)]"
+              className="flex gap-[clamp(0.75rem,1.8vw,1.75rem)] border-b border-rule py-[clamp(0.4rem,1.4svh,0.9rem)]"
             >
-              <dt className="w-[9em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] font-medium text-ink">
-                {th}
+              <dt className="min-w-0 flex-[1.25] text-[clamp(0.9375rem,1.3vw,1.375rem)] leading-[1.4] text-ink">
+                “{said}”
               </dt>
-              <dd className="min-w-0 flex-1 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
+              <dd className="min-w-0 flex-1 font-mono text-[clamp(0.75rem,1vw,1.0625rem)] leading-[1.5] text-traced-deep">
                 {cmd}
               </dd>
             </div>
@@ -62,10 +71,9 @@ export function Ask({ slide }: ScreenProps) {
         <Shot
           src={matrix}
           alt="มุมมอง matrix ของ explorer แสดงว่าคลาสไหนอ้างอิงคลาสไหน"
-          caption="explorer · structure matrix · ใครอ้างอิงใคร"
-          className="min-w-0 flex-1"
+          caption="explorer · structure matrix"
+          className="w-[26%] shrink-0 justify-center"
           fit="contain"
-          frame="aspect"
           priority
         />
       </div>
@@ -73,7 +81,7 @@ export function Ask({ slide }: ScreenProps) {
       <p
         data-enter
         style={{ "--enter-delay": "1180ms" } as React.CSSProperties}
-        className="mt-[clamp(0.6rem,2svh,1.1rem)] flex-none text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.6] text-faint"
+        className="mt-[clamp(0.5rem,1.8svh,1rem)] flex-none text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.6] text-faint"
       >
         17 ภาษา · 11 เฟรมเวิร์กที่อ่าน route ได้ · 0 การเรียกเน็ตตอนใช้งาน
       </p>

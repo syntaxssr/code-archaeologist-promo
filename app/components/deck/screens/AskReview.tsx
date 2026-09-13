@@ -9,6 +9,9 @@ import type { ScreenProps } from "./index";
  * describing a structure that exists rather than tidying the commands into
  * groups for the slide.
  *
+ * Same two layers as the page before it: what a person types on the left, what
+ * the skill tells the agent to run on the right. Nobody memorises these.
+ *
  * No picture on this page. The previous screen carries one, and a second
  * screenshot here would be decoration: this is a reference list, and a
  * reference list is most useful when it is only a reference list.
@@ -18,12 +21,12 @@ import type { ScreenProps } from "./index";
  * because one writes the lot.
  */
 const asks: [string, string, string][] = [
-  ["โค้ดนี้สุขภาพยังไง", "analyze.py", "ให้เกรด A–F พร้อมรายการหักคะแนน"],
-  ["มีช่องโหว่ไหม", "scan_security.py", "secret ฝังโค้ด · SQL ต่อสตริง · eval / innerHTML"],
-  ["อะไรรกค้างอยู่", "debt.py", "TODO / FIXME และโค้ดที่ไม่มีใครเรียก"],
-  ["อะไรยังไม่มีเทส", "tests_map.py", "โหนดไหนถูกเทสเรียกชื่อ โหนดไหนไม่เคย"],
-  ["มีโค้ดก็อปแปะไหม", "duplicates.py", "ทั้งฟังก์ชันซ้ำ และบล็อกที่ถูกแปะข้ามฟังก์ชัน"],
-  ["ใครดูแล จุดไหนร้อน", "git_insights.py", "churn และเจ้าของ จาก git จริง"],
+  ["โค้ดเบสนี้สุขภาพเป็นยังไง", "analyze.py", "ให้เกรด A–F พร้อมรายการหักคะแนน"],
+  ["มีช่องโหว่อะไรบ้างไหม", "scan_security.py", "secret ฝังโค้ด · SQL ต่อสตริง · eval / innerHTML"],
+  ["มีอะไรรกค้างอยู่ไหม", "debt.py", "TODO / FIXME และโค้ดที่ไม่มีใครเรียก"],
+  ["ตรงไหนยังไม่มีเทส", "tests_map.py", "โหนดไหนถูกเทสเรียกชื่อ โหนดไหนไม่เคย"],
+  ["มีโค้ดก็อปแปะกันไหม", "duplicates.py", "ทั้งฟังก์ชันซ้ำ และบล็อกที่ถูกแปะข้ามฟังก์ชัน"],
+  ["ใครดูแลส่วนไหน จุดไหนแก้บ่อย", "git_insights.py", "churn และเจ้าของ จาก git จริง"],
 ];
 
 export function AskReview({ slide }: ScreenProps) {
@@ -38,6 +41,15 @@ export function AskReview({ slide }: ScreenProps) {
       </h2>
 
       <dl className="mt-[clamp(0.875rem,2.6svh,1.75rem)] border-t border-rule">
+        <div className="flex gap-[clamp(0.875rem,2vw,2rem)] border-b border-rule py-[clamp(0.3rem,1svh,0.6rem)]">
+          <span className="w-[13em] shrink-0 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-faint uppercase">
+            คนพิมพ์แบบนี้
+          </span>
+          <span className="w-[13em] shrink-0 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-traced-deep uppercase">
+            AI เรียกอันนี้ให้เอง
+          </span>
+        </div>
+
         {asks.map(([th, cmd, note], n) => (
           <div
             key={cmd}
@@ -45,8 +57,8 @@ export function AskReview({ slide }: ScreenProps) {
             style={{ "--enter-delay": `${320 + n * 130}ms` } as React.CSSProperties}
             className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.45rem,1.5svh,0.95rem)]"
           >
-            <dt className="w-[10em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] font-medium text-ink">
-              {th}
+            <dt className="w-[13em] shrink-0 text-[clamp(0.9375rem,1.3vw,1.375rem)] leading-[1.4] text-ink">
+              “{th}”
             </dt>
             <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
               {cmd}
@@ -63,8 +75,8 @@ export function AskReview({ slide }: ScreenProps) {
           style={{ "--enter-delay": "1120ms" } as React.CSSProperties}
           className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.6rem,2svh,1.25rem)]"
         >
-          <dt className="w-[10em] shrink-0 text-[clamp(1.125rem,1.6vw,1.75rem)] font-semibold text-ink">
-            ขอทั้งหมดทีเดียว
+          <dt className="w-[13em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.4] font-semibold text-ink">
+            “ขอรายงานรวมทีเดียว”
           </dt>
           <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] whitespace-nowrap text-traced">
             archaeologist.py report

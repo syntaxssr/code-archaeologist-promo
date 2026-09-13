@@ -67,7 +67,8 @@ picked; they are at commit `cd54697`.
 | 06 | **Demo** — the longest thing on the deck, because it decides the room | 2:30 |
 | 07 | ได้อะไรออกมา | 0:45 |
 | 08 | ตัวเลข | 0:45 |
-| 09 | ใช้กับงานเราจริงยังไง | 1:00 |
+| 09 · 1/2 | ใช้กับงานเราจริงยังไง | 0:45 |
+| 09 · 2/2 | โค้ดเราออกจากเครื่องแค่ไหน | 0:35 |
 | 10 · 1/2 | สั่งอะไรได้บ้าง — กลุ่มเดิน | 0:30 |
 | 10 · 2/2 | สั่งอะไรได้บ้าง — กลุ่มตรวจ | 0:30 |
 | 11 | ทีม | 0:20 |
@@ -128,6 +129,13 @@ one start.
 Section 03 was the first to use it, because the hall holds people who have
 never installed anything: "where this sits" and "what a skill is" both have to
 land before "what ours is" can mean anything.
+
+Section 09 uses it because in a company the thing that blocks adoption first is
+not price or features but "does our source leave the building" — so the second
+screen answers that, and answers it narrowly. The four claims are checkable and
+the fifth row is the honest one: with a hosted model the notes it reads still
+travel, but those are the five notes on the path, not the repository. Screen
+08's saving and screen 09's exposure are the same measurement read twice.
 
 Section 10 uses it for a different reason — there are more commands than one
 screen can hold at a legible size, and they already fall into two groups. The
