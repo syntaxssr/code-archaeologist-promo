@@ -47,10 +47,23 @@ const lines = [
   "        for sub in subscribers: sub.notify(event)",
 ];
 
-/** The one line the agent opened. */
+/** The one line the agent opened. 49 characters, which is where the caption
+ *  hangs from. */
 const LIT = "        session = self.auth.verify(payload.token)";
 
-export function CodeField({ rows = 60, delay = "0ms" }: { rows?: number; delay?: string }) {
+export function CodeField({
+  rows = 60,
+  delay = "0ms",
+  /** The lit line arrives last, after the title has landed, so the eye is
+   *  pulled to it rather than having to find it. */
+  litDelay = "1000ms",
+  litLabel,
+}: {
+  rows?: number;
+  delay?: string;
+  litDelay?: string;
+  litLabel?: string;
+}) {
   // High in the field, so it lands in the strip above the cut rather than
   // behind the band or under the sign-off.
   const litRow = Math.floor(rows * 0.11);
@@ -61,26 +74,43 @@ export function CodeField({ rows = 60, delay = "0ms" }: { rows?: number; delay?:
     // once it is animated it becomes the containing block — which collapses
     // this field to zero and `overflow-hidden` then clips away every row.
     <div
-      aria-hidden="true"
       data-enter
       style={{ "--enter-delay": delay } as React.CSSProperties}
-      className="absolute inset-0 overflow-hidden select-none font-mono text-[13px] leading-[1.55] whitespace-pre"
+      className="absolute inset-0 overflow-hidden font-mono text-[13px] leading-[1.55] whitespace-pre select-none"
     >
       {Array.from({ length: rows }, (_, r) => {
-        const isLit = r === litRow;
-        const text = isLit ? LIT : lines[(r * 7 + 3) % lines.length];
-        // A ragged left edge reads as a listing rather than a paragraph.
-        const indent = isLit ? 0 : ((r * 13) % 5) * 22;
+        if (r === litRow) {
+          return (
+            <div
+              key={r}
+              data-enter
+              style={{ paddingLeft: "7%", "--enter-delay": litDelay } as React.CSSProperties}
+              className="relative text-traced"
+            >
+              <span className="absolute top-1/2 left-[calc(7%-26px)] h-[3px] w-[14px] -translate-y-1/2 bg-traced" />
+              {LIT}
+              {litLabel && (
+                // Absolutely placed so the caption cannot change this row's
+                // height and knock the whole field out of rhythm.
+                <span className="absolute top-1/2 left-[calc(7%+53ch)] -translate-y-1/2 font-sans text-[17px] leading-none font-medium whitespace-nowrap text-muted">
+                  {litLabel}
+                </span>
+              )}
+            </div>
+          );
+        }
+
+        // Noise. Hidden from assistive tech one row at a time rather than by
+        // hiding the whole field, so the lit line and its caption — the only
+        // part that means anything — still reach a screen reader.
         return (
           <div
             key={r}
-            className={isLit ? "relative text-traced" : "text-texture"}
-            style={{ paddingLeft: `calc(7% + ${indent}px)` }}
+            aria-hidden="true"
+            className="text-texture"
+            style={{ paddingLeft: `calc(7% + ${((r * 13) % 5) * 22}px)` }}
           >
-            {isLit && (
-              <span className="absolute left-[calc(7%-26px)] top-1/2 h-[3px] w-[14px] -translate-y-1/2 bg-traced" />
-            )}
-            {text}
+            {lines[(r * 7 + 3) % lines.length]}
           </div>
         );
       })}

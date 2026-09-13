@@ -6,11 +6,12 @@
 > throughout. The site is also no longer a promo page — **it replaces the
 > PowerPoint on stage**, so it is now a thirteen-screen deck driven by click.
 >
-> What still holds from this document: the colour tokens and their verified
-> ratios (§2), the typography system and the English-is-notation /
-> Thai-is-meaning rule (§3), and the anti-patterns (§8). What no longer applies:
+> What still holds from this document: the typography system and the
+> English-is-notation / Thai-is-meaning rule (§3), and the anti-patterns (§8).
+> §2 has been rewritten — **the deck now runs dark**. What no longer applies:
 > the concept (§1), the sheet anatomy (§5), the motion spec (§5b) and the
-> narrative arc — those are being redesigned one section at a time.
+> narrative arc — those are being redesigned one section at a time. The run and
+> how the deck is driven are in [`DECK.md`](./DECK.md).
 >
 > The removed build is recoverable at commit `bb6bf53`.
 
@@ -60,70 +61,46 @@ product-marketing gradients, and the entire adventure-archaeology register (see 
 
 ## 2. Color
 
-Warm paper, near-black ink, one industrial accent. **There is no second ground** —
-the sheet is one paper colour from top to bottom. Every ratio below was computed,
-not estimated; re-verify with axe-core after any change.
+**The deck runs dark.** The screen is a codebase, and one thing on it is lit.
+Ratios below are computed, not estimated; re-verify with axe-core after any
+change.
 
-| Token | Hex | Use | on `sheet` | on `sheet-2` | on `raised` |
-| --- | --- | --- | --- | --- | --- |
-| `--color-sheet` | `#FBFAF4` | The paper. Page ground, everywhere | — | — | — |
-| `--color-sheet-2` | `#F2EFE7` | Ground fill *inside a plan outline* | — | — | — |
-| `--color-sheet-raised` | `#FFFEFA` | Panels lifted off the sheet | — | — | — |
-| `--color-grid` | `#E3DFD4` | 72px module, 1px. Rule only | — | — | — |
-| `--color-rule` | `#D4CFC2` | Hairlines, register divider. Rule only | — | — | — |
-| `--color-ink` | `#14120F` | Heavy line, all body text | 17.9 | 16.3 | 18.5 |
-| `--color-line` | `#4A4640` | Standard feature outline | 8.96 | 8.15 | 9.28 |
-| `--color-muted` | `#524D46` | Margin notes, field values | 8.00 | 7.28 | 8.29 |
-| `--color-faint` | `#726B62` | Grid coordinates, least important labels | 5.03 | 4.57 | 5.21 |
-| `--color-traced` | `#C2410C` | The traced path, the find, the sink | 4.95 | 4.51 | 5.13 |
-| `--color-traced-deep` | `#9A3412` | Small accent text, hover, pressed | 6.99 | 6.36 | 7.24 |
-| `--color-on-traced` | `#FFFFFF` | Text on a traced fill (5.18 on the fill) | — | — | — |
-| `--color-grade-good` | `#1F6B4E` | Grade A / B | 6.14 | 5.59 | 6.36 |
-| `--color-grade-bad` | `#9E2B1E` | Grade E / F, security sinks | 7.13 | 6.49 | 7.38 |
+| Token | Hex | Use | Ratio on `sheet` |
+| --- | --- | --- | --- |
+| `--color-sheet` | `#0D0C0A` | The ground, everywhere | — |
+| `--color-sheet-2` | `#16140F` | Fill inside an outline | — |
+| `--color-sheet-raised` | `#1C1917` | Panels lifted off the ground | — |
+| `--color-grid` | `#262220` | Module grid, 1px. Rule only | — |
+| `--color-rule` | `#332E2A` | Hairlines, dividers. Rule only | — |
+| `--color-texture` | `#524B42` | Type that is mass, not words | 2.28 |
+| `--color-ink` | `#FAF8F3` | All body text | 18.4 |
+| `--color-line` | `#B8B0A4` | Feature outlines | 9.1 |
+| `--color-muted` | `#A8A096` | Secondary text, captions | 7.6 |
+| `--color-faint` | `#8A8278` | Labels, least important | 5.2 |
+| `--color-traced` | `#F97316` | Large text, 2px rules, fills | 7.0 |
+| `--color-traced-deep` | `#FB923C` | Small accent text, hover | 8.6 |
+| `--color-on-traced` | `#0D0C0A` | Text on a traced fill | 7.0 on the fill |
+| `--color-grade-good` | `#65D68F` | Grade A / B | 10.8 |
+| `--color-grade-bad` | `#F87171` | Grade E / F, sinks | 7.1 |
+
+**Tone is per screen.** `[data-tone="light"]` swaps in the paper palette
+(`#FBFAF4` ground, `#C2410C` accent, all AA-verified) for any screen that should
+land differently from the one before it. It is set from the slide's `tone` field
+so a light and a dark screen can share the stage mid-transition, and the deck
+controls follow the live screen.
 
 **Rules**
 
-- **One accent, and it means one thing: this is evidenced.** Not "important", not
-  "interactive". If it is not traced, it is not accent.
-- `--color-traced` has no contrast headroom (4.51 at worst). Restrict it to **large
-  text (22px+), 2px rules, and fills**. Small accent text uses `--color-traced-deep`.
-- **Warm the paper; never age it.** The warmth is one flat hex applied once. Sepia
-  tinting, edge darkening and desaturation are filters, and filters read as costume.
-- **The accent is industrial, never vintage.** `#C2410C` is a colour no 19th-century
-  process could produce. Inverting this — a dusty accent on clean white — is the most
-  reliable way to look cheap.
+- **One accent, and it means one thing: this is evidenced.** Not "important",
+  not "interactive". If it is not traced, it is not accent.
+- **The accent inverts with the tone.** On the dark ground the *lighter* orange
+  is the one small text can use; on paper it is the darker one. Using the wrong
+  half of the pair is the easiest way to ship unreadable type.
 - `--color-grid` and `--color-rule` never carry text. They are rules.
-- Depth comes from line weight and desaturation, **not from shadows**. There are no
-  shadows on this site.
-
-### Verified
-
-Measured against the production build, not by eye. Re-run after any change to
-colour, type size or section layout.
-
-| Check | Result |
-| --- | --- |
-| axe-core (WCAG 2.1 A + AA) | **0 violations** at 1920, 1536, 1440, 1280 and 390 |
-| Horizontal overflow | **none** at all five widths |
-| One screen per section | **holds at every width from 1280 to 1920** |
-| Lighthouse desktop | **100 / 100 / 100 / 100** |
-
-Widths verified: 1920x1080, 1680x1050, 1536x960, 1440x900, 1366x768, 1280x800,
-1024x768 and 390x844. One screen per section holds from 1280 up.
-
-Two things make that work, and both are easy to undo by accident:
-
-- **The chrome scales with viewport height.** Section padding, the title size
-  and the grid gap are `clamp(…svh…)` values that all land on their old fixed
-  numbers at 1080, so the pitch surface is untouched while a 768px laptop gets
-  about 50px back. Replacing any of them with a fixed rem breaks 1280–1366.
-- **The margin register is wide** — 360px at `xl`, 400px at `2xl`. The drawing
-  is height-capped, so the width the register takes was never being used by the
-  plan; narrowing it makes the Thai notes wrap a line deeper and that, not the
-  drawing, is what pushes a beat past one screen.
-
-At 1024 and below the register stacks under the drawing and sections run long.
-That range belongs to the deferred phone/tablet phase.
+- `--color-texture` is only for type that carries no meaning — a field of code
+  rendered as mass. Never for anything a judge is meant to read.
+- Depth comes from line weight and value, **not from shadows**. There are no
+  shadows on this deck.
 
 ## 3. Typography
 

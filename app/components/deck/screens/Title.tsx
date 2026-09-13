@@ -1,3 +1,4 @@
+import { LogoMark } from "../../brand/Logo";
 import { CodeField } from "./CodeField";
 
 /**
@@ -14,7 +15,7 @@ import { CodeField } from "./CodeField";
 export function Title() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <CodeField delay="40ms" />
+      <CodeField delay="40ms" litLabel="บรรทัดเดียวที่ agent เปิดอ่านจริง" />
 
       {/* The cut opens from its own centre line, so it wipes rather than fades.
           Tailwind v4 sets `translate` as its own property, so the scaleY of the
@@ -25,13 +26,16 @@ export function Title() {
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-y border-line bg-sheet-raised"
       >
         <div className="px-[7%] pt-[clamp(1.25rem,3.6svh,2.5rem)] pb-[clamp(0.875rem,2.4svh,1.5rem)]">
-          <p
+          <div
             data-enter
             style={{ "--enter-delay": "460ms" } as React.CSSProperties}
-            className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] font-medium tracking-[0.2em] text-traced-deep uppercase"
+            className="flex items-center gap-3.5"
           >
-            iCONEXT AI Challenge Day 2026
-          </p>
+            <LogoMark size={26} className="shrink-0 text-line" />
+            <p className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] font-medium tracking-[0.2em] text-traced-deep uppercase">
+              iCONEXT AI Challenge Day 2026
+            </p>
+          </div>
 
           <h1 className="mt-[clamp(0.5rem,1.6svh,1.125rem)] font-mono text-[clamp(2.25rem,8.4vw,9.5rem)] leading-[0.95] font-semibold tracking-[-0.045em] text-ink">
             <span

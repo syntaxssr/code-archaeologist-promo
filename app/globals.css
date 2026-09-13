@@ -1,70 +1,61 @@
 @import "tailwindcss";
 
 /* Design tokens — see design-system/MASTER.md.
-   The page is one survey sheet: warm paper, near-black ink, one industrial
-   accent that means exactly one thing (this is evidenced). Do not hardcode
-   brand colors in components. */
+   The deck runs dark: the screen is a codebase, and one thing on it is lit.
+   Every text token clears WCAG AA against its ground; the two that never carry
+   text (grid, rule) are rules. Ratios are computed, not estimated. */
 :root {
-  /* Grounds. There is no second ground — the sheet is one paper colour from
-     top to bottom. --sheet-2 is the fill inside a plan outline, not a section
-     background you can alternate with. */
-  --sheet: #fbfaf4;
-  --sheet-2: #f2efe7;
-  --sheet-raised: #fffefa;
-
-  /* Rules. Never carry text. */
-  --grid: #e3dfd4;
-  --rule: #d4cfc2;
-
-  /* Mass, not words. 2.25:1 — plainly there, plainly not readable. Only for
-     type that carries no meaning (MASTER.md §3). */
-  --texture: #b0a899;
-
-  /* Ink. Ratios against --sheet / --sheet-2 / --sheet-raised. */
-  --ink: #14120f; /* 17.9 / 16.3 / 18.5 */
-  --line: #4a4640; /* 8.96 / 8.15 / 9.28 — feature outlines */
-  --muted: #524d46; /* 8.00 / 7.28 / 8.29 — margin notes, field values */
-  --faint: #726b62; /* 5.03 / 4.57 / 5.21 — grid coordinates only */
-
-  /* The one accent. It means: this is evidenced. Not "important", not
-     "interactive". If it is not traced, it is not accent. */
-  --traced: #c2410c; /* 4.95 / 4.51 / 5.13 — large text and 2px rules only */
-  --traced-deep: #9a3412; /* 6.99 / 6.36 / 7.24 — small text, hover, pressed */
-  --on-traced: #ffffff; /* 5.18 on a --traced fill */
-
-  --grade-good: #1f6b4e; /* 6.14 / 5.59 / 6.36 */
-  --grade-bad: #9e2b1e; /* 7.13 / 6.49 / 7.38 — sinks, grade E/F */
-}
-
-/* A screen can run dark. Tone is a per-screen property, so the deck can use
-   light and dark as pacing — a dark cover and close around a light middle is
-   the oldest trick a deck has, and it is the contrast the previous design
-   never had.
-
-   Ratios below are against --sheet; every text token clears AA, and the two
-   that never carry text (grid, rule) are rules. Computed, not estimated. */
-[data-tone="dark"] {
   --sheet: #0d0c0a;
   --sheet-2: #16140f;
   --sheet-raised: #1c1917;
 
+  /* Rules. Never carry text. */
   --grid: #262220;
   --rule: #332e2a;
-  --texture: #524b42; /* 2.28 — mass, never words */
+
+  /* Mass, not words. 2.28 — plainly there, plainly not readable. Only for type
+     that carries no meaning (MASTER.md §3). */
+  --texture: #524b42;
 
   --ink: #faf8f3; /* 18.4 */
-  --line: #b8b0a4; /* 9.1 */
-  --muted: #a8a096; /* 7.6 */
-  --faint: #8a8278; /* 5.2 */
+  --line: #b8b0a4; /* 9.1 — feature outlines */
+  --muted: #a8a096; /* 7.6 — secondary text */
+  --faint: #8a8278; /* 5.2 — labels, least important */
 
-  /* Inverted from the light palette: on a dark ground the *lighter* orange is
-     the one small text can use. */
-  --traced: #f97316; /* 7.0 — large text, rules, fills */
-  --traced-deep: #fb923c; /* 8.6 — small text, hover */
+  /* The one accent. It means: this is evidenced. Not "important", not
+     "interactive". If it is not traced, it is not accent.
+     On a dark ground the *lighter* orange is the one small text can use —
+     the opposite of how it works on paper. */
+  --traced: #f97316; /* 7.0 — large text, 2px rules, fills */
+  --traced-deep: #fb923c; /* 8.6 — small text, hover, pressed */
   --on-traced: #0d0c0a; /* 7.0 on a traced fill */
 
   --grade-good: #65d68f; /* 10.8 */
   --grade-bad: #f87171; /* 7.1 */
+}
+
+/* Paper, for any screen that should land differently from the one before it.
+   Kept because tone is the cheapest pacing device a deck has. */
+[data-tone="light"] {
+  --sheet: #fbfaf4;
+  --sheet-2: #f2efe7;
+  --sheet-raised: #fffefa;
+
+  --grid: #e3dfd4;
+  --rule: #d4cfc2;
+  --texture: #b0a899; /* 2.25 */
+
+  --ink: #14120f; /* 17.9 */
+  --line: #4a4640; /* 8.96 */
+  --muted: #524d46; /* 8.00 */
+  --faint: #726b62; /* 5.03 */
+
+  --traced: #c2410c; /* 4.95 — large text and 2px rules only */
+  --traced-deep: #9a3412; /* 6.99 — small text */
+  --on-traced: #ffffff; /* 5.18 on a traced fill */
+
+  --grade-good: #1f6b4e; /* 6.14 */
+  --grade-bad: #9e2b1e; /* 7.13 */
 }
 
 @theme inline {
