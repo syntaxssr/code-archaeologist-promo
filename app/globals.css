@@ -201,30 +201,8 @@ body {
   }
 }
 
-/* The standby screen, and only the standby screen, is allowed to loop: nobody
-   is speaking over it. The repository drifts past, unscanned, for as long as it
-   takes the judges to settle. */
-@keyframes drift {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-50%);
-  }
-}
-
-/* One node of an idle graph, breathing. Slow enough that it reads as a thing
-   at rest rather than a thing loading. */
-@keyframes breathe {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
+/* The caret on the standby screen is the only thing on the deck that loops, and
+   that screen is the only place it is right: nobody is speaking over it. */
 /* A caret, because "waiting for input" needs no translation and no
    instruction printed on a screen the room can see. */
 @keyframes caret {
@@ -257,9 +235,7 @@ body {
     color: var(--traced);
   }
 
-  [data-drift],
-  [data-caret],
-  [data-breathe] {
+  [data-caret] {
     animation: none;
   }
 
