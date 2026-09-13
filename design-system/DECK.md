@@ -77,11 +77,26 @@ and the screens' English names, are notes to the presenter, and the room can
 read anything that is on the projector. A content screen's header is its number
 and a rule, nothing else.
 
-**One screen is still waiting on real material.** Screen 08 now counts from the
-skill's own repository — seventeen graphed languages, the five notes one trace
-reads, zero network calls — and the box beside it carries the two things that
-are still not measured: the token saving against a real repository, and the
-fact that only three of the seventeen languages have been run on real code.
+**Screen 08's numbers are measured.** On 13 September 2026 the skill was
+installed (tree-sitter grammars for Python and JS/TS) and run against its own
+repository and against this one. What screen 08 prints:
+
+| | |
+| --- | --- |
+| One traced answer, 8 call hops deep | 1,262 of 133,932 tokens — 0.94% |
+| One blast radius, 42 nodes | 5,824 tokens — 4.3% |
+| Full rebuild of both maps | ~0.5s over 11,881 lines |
+
+Corpus: the skill's own `scripts/` and `tools/`, 34 files. Seven of the eight
+notes on the traced path carry real docstring descriptions, so the figure is
+not thin notes flattering the ratio. Counted with a GPT tokenizer
+(`gpt-tokenizer`, cl100k) rather than Claude's — the ratio is the claim, not
+the raw count — and the baseline is the worst case of reading every file.
+
+Run on this repository the ratio came out the same: a three-node path read 239
+of 25,376 tokens, also 0.94%. This repo also scores grade A (96/100) with no
+security findings, which is a pleasant thing to know and not something the deck
+claims.
 
 **The judges' scoring criteria are not on the deck.** They arrived on 13
 September 2026 (Impact 30 · adoption 30 · creativity 20 · presentation 10 ·
