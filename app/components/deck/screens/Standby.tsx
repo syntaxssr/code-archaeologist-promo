@@ -9,14 +9,16 @@ import { CodeField } from "./CodeField";
  * minute or for ten, until the judges give the signal and the presenter clicks
  * into screen 00.
  *
- * Four candidates, switchable with `?sb=a|b|c|d` so they can be compared in the
- * room they will actually run in. This chooser comes out once one is picked.
+ * Candidates, switchable with `?sb=a…h` so they can be compared in the room
+ * they will actually run in. This chooser comes out once one is picked.
  *
- * All four hold back the project name: the name is the payoff of screen 00, and
- * a standby screen that already said it takes the reveal away. All four also
- * carry some small movement — a still screen with four words on it reads as a
- * page that failed to load. This is the one screen allowed to loop, because
- * nobody is speaking over it.
+ * Most of them hold back the project name — it is the payoff of screen 00, and
+ * a standby screen that already said it takes the reveal away. H deliberately
+ * does not, because showing it is also a defensible choice and worth seeing.
+ *
+ * All of them carry some small movement: a still screen with four words on it
+ * reads as a page that failed to load. This is the one screen allowed to loop,
+ * because nobody is speaking over it.
  */
 const EVENT = "iCONEXT AI Challenge Day 2026";
 
@@ -165,11 +167,149 @@ function Question() {
   );
 }
 
+/** E — the artefact at rest. The thing the tool produces, drawn dim and
+ *  sitting there, with one node breathing. It shows the deck's visual language
+ *  before a word of it is spoken. */
+const nodes = [
+  { x: 120, y: 70 }, { x: 300, y: 70 }, { x: 480, y: 96 },
+  { x: 90, y: 190 }, { x: 268, y: 178 }, { x: 452, y: 210 }, { x: 604, y: 150 },
+  { x: 170, y: 300 }, { x: 356, y: 296 }, { x: 528, y: 320 }, { x: 660, y: 268 },
+  { x: 258, y: 404 }, { x: 452, y: 418 },
+];
+const links: [number, number][] = [
+  [0, 1], [1, 2], [0, 3], [1, 4], [2, 6], [3, 7], [4, 7], [4, 8], [5, 8],
+  [5, 9], [6, 10], [7, 11], [8, 11], [8, 12], [9, 12], [2, 5], [10, 9],
+];
+/** The one that breathes — the node a trace would end on. */
+const ALIVE = 8;
+
+function IdleGraph() {
+  return (
+    <div className="absolute inset-0 flex flex-col items-center justify-center px-[7%]">
+      <svg
+        viewBox="0 0 750 480"
+        className="w-full max-w-[min(56rem,72vw)]"
+        role="img"
+        aria-label="กราฟความสัมพันธ์ในโค้ดเบส วางนิ่งรอ"
+      >
+        {links.map(([a, z]) => (
+          <line
+            key={`${a}-${z}`}
+            x1={nodes[a].x}
+            y1={nodes[a].y}
+            x2={nodes[z].x}
+            y2={nodes[z].y}
+            stroke="var(--rule)"
+            strokeWidth="1.2"
+          />
+        ))}
+        {nodes.map((n, i) =>
+          i === ALIVE ? (
+            <g key={i} data-breathe style={{ animation: "breathe 4.2s ease-in-out infinite" }}>
+              <circle cx={n.x} cy={n.y} r="22" fill="none" stroke="var(--traced)" strokeWidth="1.2" />
+              <circle cx={n.x} cy={n.y} r="7" fill="var(--traced)" />
+            </g>
+          ) : (
+            <circle key={i} cx={n.x} cy={n.y} r="5.5" fill="var(--texture)" />
+          ),
+        )}
+      </svg>
+
+      <p className="mt-[clamp(1.5rem,4svh,2.75rem)] font-mono text-[clamp(1.25rem,2.6vw,2.25rem)] leading-none font-semibold tracking-[0.06em] text-ink">
+        TEAM 03
+      </p>
+      <p className="mt-[clamp(0.75rem,2svh,1.25rem)] font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] tracking-[0.2em] text-muted uppercase">
+        {EVENT}
+      </p>
+    </div>
+  );
+}
+
+/** F — the split. A wall of code on one side, a handful of notes on the other,
+ *  with nothing explaining either. The whole argument as shape, sitting there
+ *  for however long the room takes to settle. */
+function Split() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <CodeField scan={false} drift={110} rows={64} />
+
+      <div className="absolute inset-y-0 left-1/2 w-px bg-rule" />
+
+      <div className="absolute inset-y-0 right-0 left-1/2 flex flex-col justify-center gap-[clamp(0.75rem,2svh,1.25rem)] px-[clamp(2rem,5vw,5rem)]">
+        {[0, 1, 2, 3].map((n) => (
+          <div key={n} className="border border-rule px-5 py-4">
+            <span className="block h-[7px] w-[42%] bg-line/70" />
+            <span className="mt-3 block h-[5px] w-[82%] bg-texture" />
+            <span className="mt-2 block h-[5px] w-[64%] bg-texture" />
+            <span className="mt-3 block h-[5px] w-[30%] bg-traced/70" />
+          </div>
+        ))}
+      </div>
+
+      {/* On its own ground. Sitting on the field, neither the lettering nor the
+          code underneath it can be read — the same rule the title obeys. */}
+      <div className="absolute inset-x-0 bottom-0 flex items-center gap-4 border-t border-rule bg-sheet px-[7%] py-[clamp(1rem,2.6svh,1.75rem)] pb-[clamp(4rem,8svh,5.5rem)]">
+        <LogoMark size={24} className="shrink-0 text-line" />
+        <p className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-traced-deep uppercase">
+          Team 03 · {EVENT}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/** G — a prompt, waiting. Nothing has been typed: that is what standby is. For
+ *  a room full of developers this needs no caption at all. */
+function Prompt() {
+  return (
+    <div className="absolute inset-0 flex flex-col justify-center px-[7%]">
+      <div className="flex items-center gap-3.5">
+        <LogoMark size={26} className="shrink-0 text-line" />
+        <p className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-muted uppercase">
+          Team 03 · {EVENT}
+        </p>
+      </div>
+
+      <span className="mt-[clamp(1.25rem,3svh,2rem)] block h-px w-full max-w-[min(60rem,80vw)] bg-rule" />
+
+      <p className="mt-[clamp(1.5rem,4svh,2.5rem)] font-mono text-[clamp(1.5rem,3.4vw,3.25rem)] leading-none text-muted">
+        <span className="text-faint">~/repo</span> <span className="text-traced">$</span>
+        <Caret className="!ml-3 !w-[0.6em] border-b-[6px]" />
+      </p>
+    </div>
+  );
+}
+
+/** H — the name, held. The one option that does not withhold it. Conventional,
+ *  and conventional is not wrong on a standby screen: the room wants to know
+ *  who is up. It costs screen 00 its reveal. */
+function Named() {
+  return (
+    <div className="absolute inset-0 flex flex-col justify-center px-[7%]">
+      <p className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] font-medium tracking-[0.2em] text-traced-deep uppercase">
+        Team 03 · {EVENT}
+      </p>
+      <h1 className="mt-[clamp(0.75rem,2svh,1.5rem)] font-mono text-[clamp(2.25rem,8.4vw,9.5rem)] leading-[0.95] font-semibold tracking-[-0.045em] text-ink">
+        <span className="block">CODE</span>
+        <span className="block">ARCHAEOLOGIST</span>
+      </h1>
+      <p className="mt-[clamp(1rem,2.6svh,1.75rem)] font-mono text-[clamp(0.875rem,1.2vw,1.25rem)] tracking-[0.24em] text-muted uppercase">
+        Standby
+        <Caret />
+      </p>
+    </div>
+  );
+}
+
 const variants: Record<string, () => React.ReactElement> = {
   a: Drifting,
   b: Quiet,
   c: ReadyBoard,
   d: Question,
+  e: IdleGraph,
+  f: Split,
+  g: Prompt,
+  h: Named,
 };
 
 export function Standby() {

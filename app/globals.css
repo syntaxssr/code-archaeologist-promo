@@ -213,6 +213,18 @@ body {
   }
 }
 
+/* One node of an idle graph, breathing. Slow enough that it reads as a thing
+   at rest rather than a thing loading. */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* A caret, because "waiting for input" needs no translation and no
    instruction printed on a screen the room can see. */
 @keyframes caret {
@@ -246,7 +258,8 @@ body {
   }
 
   [data-drift],
-  [data-caret] {
+  [data-caret],
+  [data-breathe] {
     animation: none;
   }
 
