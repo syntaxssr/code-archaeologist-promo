@@ -151,6 +151,56 @@ body {
   }
 }
 
+/* A single scan pass.
+   Each line brightens for a moment and drops back, one after the next down the
+   field — the lines themselves being read, not a light shining over them. A
+   translucent band sweeping across would be the same gesture, but it is also
+   exactly what a loading skeleton looks like, and this is not loading.
+
+   It runs once and stops. The presenter is speaking over this screen for
+   twenty seconds; motion that never ends competes with them. */
+[data-scan] {
+  color: var(--texture);
+}
+
+[data-live] [data-scan] {
+  animation: scan 520ms ease-out var(--scan-delay, 0ms) both;
+}
+
+@keyframes scan {
+  0% {
+    color: var(--texture);
+  }
+  34% {
+    color: var(--line);
+  }
+  100% {
+    color: var(--texture);
+  }
+}
+
+/* The line the pass finds. Same sweep, but it does not drop back — it is what
+   the scan was for, so it stays lit. */
+[data-scan-hit] {
+  color: var(--texture);
+}
+
+[data-live] [data-scan-hit] {
+  animation: scan-hit 520ms ease-out var(--scan-delay, 0ms) both;
+}
+
+@keyframes scan-hit {
+  0% {
+    color: var(--texture);
+  }
+  34% {
+    color: var(--ink);
+  }
+  100% {
+    color: var(--traced);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Everything renders in its finished state — the deck must be fully legible
      with no motion at all. */
@@ -160,6 +210,14 @@ body {
 
   [data-open] {
     transform: none;
+  }
+
+  [data-scan] {
+    color: var(--texture);
+  }
+
+  [data-scan-hit] {
+    color: var(--traced);
   }
 
   *,

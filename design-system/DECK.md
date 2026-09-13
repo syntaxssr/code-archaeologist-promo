@@ -58,6 +58,25 @@ palettes are AA-verified (`MASTER.md` §2) and the accent inverts between them.
 Checked at 16:9, 16:10 and 4:3 — halls rarely run 16:9, and the layout must
 survive whichever projector is in the room.
 
+## Motion on a screen
+
+Entrances key off the **live** screen, not mount — all thirteen are in the DOM
+the whole time, so mount-based animation would fire every screen's entrance
+during the title. `[data-enter]` rises and fades, `[data-open]` wipes a band out
+from its own centre, `[data-scan]` / `[data-scan-hit]` run a single pass down a
+field of text.
+
+Two rules the scan pass taught:
+
+- **Nothing loops.** The presenter speaks over a screen for up to two and a half
+  minutes; motion that never ends competes with them, and on a projector with a
+  poor refresh it reads as a stutter.
+- **Nothing animates where it will be covered.** The first version of the title
+  ran its pass after the cut opened, and the band hid 45% of the travel — the
+  sweep flickered at the top, vanished, and reappeared at the bottom, which
+  reads as a glitch rather than a movement. Order the beats so motion happens on
+  an uncovered screen.
+
 ## Rules that come with being a deck
 
 - **One screen fits one screen.** Nothing scrolls inside a section — if it

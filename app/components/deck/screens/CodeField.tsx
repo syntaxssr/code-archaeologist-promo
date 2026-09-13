@@ -54,19 +54,28 @@ const LIT = "        session = self.auth.verify(payload.token)";
 export function CodeField({
   rows = 60,
   delay = "0ms",
-  /** The lit line arrives last, after the title has landed, so the eye is
-   *  pulled to it rather than having to find it. */
-  litDelay = "1000ms",
+  /** When the pass starts, in ms. It runs *before* the cut opens: once the band
+   *  is over the middle of the field it hides 45% of the travel, and a wave
+   *  that flickers at the top, vanishes, and reappears at the bottom reads as a
+   *  glitch rather than a sweep. */
+  scanStart = 150,
+  /** Per-row stagger. 18ms over 60 rows is a pass of about one second — one
+   *  movement, not a queue of sixty little ones. */
+  scanStep = 18,
   litLabel,
 }: {
   rows?: number;
   delay?: string;
-  litDelay?: string;
+  scanStart?: number;
+  scanStep?: number;
   litLabel?: string;
 }) {
-  // High in the field, so it lands in the strip above the cut rather than
-  // behind the band or under the sign-off.
+  // High in the field, so it stays clear of the cut at every aspect ratio the
+  // hall might have. The pass reaches it early and then carries on to the
+  // bottom — which is the point: everything else was looked at too, and there
+  // was nothing else worth opening.
   const litRow = Math.floor(rows * 0.11);
+  const litAt = scanStart + litRow * scanStep;
 
   return (
     // The entrance flag lives on this element rather than on a wrapper: a
@@ -83,16 +92,24 @@ export function CodeField({
           return (
             <div
               key={r}
-              data-enter
-              style={{ paddingLeft: "7%", "--enter-delay": litDelay } as React.CSSProperties}
-              className="relative text-traced"
+              data-scan-hit
+              style={{ paddingLeft: "7%", "--scan-delay": `${litAt}ms` } as React.CSSProperties}
+              className="relative"
             >
-              <span className="absolute top-1/2 left-[calc(7%-26px)] h-[3px] w-[14px] -translate-y-1/2 bg-traced" />
+              <span
+                data-enter
+                style={{ "--enter-delay": `${litAt + 180}ms` } as React.CSSProperties}
+                className="absolute top-1/2 left-[calc(7%-26px)] h-[3px] w-[14px] -translate-y-1/2 bg-traced"
+              />
               {LIT}
               {litLabel && (
                 // Absolutely placed so the caption cannot change this row's
                 // height and knock the whole field out of rhythm.
-                <span className="absolute top-1/2 left-[calc(7%+53ch)] -translate-y-1/2 font-sans text-[17px] leading-none font-medium whitespace-nowrap text-muted">
+                <span
+                  data-enter
+                  style={{ "--enter-delay": `${litAt + 180}ms` } as React.CSSProperties}
+                  className="absolute top-1/2 left-[calc(7%+53ch)] -translate-y-1/2 font-sans text-[17px] leading-none font-medium whitespace-nowrap text-muted"
+                >
                   {litLabel}
                 </span>
               )}
@@ -107,8 +124,13 @@ export function CodeField({
           <div
             key={r}
             aria-hidden="true"
-            className="text-texture"
-            style={{ paddingLeft: `calc(7% + ${((r * 13) % 5) * 22}px)` }}
+            data-scan
+            style={
+              {
+                paddingLeft: `calc(7% + ${((r * 13) % 5) * 22}px)`,
+                "--scan-delay": `${scanStart + r * scanStep}ms`,
+              } as React.CSSProperties
+            }
           >
             {lines[(r * 7 + 3) % lines.length]}
           </div>
