@@ -18,6 +18,9 @@ export type Slide = {
 };
 
 export const slides: Slide[] = [
+  // Before the run. It holds the stage until the judges give the signal, so it
+  // carries no number and no budget — it is not part of the ten minutes.
+  { id: "standby", no: "—", th: "พร้อมเริ่ม", en: "STANDBY", seconds: 0 },
   { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20 },
   { id: "pain", no: "01", th: "เจ็บตรงไหน", en: "THE PAIN", seconds: 60 },
   { id: "why-fail", no: "02", th: "ทำไม AI ที่มีอยู่ยังตอบไม่ได้", en: "WHY IT FAILS TODAY", seconds: 45 },
@@ -32,6 +35,11 @@ export const slides: Slide[] = [
   { id: "team", no: "11", th: "ทีม", en: "TEAM", seconds: 20 },
   { id: "close", no: "12", th: "ปิด", en: "CLOSE", seconds: 20 },
 ];
+
+/** The numbered screens — the run itself, without the standby in front of it. */
+export const run = slides.filter((s) => /^\d+$/.test(s.no));
+
+export const lastNo = run[run.length - 1].no;
 
 export const totalSeconds = slides.reduce((a, s) => a + s.seconds, 0);
 

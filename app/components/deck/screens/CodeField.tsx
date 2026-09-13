@@ -3,8 +3,11 @@
  *
  * Hundreds of lines at a size nobody is meant to read — deliberately below the
  * legibility floor, because the point is the mass, not the words (MASTER.md §3
- * allows type this small only where it carries no meaning). One line is lit,
- * and that one is the whole argument: this is what the agent actually opened.
+ * allows type this small only where it carries no meaning).
+ *
+ * Two modes. On the standby screen it simply drifts, unscanned: this is the
+ * codebase as it sits before anything has looked at it. On the title a single
+ * pass runs down it and one line ignites — the line the agent actually opened.
  *
  * The lines are a fixed list walked deterministically, never randomised: a
  * random field would differ between the server and the client and the first
@@ -51,6 +54,10 @@ const lines = [
  *  hangs from. */
 const LIT = "        session = self.auth.verify(payload.token)";
 
+const noise = (r: number, seed: number) => lines[(r * 7 + 3 + seed) % lines.length];
+/** A ragged left edge reads as a listing rather than a paragraph. */
+const indent = (r: number) => ((r * 13) % 5) * 22;
+
 export function CodeField({
   rows = 60,
   delay = "0ms",
@@ -63,12 +70,27 @@ export function CodeField({
    *  movement, not a queue of sixty little ones. */
   scanStep = 18,
   litLabel,
+  /** No pass and no find: the repository before anything has looked at it. */
+  scan = true,
+  /** Seconds for one drift cycle. The rows are rendered twice and the stack is
+   *  pulled up by exactly half its height, so the loop has no seam. Omit it and
+   *  the field is still. */
+  drift,
+  /** Where the column starts. A second field at a different offset fills the
+   *  width — one column of code leaves two thirds of a 16:9 screen empty. */
+  left = "7%",
+  /** Shifts which line each row lands on, so two columns are not copies. */
+  seed = 0,
 }: {
   rows?: number;
   delay?: string;
   scanStart?: number;
   scanStep?: number;
   litLabel?: string;
+  scan?: boolean;
+  drift?: number;
+  left?: string;
+  seed?: number;
 }) {
   // High in the field, so it stays clear of the cut at every aspect ratio the
   // hall might have. The pass reaches it early and then carries on to the
@@ -76,6 +98,58 @@ export function CodeField({
   // was nothing else worth opening.
   const litRow = Math.floor(rows * 0.11);
   const litAt = scanStart + litRow * scanStep;
+
+  const row = (r: number, key: string) => {
+    if (scan && r === litRow) {
+      return (
+        <div
+          key={key}
+          data-scan-hit
+          style={{ paddingLeft: left, "--scan-delay": `${litAt}ms` } as React.CSSProperties}
+          className="relative"
+        >
+          <span
+            data-enter
+            style={{ "--enter-delay": `${litAt + 180}ms`, left: `calc(${left} - 26px)` } as React.CSSProperties}
+            className="absolute top-1/2 h-[3px] w-[14px] -translate-y-1/2 bg-traced"
+          />
+          {LIT}
+          {litLabel && (
+            // Absolutely placed so the caption cannot change this row's height
+            // and knock the whole field out of rhythm.
+            <span
+              data-enter
+              style={{ "--enter-delay": `${litAt + 180}ms`, left: `calc(${left} + 53ch)` } as React.CSSProperties}
+              className="absolute top-1/2 -translate-y-1/2 font-sans text-[17px] leading-none font-medium whitespace-nowrap text-muted"
+            >
+              {litLabel}
+            </span>
+          )}
+        </div>
+      );
+    }
+
+    // Noise. Hidden from assistive tech one row at a time rather than by hiding
+    // the whole field, so the lit line and its caption — the only part that
+    // means anything — still reach a screen reader.
+    return (
+      <div
+        key={key}
+        aria-hidden="true"
+        {...(scan ? { "data-scan": "" } : { className: "text-texture" })}
+        style={
+          {
+            paddingLeft: `calc(${left} + ${indent(r)}px)`,
+            ...(scan ? { "--scan-delay": `${scanStart + r * scanStep}ms` } : null),
+          } as React.CSSProperties
+        }
+      >
+        {noise(r, seed)}
+      </div>
+    );
+  };
+
+  const stack = Array.from({ length: rows }, (_, r) => row(r, `a${r}`));
 
   return (
     // The entrance flag lives on this element rather than on a wrapper: a
@@ -87,55 +161,18 @@ export function CodeField({
       style={{ "--enter-delay": delay } as React.CSSProperties}
       className="absolute inset-0 overflow-hidden font-mono text-[13px] leading-[1.55] whitespace-pre select-none"
     >
-      {Array.from({ length: rows }, (_, r) => {
-        if (r === litRow) {
-          return (
-            <div
-              key={r}
-              data-scan-hit
-              style={{ paddingLeft: "7%", "--scan-delay": `${litAt}ms` } as React.CSSProperties}
-              className="relative"
-            >
-              <span
-                data-enter
-                style={{ "--enter-delay": `${litAt + 180}ms` } as React.CSSProperties}
-                className="absolute top-1/2 left-[calc(7%-26px)] h-[3px] w-[14px] -translate-y-1/2 bg-traced"
-              />
-              {LIT}
-              {litLabel && (
-                // Absolutely placed so the caption cannot change this row's
-                // height and knock the whole field out of rhythm.
-                <span
-                  data-enter
-                  style={{ "--enter-delay": `${litAt + 180}ms` } as React.CSSProperties}
-                  className="absolute top-1/2 left-[calc(7%+53ch)] -translate-y-1/2 font-sans text-[17px] leading-none font-medium whitespace-nowrap text-muted"
-                >
-                  {litLabel}
-                </span>
-              )}
-            </div>
-          );
-        }
-
-        // Noise. Hidden from assistive tech one row at a time rather than by
-        // hiding the whole field, so the lit line and its caption — the only
-        // part that means anything — still reach a screen reader.
-        return (
-          <div
-            key={r}
-            aria-hidden="true"
-            data-scan
-            style={
-              {
-                paddingLeft: `calc(7% + ${((r * 13) % 5) * 22}px)`,
-                "--scan-delay": `${scanStart + r * scanStep}ms`,
-              } as React.CSSProperties
-            }
-          >
-            {lines[(r * 7 + 3) % lines.length]}
-          </div>
-        );
-      })}
+      {drift ? (
+        <div
+          data-drift
+          style={{ animation: `drift ${drift}s linear infinite` }}
+          className="will-change-transform"
+        >
+          {stack}
+          {Array.from({ length: rows }, (_, r) => row(r, `b${r}`))}
+        </div>
+      ) : (
+        stack
+      )}
     </div>
   );
 }

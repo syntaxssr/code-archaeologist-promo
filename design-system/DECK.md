@@ -31,8 +31,18 @@ back on any movement.
 
 ## The run — 13 screens, about 10 minutes
 
+A standby screen sits in front of the run. It holds the projector while the room
+settles and carries no number and no budget, because it is not part of the ten
+minutes: the presenter clicks out of it when the judges give the signal.
+
+It shows the repository drifting past **unscanned** — no pass, no lit line — and
+it deliberately withholds the project name, which is the payoff of screen 00. It
+is also the only screen allowed to loop, since nobody is speaking over it and a
+still screen with four words on it reads as a page that failed to load.
+
 | # | Screen | Budget |
 | --- | --- | --- |
+| — | Standby | — |
 | 00 | Title | 0:20 |
 | 01 | เจ็บตรงไหน — the pain, as a moment a developer has actually had | 1:00 |
 | 02 | ทำไม AI ที่มีอยู่ยังตอบไม่ได้ | 0:45 |

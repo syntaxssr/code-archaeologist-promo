@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { currentIndex, goTo, slides, subscribeIndex } from "./deck-data";
+import { currentIndex, goTo, lastNo, slides, subscribeIndex } from "./deck-data";
 import { Slide } from "./Slide";
 
 /** A clicker sends key events, not mouse clicks, so these are the ones that
@@ -122,7 +122,6 @@ export function Deck() {
           key={s.id}
           slide={s}
           active={n === i}
-          total={slides.length}
           offset={n - i}
         />
       ))}
@@ -158,7 +157,7 @@ function Controls({
     >
       <div className="pointer-events-auto flex items-center gap-6 px-7 py-5">
         <span className="font-mono text-base tabular-nums text-faint">
-          {slides[i].no} / {slides[slides.length - 1].no}
+          {slides[i].no} / {lastNo}
         </span>
 
         {/* One tick per screen. Clickable, because rehearsing means jumping. */}

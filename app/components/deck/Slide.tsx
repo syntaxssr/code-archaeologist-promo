@@ -1,5 +1,5 @@
 import type { Slide as SlideType } from "./deck-data";
-import { fmt } from "./deck-data";
+import { fmt, lastNo } from "./deck-data";
 import { screens } from "./screens";
 
 /**
@@ -17,12 +17,10 @@ import { screens } from "./screens";
 export function Slide({
   slide,
   active,
-  total,
   offset,
 }: {
   slide: SlideType;
   active: boolean;
-  total: number;
   /** Screens behind sit one width to the left, screens ahead one to the right.
    *  The sign is what gives the transition its direction. */
   offset: number;
@@ -41,12 +39,12 @@ export function Slide({
       style={{ transform: `translate3d(${offset * 100}%, 0, 0)` }}
       className="absolute inset-0 bg-sheet transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
     >
-      {Screen ? <Screen /> : <Placeholder slide={slide} total={total} />}
+      {Screen ? <Screen /> : <Placeholder slide={slide} />}
     </section>
   );
 }
 
-function Placeholder({ slide, total }: { slide: SlideType; total: number }) {
+function Placeholder({ slide }: { slide: SlideType }) {
   return (
     <div className="flex h-full flex-col justify-center px-[7%]">
       <div className="flex items-baseline gap-5">
@@ -67,7 +65,7 @@ function Placeholder({ slide, total }: { slide: SlideType; total: number }) {
       </p>
 
       <p className="mt-14 font-mono text-base tracking-[0.14em] tabular-nums text-faint uppercase">
-        Screen {slide.no} of {String(total - 1).padStart(2, "0")} — ยังไม่ใส่เนื้อหา
+        Screen {slide.no} of {lastNo} — ยังไม่ใส่เนื้อหา
       </p>
     </div>
   );

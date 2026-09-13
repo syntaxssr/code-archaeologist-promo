@@ -201,6 +201,31 @@ body {
   }
 }
 
+/* The standby screen, and only the standby screen, is allowed to loop: nobody
+   is speaking over it. The repository drifts past, unscanned, for as long as it
+   takes the judges to settle. */
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* A caret, because "waiting for input" needs no translation and no
+   instruction printed on a screen the room can see. */
+@keyframes caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Everything renders in its finished state — the deck must be fully legible
      with no motion at all. */
@@ -218,6 +243,11 @@ body {
 
   [data-scan-hit] {
     color: var(--traced);
+  }
+
+  [data-drift],
+  [data-caret] {
+    animation: none;
   }
 
   *,
