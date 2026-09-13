@@ -83,13 +83,15 @@ repository and against this one. What screen 08 prints:
 
 | | |
 | --- | --- |
-| One traced answer, 8 call hops deep | 1,262 of 133,932 tokens — 0.94% |
+| One traced answer — the 5 nodes `trace_path.py` returns | 732 of 133,932 tokens — 0.55% |
 | One blast radius, 42 nodes | 5,824 tokens — 4.3% |
 | Full rebuild of both maps | ~0.5s over 11,881 lines |
 
-Corpus: the skill's own `scripts/` and `tools/`, 34 files. Seven of the eight
-notes on the traced path carry real docstring descriptions, so the figure is
-not thin notes flattering the ratio. Counted with a GPT tokenizer
+Corpus: the skill's own `scripts/` and `tools/`, 34 files. The path is what the
+command actually prints — `langs_extract.main > extract_lang_files >
+langs_extract.extract_file > _generic > langs_extract._text` — and four of its
+five notes carry real docstring descriptions, so the figure is not thin notes
+flattering the ratio. Counted with a GPT tokenizer
 (`gpt-tokenizer`, cl100k) rather than Claude's — the ratio is the claim, not
 the raw count — and the baseline is the worst case of reading every file.
 

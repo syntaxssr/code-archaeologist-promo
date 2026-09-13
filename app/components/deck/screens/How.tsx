@@ -1,134 +1,93 @@
 import { Frame } from "./Frame";
+import { Shot } from "./Shot";
 import type { ScreenProps } from "./index";
+import stage1 from "@/public/shots/stage-1.png";
+import stage2 from "@/public/shots/stage-2.png";
+import stage3 from "@/public/shots/stage-3.png";
+import stage4 from "@/public/shots/stage-4.png";
 
 /**
  * Screen 04 — how it works.
  *
- * Four panels, and each one is the *same thing* at a later stage rather than
- * four unrelated icons: source, note, link, graph. A judge can follow one
- * entity across the row and watch it become something you can walk.
+ * Four panels, and each one is the *same function* at a later stage rather than
+ * four unrelated icons. It used to be four drawings of that idea; it is now the
+ * four artefacts themselves, taken from the run against the skill's own
+ * repository on 13 September 2026 — the source, the note built from it, the
+ * edge recorded in the graph, and the traced answer that walks it.
  *
- * The accent lands only in the last panel, on the edge that can now be
- * followed — the first evidence the pipeline produces.
+ * `langs_extract.extract_file` is the thread. A judge can read its name in all
+ * four panels and watch it turn from text into something you can follow.
+ *
+ * Every panel is verbatim: a contiguous slice of a real file, or a command's
+ * real output. The accent falls only on the relationship — the wikilink, the
+ * edge's fields, the arrows in the trace — which is the deck's rule that the
+ * accent marks evidence.
  */
 const steps = [
   {
     no: "01",
-    th: "อ่านโครงสร้าง",
-    en: "AST",
-    body: "รู้ว่ามี class อะไร method อะไร เรียกอะไร โดยไม่ต้องอ่านเนื้อในทุกบรรทัด",
+    en: "SOURCE",
+    th: "อ่านโครงสร้างด้วย parser",
+    shot: stage1,
+    caption: "scripts/extract/langs_extract.py:1378",
+    alt: "โค้ด Python จริงของฟังก์ชัน extract_file",
   },
   {
     no: "02",
-    th: "เขียนเป็นโน้ต",
-    en: "1 ENTITY → 1 NOTE",
-    body: "ทั้ง entity อยู่ในไฟล์เดียว ไม่ถูกหั่น จึงไม่มีชิ้นส่วนที่หลุดบริบท",
+    en: "1 FUNCTION → 1 NOTE",
+    th: "เขียนเป็นโน้ตใบเดียว ไม่หั่น",
+    shot: stage2,
+    caption: "data/flow/notes/langs_extract.extract_file.md",
+    alt: "ไฟล์โน้ตจริงของฟังก์ชันเดียวกัน มีลิงก์ไปฟังก์ชันที่มันเรียก",
   },
   {
     no: "03",
-    th: "เชื่อมโน้ตเข้าหากัน",
-    en: "[[WIKILINK]]",
-    body: "ความสัมพันธ์กลายเป็นลิงก์ที่เดินตามได้ ไม่ใช่ความคล้ายที่ต้องเดา",
+    en: "EDGE",
+    th: "ความสัมพันธ์กลายเป็นข้อมูล",
+    shot: stage3,
+    caption: "data/flow/flow_graph.json",
+    alt: "edge จริงในกราฟ บอกว่า extract_file เรียก _generic",
   },
   {
     no: "04",
-    th: "ตอบโดยเดินตามเส้น",
     en: "BFS TRAVERSAL",
-    body: "อ่านเฉพาะ node ที่อยู่บนเส้นทาง ถามซ้ำได้คำตอบเดิมทุกครั้ง",
+    th: "ตอบด้วยการเดินตามเส้น",
+    shot: stage4,
+    caption: "stdout · trace_path.py",
+    alt: "ผลลัพธ์จริงของคำสั่ง trace_path แสดงเส้นทาง 5 โหนด",
   },
 ];
-
-/** A small drawing per stage. Same entity, four states. */
-function Glyph({ stage }: { stage: number }) {
-  return (
-    <svg viewBox="0 0 120 76" className="h-[clamp(2.75rem,6svh,4.25rem)] w-auto" aria-hidden="true">
-      {stage === 0 && (
-        <g stroke="var(--line)" strokeWidth="1.4">
-          {[0, 1, 2, 3, 4].map((r) => (
-            <line key={r} x1="14" y1={16 + r * 11} x2={r % 2 ? 82 : 100} y2={16 + r * 11} />
-          ))}
-        </g>
-      )}
-      {stage === 1 && (
-        <g>
-          <rect x="30" y="10" width="60" height="56" fill="none" stroke="var(--line)" strokeWidth="1.4" />
-          {[0, 1, 2].map((r) => (
-            <line
-              key={r}
-              x1="40"
-              y1={26 + r * 12}
-              x2={r === 2 ? 62 : 80}
-              y2={26 + r * 12}
-              stroke="var(--texture)"
-              strokeWidth="1.4"
-            />
-          ))}
-        </g>
-      )}
-      {stage === 2 && (
-        <g>
-          <rect x="6" y="18" width="42" height="40" fill="none" stroke="var(--line)" strokeWidth="1.4" />
-          <rect x="72" y="18" width="42" height="40" fill="none" stroke="var(--line)" strokeWidth="1.4" />
-          <line x1="48" y1="38" x2="72" y2="38" stroke="var(--line)" strokeWidth="1.4" />
-        </g>
-      )}
-      {stage === 3 && (
-        <g>
-          <line x1="20" y1="22" x2="60" y2="38" stroke="var(--traced)" strokeWidth="2.2" />
-          <line x1="60" y1="38" x2="100" y2="24" stroke="var(--traced)" strokeWidth="2.2" />
-          <line x1="60" y1="38" x2="46" y2="62" stroke="var(--rule)" strokeWidth="1.4" />
-          <line x1="60" y1="38" x2="94" y2="60" stroke="var(--rule)" strokeWidth="1.4" />
-          {[
-            [20, 22, true],
-            [60, 38, true],
-            [100, 24, true],
-            [46, 62, false],
-            [94, 60, false],
-          ].map(([x, y, on], i) => (
-            <circle
-              key={i}
-              cx={x as number}
-              cy={y as number}
-              r={on ? 5 : 3.5}
-              fill={on ? "var(--traced)" : "var(--texture)"}
-            />
-          ))}
-        </g>
-      )}
-    </svg>
-  );
-}
 
 export function How({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      <ol className="grid gap-[clamp(1.25rem,2.4vw,2.5rem)] sm:grid-cols-2 xl:grid-cols-4">
+      <ol className="grid min-h-0 flex-1 grid-cols-2 gap-x-[clamp(1.25rem,3vw,3rem)] gap-y-[clamp(0.75rem,2.2svh,1.5rem)]">
         {steps.map((s, n) => (
           <li
             key={s.no}
             data-enter
             style={{ "--enter-delay": `${200 + n * 170}ms` } as React.CSSProperties}
-            className="border-t border-rule pt-[clamp(0.875rem,2.4svh,1.5rem)]"
+            className="flex min-h-0 flex-col border-t border-rule pt-[clamp(0.5rem,1.5svh,0.9rem)]"
           >
-            <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] font-medium tabular-nums text-traced-deep">
+            <div className="flex flex-none items-baseline gap-3">
+              <span className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] font-medium tabular-nums text-traced-deep">
                 {s.no}
               </span>
-              <span className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] tracking-[0.16em] text-faint uppercase">
+              <span className="font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-faint uppercase">
                 {s.en}
+              </span>
+              <span className="ml-auto text-[clamp(0.9375rem,1.3vw,1.375rem)] leading-[1.3] font-medium text-ink">
+                {s.th}
               </span>
             </div>
 
-            <div className="mt-[clamp(0.875rem,2.4svh,1.5rem)]">
-              <Glyph stage={n} />
-            </div>
-
-            <p className="mt-[clamp(0.875rem,2.4svh,1.5rem)] text-[clamp(1.125rem,1.6vw,1.75rem)] leading-[1.3] font-medium text-ink">
-              {s.th}
-            </p>
-            <p className="mt-2 text-[clamp(0.9375rem,1.15vw,1.1875rem)] leading-[1.6] text-muted">
-              {s.body}
-            </p>
+            <Shot
+              src={s.shot}
+              alt={s.alt}
+              caption={s.caption}
+              className="mt-[clamp(0.4rem,1.2svh,0.75rem)] min-h-0 flex-1"
+              fit="contain"
+            />
           </li>
         ))}
       </ol>

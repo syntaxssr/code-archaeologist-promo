@@ -6,9 +6,11 @@ import type { ScreenProps } from "./index";
  *
  * These are measured, not argued. On 13 September 2026 the skill was installed
  * and run against its own repository — 34 files, 11,881 lines — and against
- * this one. A traced answer that crosses eight call hops reads 1,262 of the
- * repository's 133,932 tokens; the blast radius of a function with 41 callers
- * reads 5,824. Both maps rebuild from scratch in about half a second.
+ * this one. The path `trace_path.py` actually returns for "how does
+ * langs_extract.main reach _text" is five nodes, and reading those five notes
+ * costs 732 of the repository's 133,932 tokens; the blast radius of a function
+ * with 41 callers reads 5,824. Both maps rebuild from scratch in about half a
+ * second.
  *
  * The right-hand box carries what the measurement does not cover, because the
  * fastest way to lose a room is to let it find the caveat first: the baseline
@@ -20,7 +22,7 @@ import type { ScreenProps } from "./index";
  * cannot put an unjustified number on a screen.
  */
 const measured: [string, string, string][] = [
-  ["ONE TRACED ANSWER", "0.94%", "อ่าน 1,262 จาก 133,932 tokens — เส้นทางลึก 8 ชั้น"],
+  ["ONE TRACED ANSWER", "0.55%", "อ่าน 732 จาก 133,932 tokens — เส้นทาง 5 โหนดที่ trace คืนมา"],
   ["ONE BLAST RADIUS", "4.3%", "อ่าน 5,824 tokens — ครอบ 42 โหนดที่กระทบกัน"],
   ["FULL REBUILD", "0.5 วิ", "สแกน 11,881 บรรทัดใหม่ทั้งหมด ทั้งสองแผนที่"],
 ];
