@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { currentIndex, goTo, lastNo, slides, subscribeIndex } from "./deck-data";
+import { MeasureDraw } from "./MeasureDraw";
 import { Slide } from "./Slide";
 
 /** A clicker sends key events, not mouse clicks, so these are the ones that
@@ -125,6 +126,8 @@ export function Deck() {
           is always exactly one screen. A single translated track has to agree
           with the container about what 100% means, and when it does not, the
           deck lands between screens. */}
+      <MeasureDraw />
+
       {slides.map((s, n) => (
         <Slide
           key={s.id}

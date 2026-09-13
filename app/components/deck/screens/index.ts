@@ -1,8 +1,19 @@
 import type { ComponentType } from "react";
 import type { Slide } from "../deck-data";
+import { Close } from "./Close";
+import { Criteria } from "./Criteria";
+import { Demo } from "./Demo";
+import { How } from "./How";
+import { Numbers } from "./Numbers";
+import { Output } from "./Output";
 import { Pain } from "./Pain";
 import { Standby } from "./Standby";
+import { Team } from "./Team";
 import { Title } from "./Title";
+import { Use } from "./Use";
+import { VsRag } from "./VsRag";
+import { What } from "./What";
+import { WhyFail } from "./WhyFail";
 
 export type ScreenProps = { slide: Slide };
 
@@ -13,4 +24,15 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   standby: Standby,
   title: Title,
   pain: Pain,
+  "why-fail": WhyFail,
+  what: What,
+  how: How,
+  "vs-rag": VsRag,
+  demo: Demo,
+  output: Output,
+  numbers: Numbers,
+  use: Use,
+  criteria: Criteria,
+  team: Team,
+  close: Close,
 };

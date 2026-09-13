@@ -1,5 +1,5 @@
 import type { Slide as SlideType } from "./deck-data";
-import { fmt, lastNo } from "./deck-data";
+import { lastNo } from "./deck-data";
 import { screens } from "./screens";
 
 /**
@@ -52,24 +52,18 @@ export function Slide({
 function Placeholder({ slide }: { slide: SlideType }) {
   return (
     <div className="flex h-full flex-col justify-center px-[7%]">
-      <div className="flex items-baseline gap-5">
-        <span className="font-mono text-base font-medium tracking-[0.16em] tabular-nums text-traced-deep uppercase">
+      <div className="flex items-center gap-5">
+        <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.16em] tabular-nums text-traced-deep">
           {slide.no}
         </span>
         <span className="h-px flex-1 bg-rule" />
-        <span className="font-mono text-base tracking-[0.16em] tabular-nums text-faint uppercase">
-          {fmt(slide.seconds)}
-        </span>
       </div>
 
-      <h2 className="mt-10 text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.08] font-semibold tracking-[-0.02em] text-ink">
+      <h2 className="mt-10 text-[clamp(2.5rem,6.4vw,6rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-ink">
         {slide.th}
       </h2>
-      <p className="mt-5 font-mono text-[clamp(1rem,1.6vw,1.5rem)] tracking-[0.16em] text-muted uppercase">
-        {slide.en}
-      </p>
 
-      <p className="mt-14 font-mono text-base tracking-[0.14em] tabular-nums text-faint uppercase">
+      <p className="mt-8 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] tracking-[0.16em] text-faint uppercase">
         Screen {slide.no} of {lastNo} — ยังไม่ใส่เนื้อหา
       </p>
     </div>

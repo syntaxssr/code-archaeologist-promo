@@ -216,6 +216,25 @@ body {
   }
 }
 
+/* A line drawing itself. The path starts fully retracted and plays out over
+   its own measured length, so a long route does not finish before a short one
+   it was drawn after. Measured by Draw.tsx; --draw-len is set per path. */
+[data-draw] {
+  stroke-dasharray: var(--draw-len, 1400);
+  stroke-dashoffset: var(--draw-len, 1400);
+}
+
+[data-live] [data-draw] {
+  animation: draw var(--draw-dur, 900ms) cubic-bezier(0.4, 0, 0.2, 1)
+    var(--draw-delay, 0ms) both;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Everything renders in its finished state — the deck must be fully legible
      with no motion at all. */
@@ -237,6 +256,10 @@ body {
 
   [data-caret] {
     animation: none;
+  }
+
+  [data-draw] {
+    stroke-dashoffset: 0;
   }
 
   *,

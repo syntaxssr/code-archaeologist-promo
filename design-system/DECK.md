@@ -72,9 +72,16 @@ picked; they are at commit `cd54697`.
 | 11 | ทีม | 0:20 |
 | 12 | ปิด | 0:20 |
 
-The budgets are a rehearsal aid, not a countdown. They are printed on each
-screen while the deck is still a skeleton so the shape of the talk is visible
-before the content exists.
+The budgets are a rehearsal aid and are **not printed on the screens** — they,
+and the screens' English names, are notes to the presenter, and the room can
+read anything that is on the projector. A content screen's header is its number
+and a rule, nothing else.
+
+**Two screens are waiting on real material.** Screen 08 separates what the demo
+can prove from the token figure, which is still an estimate and is labelled as
+one; measure it before the 26th. Screen 10's criteria are a stand-in — replace
+them with the organisers' published list, because a mapping to the wrong
+criteria is worse than none.
 
 ## Tone
 
