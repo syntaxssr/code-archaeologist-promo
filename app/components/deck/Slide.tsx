@@ -44,7 +44,7 @@ export function Slide({
       style={{ transform: `translate3d(${offset * 100}%, 0, 0)` }}
       className="absolute inset-0 bg-sheet transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
     >
-      {Screen ? <Screen /> : <Placeholder slide={slide} />}
+      {Screen ? <Screen slide={slide} /> : <Placeholder slide={slide} />}
     </section>
   );
 }

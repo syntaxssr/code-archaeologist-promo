@@ -32,32 +32,54 @@ this file is the reference you build against.
 
 ## 1. Concept
 
-> **The site is one continuous survey drawing of a codebase, drawn in front of the judge, on a single sheet.**
+> **Archaeology lives in the logic and the words. It never appears in the pictures.**
 
-The product knows a codebase's architecture without an agent reading the whole
-repository. Modern archaeology's most important move is the same one: ground
-radar, magnetometry and LiDAR image what is underground *without opening it*.
+Decided 13 September 2026, after the first build drifted into being a dev-tool
+deck with an archaeological name and nothing else. Both halves of that sentence
+are load-bearing: the pictures stay a modern instrument, because an instrument is
+what is being sold, and the archaeology earns its place only where it is pointing
+out something that is *actually the same thing*, not something that merely looks
+like it.
 
-The metaphor is not "digging". It is **the refusal to dig**.
+### The spine: survey, not excavation
 
-### The identity that makes it work
+Modern archaeology stopped opening whole sites. Ground radar and magnetometry
+image what is underground **without breaking it open**, and the dig that follows
+is one trench over one anomaly. That is not a metaphor for what this product
+does — it is a description of it. The metaphor is not "digging"; it is the
+refusal to dig.
 
-A Harris matrix — archaeology's diagram of which deposit came before which — is a
-directed acyclic graph: numbered rectangles, latest at the top, edges only between
-contexts in direct contact. A dependency graph is the same object. "Overlain by /
-overlies" and "imported by / imports" are one relation.
+### The five devices that are allowed
 
-We are not decorating a dev tool with archaeology. We are pointing out that the two
-are already doing the same thing. **Every choice that looks decorative gets checked
-against this: is it pointing out a real overlap, or dressing up?**
+Everything archaeological in the deck must be one of these. Each one is a real
+overlap, not a resemblance.
 
-**Tone keywords:** surveyed, recorded, evidenced, captioned, measured, ordered.
+| Device | Why it is not costume |
+| --- | --- |
+| **Survey, not excavation** | The product's actual claim, stated in the discipline's own terms |
+| **Solid = evidenced, dashed = conjectured** | A real drafting convention, and the product's differentiator, in two strokes |
+| **A Harris matrix is a dependency graph** | The same object. Numbered nodes, latest on top, an edge only between things in direct contact |
+| **A numbered finding (`CTX 031`)** | A record gives every observation an identifier you can point at. So should a tool's output |
+| **Recorder / Date / Initials** | Every context sheet ends this way: who recorded it, when, who checked |
 
-**Register:** museum — an exhibition hall. Light, ordered, spacious, every artefact
-captioned.
+### The accent means one thing across the whole deck
 
-**What this rules out:** generic SaaS blue, neon "hacker" green, glassmorphism, dark
-product-marketing gradients, and the entire adventure-archaeology register (see §7).
+Orange is **evidence, or its absence**. On screen 00 it lights the single line
+that was actually read; on screen 01 it is the question mark against "files
+actually affected". Same colour, same meaning, opposite sign. It is never used
+for emphasis, for interaction, or because a screen needed some colour.
+
+### Tone
+
+Dry, precise, unhurried — the register of an instrument and of the people who
+keep records, not of an adventure. Thai carries the meaning and is plain; Latin
+monospace carries the notation and is never translated (§3).
+
+**What this rules out:** sand and ochre palettes, dust, torn or burnt paper,
+trowels, pith helmets, treasure, "ขุดลึกลงไป" copy, and loaders that brush dirt
+away. Real archaeology looks like paperwork — forms, numbers, hairlines, grids.
+Everything on that list comes from adventure fiction about archaeology rather
+than from archaeology, and the full ban is in §8.
 
 ## 2. Color
 
