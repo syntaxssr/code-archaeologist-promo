@@ -4,19 +4,24 @@ import type { ScreenProps } from "./index";
 /**
  * Screen 08 — the numbers.
  *
- * The rule on this deck is that every number is real, and the honest position
- * today is that one of them is not measured yet. So the screen is built in two
- * halves and says which is which: what the demo the room just watched can
- * prove, and what is still an estimate with its basis stated.
+ * The rule on this deck is that every number is real. These now come from the
+ * skill's own repository rather than from the shape of an argument: seventeen
+ * graphed languages, the five notes one trace actually reads, and the zero
+ * network calls the explorer makes.
+ *
+ * The screen is still built in two halves, because one number is still missing
+ * and one claim is weaker than it looks. The right-hand box carries both: the
+ * token saving has not been measured against a real repository, and only three
+ * of the seventeen languages have been run on real code.
  *
  * That is not a weakness to hide. A tool whose whole claim is "we only read
  * what we can justify reading" cannot put an unjustified number on a screen —
  * and a judge who catches one will not believe the rest.
  */
 const measured: [string, string, string][] = [
-  ["NODES READ", "4", "จำนวน entity ที่อยู่บนเส้นทาง จากคำถามในเดโม"],
-  ["EDGES FOLLOWED", "3", "ทุก hop ชี้บรรทัดต้นทางได้"],
-  ["RUNS", "เท่ากันทุกครั้ง", "ถามซ้ำได้คำตอบเดิม ไม่ใช่ similarity"],
+  ["LANGUAGES", "17", "ทุกภาษามี fixture ตรวจทั้ง node, edge, route และบรรทัด"],
+  ["NOTES PER ANSWER", "5", "≈ 1,500 tokens แทนการอ่านทั้ง repository"],
+  ["NETWORK CALLS", "0", "explorer.html เปิดจากเครื่องได้ ปิดเน็ตก็ยังเปิด"],
 ];
 
 export function Numbers({ slide }: ScreenProps) {
@@ -36,7 +41,7 @@ export function Numbers({ slide }: ScreenProps) {
             style={{ "--enter-delay": "220ms" } as React.CSSProperties}
             className="mt-2 text-[clamp(1.25rem,2.4vw,2.25rem)] leading-[1.25] font-semibold text-ink"
           >
-            วัดจากเดโมที่เพิ่งดูไป
+            นับจาก repo ของ skill จริง
           </p>
 
           <dl className="mt-[clamp(1rem,3svh,1.75rem)] border-t border-rule">
@@ -73,11 +78,15 @@ export function Numbers({ slide }: ScreenProps) {
             Estimate
           </p>
           <p className="mt-2 text-[clamp(1.25rem,2.4vw,2.25rem)] leading-[1.25] font-semibold text-ink">
-            token ที่ประหยัดได้
+            ยังไม่ได้วัด 2 ข้อ
           </p>
           <p className="mt-[clamp(0.75rem,2svh,1.25rem)] text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.6] text-muted">
-            คำนวณจากสัดส่วน entity ที่ต้องอ่าน ยังไม่ได้จับกับ repository จริง —
-            <span className="text-ink"> จะวัดให้ได้ก่อนวันนำเสนอ</span>
+            <span className="text-ink">token ที่ประหยัดได้</span> — ยังไม่ได้จับกับ repository
+            ของทีมเรา จะวัดให้ได้ก่อนวันนำเสนอ
+          </p>
+          <p className="mt-[clamp(0.5rem,1.4svh,0.9rem)] text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.6] text-muted">
+            <span className="text-ink">17 ภาษาผ่าน fixture</span> — แต่รันกับโค้ดจริงแล้ว 3 ภาษา
+            คือ Python, JS/TS และ Java
           </p>
           <p className="mt-[clamp(0.75rem,2svh,1.25rem)] border-t border-rule pt-[clamp(0.625rem,1.6svh,1rem)] text-[clamp(0.9375rem,1.2vw,1.1875rem)] leading-[1.6] text-faint">
             เขียนแยกไว้ตรงนี้ เพราะตัวเลขที่ยังพิสูจน์ไม่ได้

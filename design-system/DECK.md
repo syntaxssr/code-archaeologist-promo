@@ -68,7 +68,7 @@ picked; they are at commit `cd54697`.
 | 07 | ได้อะไรออกมา | 0:45 |
 | 08 | ตัวเลข | 0:45 |
 | 09 | ใช้กับงานเราจริงยังไง | 1:00 |
-| 10 | ตรงเกณฑ์ตรงไหน | 0:45 |
+| 10 | สั่งอะไรได้บ้าง | 0:45 |
 | 11 | ทีม | 0:20 |
 | 12 | ปิด | 0:20 |
 
@@ -77,30 +77,41 @@ and the screens' English names, are notes to the presenter, and the room can
 read anything that is on the projector. A content screen's header is its number
 and a rule, nothing else.
 
-**One screen is still waiting on real material.** Screen 08 separates what the
-demo can prove from the token figure, which is an estimate and is labelled as
-one; measure it against a real repository before the 26th.
+**One screen is still waiting on real material.** Screen 08 now counts from the
+skill's own repository — seventeen graphed languages, the five notes one trace
+reads, zero network calls — and the box beside it carries the two things that
+are still not measured: the token saving against a real repository, and the
+fact that only three of the seventeen languages have been run on real code.
 
-**Screen 10 now carries the organisers' published weights** (received 13
-September 2026), not a guess:
+**The judges' scoring criteria are not on the deck.** They arrived on 13
+September 2026 (Impact 30 · adoption 30 · creativity 20 · presentation 10 ·
+audience vote 10, recorded in the project memory) and were briefly printed on
+screen 10. That was wrong: the rubric belongs to the panel, and reciting it
+back proves nothing. It is a checklist for us, not a slide. Screen 10 answers
+the question the room actually has at that point instead — **สั่งอะไรได้บ้าง**:
+six questions a developer asks out loud, each with the one command that answers
+it.
 
-| Criterion | Points |
-| --- | --- |
-| Impact ต่อบริษัท | 30 |
-| แนวทางต่อยอดหรือใช้งานได้จริง | 30 |
-| ความคิดสร้างสรรค์ | 20 |
-| Presentation | 10 |
-| คะแนนจากผู้เข้าร่วมงาน | 10 |
+What the criteria do change is where effort goes. Sixty of the hundred points
+are for worth and adoption, so an unmeasured number is expensive; ten are voted
+by the audience rather than the panel, so the demo has to land with people who
+do not write code.
 
-Sixty of the hundred points are for worth and adoption, twenty for invention,
-and the last twenty are decided by the room rather than by the panel — so the
-deck is built for people who do not already know the problem, and the demo is
-what the audience vote will actually be cast on.
+## Pictures
 
-The brief also requires the work to produce at least one of: ลดเวลาทำงาน,
-ลดต้นทุน, เพิ่มคุณภาพ, เพิ่มรายได้, เปิดโอกาสธุรกิจใหม่. This one claims two —
-ลดเวลาทำงาน and เพิ่มคุณภาพ — and screen 10 says so in a single line rather
-than claiming all five.
+The deck's rule is that archaeology never appears in the imagery. The
+exception, added 13 September 2026, is the tool's own window: screenshots of
+`explorer.html` running on the skill's sample repository, captured at 2×
+into `public/shots/`. They are the only images on the deck, and they are
+evidence rather than illustration — the graph on screen 06, the census and
+security panels on screen 07, the structure matrix on screen 10. Nothing is
+cropped to flatter the tool: an empty panel stays empty in the picture, and
+every caption names what is being looked at.
+
+`Shot.tsx` frames all of them identically — a hairline, the raised ground, a
+mono caption. A shot either fills the space it is given (`fit="cover"`) or
+shows all of itself inside it (`fit="contain"`); a contained shot whose slot is
+the wrong shape letterboxes rather than crops.
 
 ## Tone
 

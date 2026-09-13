@@ -31,7 +31,7 @@ export const slides: Slide[] = [
   { id: "output", no: "07", th: "ได้อะไรออกมา", en: "WHAT YOU GET", seconds: 45 },
   { id: "numbers", no: "08", th: "ตัวเลข", en: "THE NUMBERS", seconds: 45 },
   { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 60 },
-  { id: "criteria", no: "10", th: "ตรงเกณฑ์ตรงไหน", en: "AGAINST THE CRITERIA", seconds: 45 },
+  { id: "ask", no: "10", th: "สั่งอะไรได้บ้าง", en: "WHAT YOU CAN ASK IT", seconds: 45 },
   { id: "team", no: "11", th: "ทีม", en: "TEAM", seconds: 20 },
   { id: "close", no: "12", th: "ปิด", en: "CLOSE", seconds: 20 },
 ];

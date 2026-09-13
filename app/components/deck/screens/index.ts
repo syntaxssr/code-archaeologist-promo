@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { Slide } from "../deck-data";
+import { Ask } from "./Ask";
 import { Close } from "./Close";
-import { Criteria } from "./Criteria";
 import { Demo } from "./Demo";
 import { How } from "./How";
 import { Numbers } from "./Numbers";
@@ -32,7 +32,7 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   output: Output,
   numbers: Numbers,
   use: Use,
-  criteria: Criteria,
+  ask: Ask,
   team: Team,
   close: Close,
 };
