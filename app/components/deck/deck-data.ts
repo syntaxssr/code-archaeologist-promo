@@ -1,6 +1,12 @@
 /**
  * The run. One entry per screen, in stage order.
  *
+ * A section can run to more than one screen: several entries share a `no`, and
+ * the frame then prints "03 · 2/3" so the room knows it is still inside the
+ * same idea. One page per section was a constraint that made some sections
+ * either cramped or shallow — the rule now is one *idea* per section, however
+ * many screens that idea needs.
+ *
  * `seconds` is the rehearsal budget, not a countdown — it is here so the shape
  * of the talk is visible while the screens are still empty. The whole run is
  * about ten minutes and the demo is deliberately the longest thing on it.
@@ -24,6 +30,11 @@ export const slides: Slide[] = [
   { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20 },
   { id: "pain", no: "01", th: "เจ็บตรงไหน", en: "THE PAIN", seconds: 60 },
   { id: "why-fail", no: "02", th: "ทำไม AI ที่มีอยู่ยังตอบไม่ได้", en: "WHY IT FAILS TODAY", seconds: 45 },
+  // Section 03 runs to three screens. The room holds people who have never
+  // installed anything, and "what a skill is" has to land with them before
+  // "what ours is" can mean anything.
+  { id: "category", no: "03", th: "เราอยู่หมวดไหน", en: "WHERE THIS SITS", seconds: 25 },
+  { id: "skill", no: "03", th: "skill คืออะไร", en: "WHAT A SKILL IS", seconds: 40 },
   { id: "what", no: "03", th: "นี่คืออะไร", en: "WHAT IT IS", seconds: 30 },
   { id: "how", no: "04", th: "ทำงานยังไง", en: "HOW IT WORKS", seconds: 60 },
   { id: "vs-rag", no: "05", th: "ต่างจาก RAG ยังไง", en: "VERSUS RAG", seconds: 45 },
@@ -33,13 +44,24 @@ export const slides: Slide[] = [
   { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 60 },
   { id: "ask", no: "10", th: "สั่งอะไรได้บ้าง", en: "WHAT YOU CAN ASK IT", seconds: 45 },
   { id: "team", no: "11", th: "ทีม", en: "TEAM", seconds: 20 },
-  { id: "close", no: "12", th: "ปิด", en: "CLOSE", seconds: 20 },
+  { id: "tokens", no: "12", th: "token ที่บริษัทออกให้ ใช้ไปกับอะไร", en: "THE TOKEN BUDGET", seconds: 45 },
+  { id: "close", no: "13", th: "ปิด", en: "CLOSE", seconds: 20 },
 ];
 
 /** The numbered screens — the run itself, without the standby in front of it. */
 export const run = slides.filter((s) => /^\d+$/.test(s.no));
 
 export const lastNo = run[run.length - 1].no;
+
+/** Where a screen sits inside its section, for sections that run to more than
+ *  one screen. Null for a section that is a single screen, so the frame prints
+ *  nothing extra. */
+export function part(id: string): { n: number; of: number } | null {
+  const slide = slides.find((s) => s.id === id);
+  if (!slide) return null;
+  const peers = slides.filter((s) => s.no === slide.no);
+  return peers.length > 1 ? { n: peers.indexOf(slide) + 1, of: peers.length } : null;
+}
 
 export const totalSeconds = slides.reduce((a, s) => a + s.seconds, 0);
 

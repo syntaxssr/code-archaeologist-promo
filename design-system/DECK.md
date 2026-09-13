@@ -70,7 +70,8 @@ picked; they are at commit `cd54697`.
 | 09 | ใช้กับงานเราจริงยังไง | 1:00 |
 | 10 | สั่งอะไรได้บ้าง | 0:45 |
 | 11 | ทีม | 0:20 |
-| 12 | ปิด | 0:20 |
+| 12 | token ที่บริษัทออกให้ ใช้ไปกับอะไร | 0:45 |
+| 13 | ปิด | 0:20 |
 
 The budgets are a rehearsal aid and are **not printed on the screens** — they,
 and the screens' English names, are notes to the presenter, and the room can
@@ -113,6 +114,34 @@ What the criteria do change is where effort goes. Sixty of the hundred points
 are for worth and adoption, so an unmeasured number is expensive; ten are voted
 by the audience rather than the panel, so the demo has to land with people who
 do not write code.
+
+## Sections can run to several screens
+
+Until 13 September 2026 a section was one screen. That was a constraint, not a
+principle, and it was making sections either cramped or shallow. The rule now
+is **one idea per section, however many screens the idea needs**: entries in
+`deck-data.ts` share a `no`, and `part()` tells the frame to print `03 · 2/3`
+so the room knows it is still inside the same idea rather than watching a new
+one start.
+
+Section 03 is the first to use it, because the hall holds people who have never
+installed anything: "where this sits" and "what a skill is" both have to land
+before "what ours is" can mean anything.
+
+## The token account
+
+Screen 12 accounts for the tokens the company paid for. Every figure comes from
+`tools/usage.py`, which reads the presenter's own Claude Code transcripts,
+counts each assistant turn once (keyed by message id, files walked in sorted
+order so totals do not move between runs) and sums input + output + cache
+write + cache read.
+
+The chart shows **every** day the budget was used, with the challenge days in
+the accent — an account that hides the rest of the spending is not an account.
+ณัฐวุฒิ's row stays empty until he runs the same script; a bar drawn from a
+guess beside bars drawn from a count would cost more than it shows.
+
+Re-run the script and paste the numbers into `token-usage.ts` before the 26th.
 
 ## Pictures
 

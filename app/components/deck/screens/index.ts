@@ -1,15 +1,18 @@
 import type { ComponentType } from "react";
 import type { Slide } from "../deck-data";
 import { Ask } from "./Ask";
+import { Category } from "./Category";
 import { Close } from "./Close";
 import { Demo } from "./Demo";
 import { How } from "./How";
 import { Numbers } from "./Numbers";
 import { Output } from "./Output";
 import { Pain } from "./Pain";
+import { Skill } from "./Skill";
 import { Standby } from "./Standby";
 import { Team } from "./Team";
 import { Title } from "./Title";
+import { Tokens } from "./Tokens";
 import { Use } from "./Use";
 import { VsRag } from "./VsRag";
 import { What } from "./What";
@@ -25,6 +28,8 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   title: Title,
   pain: Pain,
   "why-fail": WhyFail,
+  category: Category,
+  skill: Skill,
   what: What,
   how: How,
   "vs-rag": VsRag,
@@ -34,5 +39,6 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   use: Use,
   ask: Ask,
   team: Team,
+  tokens: Tokens,
   close: Close,
 };
