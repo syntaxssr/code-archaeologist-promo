@@ -4,7 +4,7 @@ import type { ScreenProps } from "./index";
 import matrix from "@/public/shots/matrix-canvas.png";
 
 /**
- * Screen 10 — what you can ask it.
+ * Screen 10 · 1/2 — the commands that walk the graph.
  *
  * This slot used to map the work onto the judges' scoring criteria. That was
  * the wrong thing to put on a projector: the criteria belong to the panel, not
@@ -15,13 +15,17 @@ import matrix from "@/public/shots/matrix-canvas.png";
  * So every row is a question a developer already asks out loud, paired with the
  * single command that answers it. The commands are real and copied from the
  * skill's own usage reference; none of them is an invented flag.
+ *
+ * This page is `scripts/query` — finding things and walking between them. The
+ * second page is `scripts/review`, which judges what it finds. The split is the
+ * skill's own, not one invented for the slide.
  */
 const asks: [string, string][] = [
   ["อยู่ตรงไหน", "search.py --name X"],
   ["A ไปถึง B ยังไง", "trace_path.py --from A --to B"],
   ["แก้แล้วพังตรงไหน", "trace_path.py --impact-of X"],
   ["PR นี้กระทบอะไร", "trace_path.py --impact-of-diff"],
-  ["มีช่องโหว่ไหม", "scan_security.py"],
+  ["ขอทุกอย่างของโหนดเดียว", "context.py --node X"],
   ["แผนที่เก่ารึยัง", "archaeologist.py check"],
 ];
 

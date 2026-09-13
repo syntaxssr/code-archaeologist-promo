@@ -68,7 +68,8 @@ picked; they are at commit `cd54697`.
 | 07 | ได้อะไรออกมา | 0:45 |
 | 08 | ตัวเลข | 0:45 |
 | 09 | ใช้กับงานเราจริงยังไง | 1:00 |
-| 10 | สั่งอะไรได้บ้าง | 0:45 |
+| 10 · 1/2 | สั่งอะไรได้บ้าง — กลุ่มเดิน | 0:30 |
+| 10 · 2/2 | สั่งอะไรได้บ้าง — กลุ่มตรวจ | 0:30 |
 | 11 | ทีม | 0:20 |
 | 12 | token ที่บริษัทออกให้ ใช้ไปกับอะไร | 0:45 |
 | 13 | ปิด | 0:20 |
@@ -124,9 +125,16 @@ is **one idea per section, however many screens the idea needs**: entries in
 so the room knows it is still inside the same idea rather than watching a new
 one start.
 
-Section 03 is the first to use it, because the hall holds people who have never
-installed anything: "where this sits" and "what a skill is" both have to land
-before "what ours is" can mean anything.
+Section 03 was the first to use it, because the hall holds people who have
+never installed anything: "where this sits" and "what a skill is" both have to
+land before "what ours is" can mean anything.
+
+Section 10 uses it for a different reason — there are more commands than one
+screen can hold at a legible size, and they already fall into two groups. The
+split is the skill's own directory structure, `scripts/query` against
+`scripts/review`: page one walks the graph, page two judges what it finds. Only
+page one carries a picture; a reference list is most useful when it is only a
+reference list.
 
 ## The token account
 

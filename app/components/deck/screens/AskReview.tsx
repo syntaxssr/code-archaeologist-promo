@@ -1,0 +1,87 @@
+import { Frame } from "./Frame";
+import type { ScreenProps } from "./index";
+
+/**
+ * Screen 10 · 2/2 — the commands that judge the code.
+ *
+ * The first page walks the graph; this one reads it and reports. The split is
+ * the skill's own — `scripts/query` against `scripts/review` — so the deck is
+ * describing a structure that exists rather than tidying the commands into
+ * groups for the slide.
+ *
+ * No picture on this page. The previous screen carries one, and a second
+ * screenshot here would be decoration: this is a reference list, and a
+ * reference list is most useful when it is only a reference list.
+ *
+ * Every command and flag is copied from the skill's usage reference. The last
+ * row is the one to say out loud — a judge does not have to run six commands,
+ * because one writes the lot.
+ */
+const asks: [string, string, string][] = [
+  ["โค้ดนี้สุขภาพยังไง", "analyze.py", "ให้เกรด A–F พร้อมรายการหักคะแนน"],
+  ["มีช่องโหว่ไหม", "scan_security.py", "secret ฝังโค้ด · SQL ต่อสตริง · eval / innerHTML"],
+  ["อะไรรกค้างอยู่", "debt.py", "TODO / FIXME และโค้ดที่ไม่มีใครเรียก"],
+  ["อะไรยังไม่มีเทส", "tests_map.py", "โหนดไหนถูกเทสเรียกชื่อ โหนดไหนไม่เคย"],
+  ["มีโค้ดก็อปแปะไหม", "duplicates.py", "ทั้งฟังก์ชันซ้ำ และบล็อกที่ถูกแปะข้ามฟังก์ชัน"],
+  ["ใครดูแล จุดไหนร้อน", "git_insights.py", "churn และเจ้าของ จาก git จริง"],
+];
+
+export function AskReview({ slide }: ScreenProps) {
+  return (
+    <Frame slide={slide}>
+      <h2
+        data-enter
+        style={{ "--enter-delay": "160ms" } as React.CSSProperties}
+        className="flex-none text-[clamp(1.5rem,3.4vw,3rem)] leading-[1.15] font-semibold tracking-[-0.02em] text-ink"
+      >
+        อีกกลุ่มไม่ได้หาของ — มันตรวจของที่หาเจอ
+      </h2>
+
+      <dl className="mt-[clamp(0.875rem,2.6svh,1.75rem)] border-t border-rule">
+        {asks.map(([th, cmd, note], n) => (
+          <div
+            key={cmd}
+            data-enter
+            style={{ "--enter-delay": `${320 + n * 130}ms` } as React.CSSProperties}
+            className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.45rem,1.5svh,0.95rem)]"
+          >
+            <dt className="w-[10em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] font-medium text-ink">
+              {th}
+            </dt>
+            <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
+              {cmd}
+            </dd>
+            <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.5] text-muted">
+              {note}
+            </dd>
+          </div>
+        ))}
+
+        {/* The one that replaces the six above it. */}
+        <div
+          data-enter
+          style={{ "--enter-delay": "1120ms" } as React.CSSProperties}
+          className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.6rem,2svh,1.25rem)]"
+        >
+          <dt className="w-[10em] shrink-0 text-[clamp(1.125rem,1.6vw,1.75rem)] font-semibold text-ink">
+            ขอทั้งหมดทีเดียว
+          </dt>
+          <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] whitespace-nowrap text-traced">
+            archaeologist.py report
+          </dd>
+          <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.5] text-muted">
+            รันทุกอันข้างบน แล้วเขียนออกมาเป็นรายงานเดียว พร้อมอัปเดตหน้า explorer
+          </dd>
+        </div>
+      </dl>
+
+      <p
+        data-enter
+        style={{ "--enter-delay": "1280ms" } as React.CSSProperties}
+        className="mt-[clamp(0.6rem,2svh,1.1rem)] flex-none text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.6] text-faint"
+      >
+        ทุกข้อคำนวณจากกราฟ ไม่มีข้อไหนที่โมเดลเดาเกี่ยวกับโค้ดของคุณ
+      </p>
+    </Frame>
+  );
+}

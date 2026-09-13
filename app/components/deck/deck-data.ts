@@ -42,7 +42,11 @@ export const slides: Slide[] = [
   { id: "output", no: "07", th: "ได้อะไรออกมา", en: "WHAT YOU GET", seconds: 45 },
   { id: "numbers", no: "08", th: "ตัวเลข", en: "THE NUMBERS", seconds: 45 },
   { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 60 },
-  { id: "ask", no: "10", th: "สั่งอะไรได้บ้าง", en: "WHAT YOU CAN ASK IT", seconds: 45 },
+  // Section 10 runs to two screens: the commands that walk the graph, then
+  // the ones that judge it. The split is the skill's own — scripts/query
+  // against scripts/review.
+  { id: "ask", no: "10", th: "สั่งอะไรได้บ้าง — กลุ่มเดิน", en: "NAVIGATE", seconds: 30 },
+  { id: "ask-review", no: "10", th: "สั่งอะไรได้บ้าง — กลุ่มตรวจ", en: "REVIEW", seconds: 30 },
   { id: "team", no: "11", th: "ทีม", en: "TEAM", seconds: 20 },
   { id: "tokens", no: "12", th: "token ที่บริษัทออกให้ ใช้ไปกับอะไร", en: "THE TOKEN BUDGET", seconds: 45 },
   { id: "close", no: "13", th: "ปิด", en: "CLOSE", seconds: 20 },
