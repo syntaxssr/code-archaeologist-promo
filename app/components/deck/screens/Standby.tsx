@@ -5,9 +5,9 @@ import { LogoMark } from "../../brand/Logo";
  * minute or for ten, until the judges give the signal and the presenter clicks
  * into screen 00.
  *
- * A prompt with nothing typed at it, because that is what standby is. In a room
- * of developers it needs no caption: everyone there knows what a blinking
- * cursor at a shell means, and it says "ready, waiting for you" without putting
+ * A path and a cursor, with nothing typed at it, because that is what standby
+ * is. In a room of developers it needs no caption: everyone there knows what a
+ * blinking cursor means, and it says "ready, waiting for you" without putting
  * an instruction on a screen the whole room can read.
  *
  * It holds back the project name — that is the payoff of screen 00, and a
@@ -32,7 +32,7 @@ export function Standby() {
       <span className="mt-[clamp(1.25rem,3svh,2rem)] block h-px w-full max-w-[min(60rem,80vw)] bg-rule" />
 
       <p className="mt-[clamp(1.5rem,4svh,2.5rem)] font-mono text-[clamp(1.5rem,3.4vw,3.25rem)] leading-none text-muted">
-        <span className="text-faint">~/standby</span> <span className="text-traced">$</span>
+        <span className="text-faint">~/standby</span>
         <span
           data-caret
           style={{ animation: "caret 1.1s steps(1, end) infinite" }}

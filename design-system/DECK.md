@@ -43,9 +43,8 @@ A standby screen sits in front of the run. It holds the projector while the room
 settles and carries no number and no budget, because it is not part of the ten
 minutes: the presenter clicks out of it when the judges give the signal.
 
-It is a prompt with nothing typed at it — `~/standby $` and a blinking cursor.
-In a room of developers that needs no caption: everyone knows what a cursor at a
-shell means, and it says "ready, waiting for you" without putting an instruction
+It is `~/standby` and a blinking cursor, with nothing typed at it. In a room of
+developers that needs no caption: everyone knows what a cursor means, and it says "ready, waiting for you" without putting an instruction
 on a screen the whole room can read.
 
 It withholds the project name, which is the payoff of screen 00. Its cursor is
