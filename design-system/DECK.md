@@ -21,6 +21,14 @@ how you drill one screen during rehearsal without clicking there from the start.
 It is written with `replaceState`, so thirteen screens do not leave thirteen
 entries in the back button.
 
+**Section ids are prefixed (`screen-demo`) so the fragment never matches one.**
+A bare `id={slide.id}` made `#title` a real fragment target, and the browser
+scrolled this `overflow-hidden` box to bring it into view — on top of the
+transform that actually positions the deck, landing every deep link exactly one
+screen off. `overflow: hidden` prevents a scrollbar, not scrolling; the stage
+also resets its own `scrollLeft`/`scrollTop` on any scroll, because a focus ring
+in an off-stage screen can do the same thing.
+
 **Each screen is its own reference frame** — absolutely positioned over the
 stage, translated by whole multiples of its own width. A single translated track
 has to agree with its container about what 100% means, and when it does not, the

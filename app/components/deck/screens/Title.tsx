@@ -29,7 +29,7 @@ export function Title() {
         style={{ "--enter-delay": "1050ms" } as React.CSSProperties}
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-y border-line bg-sheet-raised"
       >
-        <div className="px-[7%] pt-[clamp(1.25rem,3.6svh,2.5rem)] pb-[clamp(0.875rem,2.4svh,1.5rem)]">
+        <div className="px-[7%] py-[clamp(1.5rem,4svh,2.75rem)]">
           <div
             data-enter
             style={{ "--enter-delay": "1250ms" } as React.CSSProperties}
@@ -61,23 +61,11 @@ export function Title() {
           <p
             data-enter
             style={{ "--enter-delay": "1490ms" } as React.CSSProperties}
-            className="mt-[clamp(0.75rem,2.2svh,1.75rem)] max-w-[52ch] text-[clamp(1.125rem,1.85vw,1.875rem)] leading-[1.4] font-medium text-muted"
+            className="mt-[clamp(0.75rem,2.4svh,1.75rem)] max-w-[52ch] text-[clamp(1.125rem,1.85vw,1.875rem)] leading-[1.4] font-medium text-muted"
           >
             รู้โครงสร้างทั้ง repo โดยไม่ต้องอ่านโค้ดทั้งหมด
           </p>
 
-          {/* The sign-off stays on the band. On the texture it would be sitting
-              on top of code and neither would be readable. */}
-          <div
-            data-enter
-            style={{ "--enter-delay": "1590ms" } as React.CSSProperties}
-            className="mt-[clamp(0.875rem,2.4svh,1.75rem)] flex flex-wrap items-baseline gap-x-8 gap-y-1 border-t border-rule pt-[clamp(0.625rem,1.6svh,1rem)] font-mono text-[clamp(0.8125rem,0.95vw,1.0625rem)] tracking-[0.14em] text-faint uppercase"
-          >
-            <span>
-              Team 03 — <span className="text-muted">ณัฐวุฒิ รอดทอง · พีรพล จันทะแจ่ม</span>
-            </span>
-            <span className="ml-auto tabular-nums">26.09.2026</span>
-          </div>
         </div>
       </div>
     </div>

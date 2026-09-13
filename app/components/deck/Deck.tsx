@@ -105,6 +105,14 @@ export function Deck() {
       // The controls read the live screen's tone, so they stay visible over a
       // dark screen without being styled twice.
       data-tone={slides[i].tone}
+      // overflow-hidden stops a scrollbar, not scrolling: a fragment target or
+      // a focus ring inside an off-stage screen can still scroll this box, and
+      // any scroll here is desynchronised from the transform that actually
+      // positions the deck. Put it straight back.
+      onScroll={(e) => {
+        e.currentTarget.scrollLeft = 0;
+        e.currentTarget.scrollTop = 0;
+      }}
       className={`relative h-svh w-screen overflow-hidden bg-sheet ${
         full && idle ? "cursor-none" : ""
       }`}

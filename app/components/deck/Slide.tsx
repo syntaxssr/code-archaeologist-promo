@@ -29,7 +29,12 @@ export function Slide({
 
   return (
     <section
-      id={slide.id}
+      // Prefixed, so the URL fragment does not match it. A bare id={slide.id}
+      // let the browser treat "#title" as a fragment target and scroll this
+      // overflow-hidden container to bring it into view — on top of our own
+      // transform, which landed the deck exactly one screen off on every deep
+      // link. The hash is our state, not a scroll anchor.
+      id={`screen-${slide.id}`}
       aria-hidden={!active}
       inert={!active}
       data-live={active ? "" : undefined}
