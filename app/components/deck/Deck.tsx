@@ -102,6 +102,9 @@ export function Deck() {
 
   return (
     <div
+      // The controls read the live screen's tone, so they stay visible over a
+      // dark screen without being styled twice.
+      data-tone={slides[i].tone}
       className={`relative h-svh w-screen overflow-hidden bg-sheet ${
         full && idle ? "cursor-none" : ""
       }`}

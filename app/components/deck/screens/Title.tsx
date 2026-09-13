@@ -22,7 +22,7 @@ export function Title() {
       <div
         data-open
         style={{ "--enter-delay": "200ms" } as React.CSSProperties}
-        className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-y border-line bg-sheet"
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-y border-line bg-sheet-raised"
       >
         <div className="px-[7%] pt-[clamp(1.25rem,3.6svh,2.5rem)] pb-[clamp(0.875rem,2.4svh,1.5rem)]">
           <p

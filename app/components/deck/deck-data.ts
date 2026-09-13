@@ -11,10 +11,13 @@ export type Slide = {
   th: string;
   en: string;
   seconds: number;
+  /** Screens default to paper. Dark is a pacing device, not a theme — use it
+   *  where the screen should land differently from the one before it. */
+  tone?: "dark";
 };
 
 export const slides: Slide[] = [
-  { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20 },
+  { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20, tone: "dark" },
   { id: "pain", no: "01", th: "เจ็บตรงไหน", en: "THE PAIN", seconds: 60 },
   { id: "why-fail", no: "02", th: "ทำไม AI ที่มีอยู่ยังตอบไม่ได้", en: "WHY IT FAILS TODAY", seconds: 45 },
   { id: "what", no: "03", th: "นี่คืออะไร", en: "WHAT IT IS", seconds: 30 },

@@ -36,6 +36,37 @@
   --grade-bad: #9e2b1e; /* 7.13 / 6.49 / 7.38 — sinks, grade E/F */
 }
 
+/* A screen can run dark. Tone is a per-screen property, so the deck can use
+   light and dark as pacing — a dark cover and close around a light middle is
+   the oldest trick a deck has, and it is the contrast the previous design
+   never had.
+
+   Ratios below are against --sheet; every text token clears AA, and the two
+   that never carry text (grid, rule) are rules. Computed, not estimated. */
+[data-tone="dark"] {
+  --sheet: #0d0c0a;
+  --sheet-2: #16140f;
+  --sheet-raised: #1c1917;
+
+  --grid: #262220;
+  --rule: #332e2a;
+  --texture: #524b42; /* 2.28 — mass, never words */
+
+  --ink: #faf8f3; /* 18.4 */
+  --line: #b8b0a4; /* 9.1 */
+  --muted: #a8a096; /* 7.6 */
+  --faint: #8a8278; /* 5.2 */
+
+  /* Inverted from the light palette: on a dark ground the *lighter* orange is
+     the one small text can use. */
+  --traced: #f97316; /* 7.0 — large text, rules, fills */
+  --traced-deep: #fb923c; /* 8.6 — small text, hover */
+  --on-traced: #0d0c0a; /* 7.0 on a traced fill */
+
+  --grade-good: #65d68f; /* 10.8 */
+  --grade-bad: #f87171; /* 7.1 */
+}
+
 @theme inline {
   --color-sheet: var(--sheet);
   --color-sheet-2: var(--sheet-2);

@@ -35,8 +35,11 @@ export function Slide({
       aria-hidden={!active}
       inert={!active}
       data-live={active ? "" : undefined}
+      // Each screen paints its own ground, so a dark screen and a light one can
+      // be on stage together mid-transition without either bleeding through.
+      data-tone={slide.tone}
       style={{ transform: `translate3d(${offset * 100}%, 0, 0)` }}
-      className="absolute inset-0 transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
+      className="absolute inset-0 bg-sheet transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
     >
       {Screen ? <Screen /> : <Placeholder slide={slide} total={total} />}
     </section>
