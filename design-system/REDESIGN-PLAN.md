@@ -1,6 +1,14 @@
 # Redesign Plan — The Survey Sheet / ผังสำรวจ
 
-**Status:** agreed and built, 12 September 2026. Phases 1–6 are complete; the site now runs on this plan. Phase 7 (phone layout) is deferred.
+**Status: superseded, 13 September 2026.** This plan was built in full and then
+removed. BB judged the result not creative enough — the same plan drawing carried
+five of seven beats, nothing changed scale, and the whole site used a single
+viewpoint. The brief also changed underneath it: the site now **replaces the
+PowerPoint** rather than accompanying it, so it is a thirteen-screen deck driven
+by click rather than a scrolling page.
+
+Kept for the reasoning, the reference research and the record of what
+verification found. The build is recoverable at commit `bb6bf53`.
 
 **`MASTER.md` has been rewritten from this document** and is now the reference
 you build against; this file keeps the reasoning, the narrative arc and the

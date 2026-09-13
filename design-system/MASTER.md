@@ -1,5 +1,19 @@
 # Code Archaeologist — Brand & Design System
 
+> **Status, 13 September 2026 — the Survey Sheet build has been removed.**
+> BB judged the presentation not creative enough: the same plan drawing carried
+> five of seven beats, there was no contrast of scale, and one viewpoint ran
+> throughout. The site is also no longer a promo page — **it replaces the
+> PowerPoint on stage**, so it is now a thirteen-screen deck driven by click.
+>
+> What still holds from this document: the colour tokens and their verified
+> ratios (§2), the typography system and the English-is-notation /
+> Thai-is-meaning rule (§3), and the anti-patterns (§8). What no longer applies:
+> the concept (§1), the sheet anatomy (§5), the motion spec (§5b) and the
+> narrative arc — those are being redesigned one section at a time.
+>
+> The removed build is recoverable at commit `bb6bf53`.
+
 Source of truth for the promo site. Anything built later (components, slides,
 social images) must pull from this file rather than inventing new colors, fonts,
 or logo variants.

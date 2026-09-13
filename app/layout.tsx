@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { SheetRail } from "./components/sheet/SheetRail";
 import "./globals.css";
 
 // Self-hosted from app/fonts (see the README there). next/font/google fetches
@@ -95,15 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="th"
       className={`${plexSans.variable} ${plexThai.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <head>
-        {/* Lines start retracted and notes start hidden; without JS the sheet
-            must still render complete. */}
-        <noscript>
-          <style>{`[data-reveal],[data-note]{opacity:1!important;transform:none!important}[data-draw]{stroke-dashoffset:0!important}`}</style>
-        </noscript>
-      </head>
-      <body className="min-h-full flex flex-col">
-        <SheetRail />
+      <body className="h-full overflow-hidden">
         {children}
       </body>
     </html>
