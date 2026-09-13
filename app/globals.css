@@ -16,6 +16,10 @@
   --grid: #e3dfd4;
   --rule: #d4cfc2;
 
+  /* Mass, not words. 2.25:1 — plainly there, plainly not readable. Only for
+     type that carries no meaning (MASTER.md §3). */
+  --texture: #b0a899;
+
   /* Ink. Ratios against --sheet / --sheet-2 / --sheet-raised. */
   --ink: #14120f; /* 17.9 / 16.3 / 18.5 */
   --line: #4a4640; /* 8.96 / 8.15 / 9.28 — feature outlines */
@@ -39,6 +43,7 @@
 
   --color-grid: var(--grid);
   --color-rule: var(--rule);
+  --color-texture: var(--texture);
 
   --color-ink: var(--ink);
   --color-line: var(--line);
@@ -84,7 +89,57 @@ body {
   line-height: 1.7;
 }
 
+/* Entrance. A screen's own animation runs when that screen becomes the live
+   one, not on mount — all thirteen are in the DOM the whole time, so without
+   this every entrance would have played during the title. */
+[data-enter] {
+  opacity: 0;
+}
+
+[data-live] [data-enter] {
+  animation: enter 460ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--enter-delay, 0ms) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The same idea for a cut opening: a band that wipes outward from its centre. */
+[data-open] {
+  transform: scaleY(0);
+}
+
+[data-live] [data-open] {
+  animation: open 420ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--enter-delay, 0ms) both;
+}
+
+@keyframes open {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  /* Everything renders in its finished state — the deck must be fully legible
+     with no motion at all. */
+  [data-enter] {
+    opacity: 1;
+  }
+
+  [data-open] {
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {

@@ -1,13 +1,18 @@
 import type { Slide as SlideType } from "./deck-data";
 import { fmt } from "./deck-data";
+import { screens } from "./screens";
 
 /**
- * A screen. Right now it carries only its name — the point of this pass is to
- * feel the run: how many stops there are, how the transition reads, whether the
- * pacing is right. Content lands one section at a time after that.
+ * A screen of the deck.
  *
- * `aria-hidden` on the inactive screens keeps a screen reader on the one that
- * is actually showing, since all thirteen stay mounted in the track.
+ * All thirteen stay mounted so a transition has something to slide to, so the
+ * inactive ones are hidden from assistive tech and made inert — otherwise a
+ * screen reader would walk the whole deck and Tab would land on controls nobody
+ * can see.
+ *
+ * Screens that have not been designed yet fall back to a placeholder carrying
+ * the name, the number and the rehearsal budget, so the shape of the run stays
+ * visible while it is built one section at a time.
  */
 export function Slide({
   slide,
@@ -22,34 +27,45 @@ export function Slide({
    *  The sign is what gives the transition its direction. */
   offset: number;
 }) {
+  const Screen = screens[slide.id];
+
   return (
     <section
       id={slide.id}
       aria-hidden={!active}
       inert={!active}
+      data-live={active ? "" : undefined}
       style={{ transform: `translate3d(${offset * 100}%, 0, 0)` }}
-      className="absolute inset-0 flex flex-col justify-center px-[7%] transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
+      className="absolute inset-0 transition-transform duration-[520ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none"
     >
+      {Screen ? <Screen /> : <Placeholder slide={slide} total={total} />}
+    </section>
+  );
+}
+
+function Placeholder({ slide, total }: { slide: SlideType; total: number }) {
+  return (
+    <div className="flex h-full flex-col justify-center px-[7%]">
       <div className="flex items-baseline gap-5">
-        <span className="font-mono text-base font-medium uppercase tracking-[0.16em] text-traced-deep tabular-nums">
+        <span className="font-mono text-base font-medium tracking-[0.16em] tabular-nums text-traced-deep uppercase">
           {slide.no}
         </span>
         <span className="h-px flex-1 bg-rule" />
-        <span className="font-mono text-base uppercase tracking-[0.16em] text-faint tabular-nums">
+        <span className="font-mono text-base tracking-[0.16em] tabular-nums text-faint uppercase">
           {fmt(slide.seconds)}
         </span>
       </div>
 
-      <h2 className="mt-10 text-[clamp(2.5rem,7vw,6.5rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-ink">
+      <h2 className="mt-10 text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.08] font-semibold tracking-[-0.02em] text-ink">
         {slide.th}
       </h2>
-      <p className="mt-5 font-mono text-[clamp(1rem,1.6vw,1.5rem)] uppercase tracking-[0.16em] text-muted">
+      <p className="mt-5 font-mono text-[clamp(1rem,1.6vw,1.5rem)] tracking-[0.16em] text-muted uppercase">
         {slide.en}
       </p>
 
-      <p className="mt-14 font-mono text-base uppercase tracking-[0.14em] text-faint tabular-nums">
+      <p className="mt-14 font-mono text-base tracking-[0.14em] tabular-nums text-faint uppercase">
         Screen {slide.no} of {String(total - 1).padStart(2, "0")} — ยังไม่ใส่เนื้อหา
       </p>
-    </section>
+    </div>
   );
 }
