@@ -18,27 +18,11 @@ import type { ScreenProps } from "./index";
  * would be false while the agent is a hosted model, and a judge who catches
  * that takes the other four rows with it.
  */
-const rows: [string, string, string][] = [
-  [
-    "ไม่มี vector DB ไม่มี embedding",
-    "ไม่ต้องอัปโหลด repo ไปสร้าง index ที่บริการของใคร",
-    "ทั้งหมดเป็นไฟล์ JSON ในเครื่อง",
-  ],
-  [
-    "แผนที่อยู่ใน repo ของเราเอง",
-    "commit ลง git ได้ diff ได้ ย้อนดูได้ว่าเปลี่ยนอะไร",
-    "ไม่มีดัชนีลับที่ตรวจสอบไม่ได้",
-  ],
-  [
-    "explorer เปิดตอนปิดเน็ตได้",
-    "ไฟล์เดียว ไลบรารีฝังมาในไฟล์แล้ว",
-    "0 การเรียกเน็ต และมี self-test บังคับไว้",
-  ],
-  [
-    "ตอนถาม ส่งแค่โน้ตบนเส้นทาง",
-    "ไม่ได้ส่งทั้ง repo ไปให้โมเดลอ่าน",
-    "732 จาก 133,932 tokens — 0.55%",
-  ],
+const rows: [string, string][] = [
+  ["ไม่มี vector DB", "ทั้งหมดเป็นไฟล์ JSON ในเครื่อง"],
+  ["แผนที่อยู่ใน repo เราเอง", "commit ลง git ได้ diff ได้"],
+  ["explorer เปิดตอนปิดเน็ตได้", "0 การเรียกเน็ต"],
+  ["ตอนถาม ส่งแค่โน้ตบนเส้นทาง", "732 จาก 133,932 tokens — 0.55%"],
 ];
 
 export function Local({ slide }: ScreenProps) {
@@ -53,20 +37,17 @@ export function Local({ slide }: ScreenProps) {
       </h2>
 
       <dl className="mt-[clamp(0.875rem,2.6svh,1.75rem)] border-t border-rule">
-        {rows.map(([k, th, proof], n) => (
+        {rows.map(([k, proof], n) => (
           <div
             key={k}
             data-enter
             style={{ "--enter-delay": `${340 + n * 150}ms` } as React.CSSProperties}
             className="flex flex-wrap items-baseline gap-x-[clamp(0.875rem,2vw,2rem)] gap-y-1 border-b border-rule py-[clamp(0.5rem,1.7svh,1.05rem)]"
           >
-            <dt className="w-[13em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.35] font-medium text-ink">
+            <dt className="min-w-0 flex-1 text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.35] font-medium text-ink">
               {k}
             </dt>
-            <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.25vw,1.3125rem)] leading-[1.5] text-muted">
-              {th}
-            </dd>
-            <dd className="w-[16em] shrink-0 font-mono text-[clamp(0.75rem,1vw,1.0625rem)] leading-[1.5] text-traced-deep">
+            <dd className="w-[18em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
               {proof}
             </dd>
           </div>
@@ -83,9 +64,7 @@ export function Local({ slide }: ScreenProps) {
           ที่ต้องพูดตรงๆ
         </p>
         <p className="mt-2 max-w-[80ch] text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.6] text-muted">
-          ถ้าใช้กับ AI บนคลาวด์ <span className="text-ink">โน้ตที่มันอ่านก็ยังวิ่งผ่าน API อยู่ดี</span> —
-          แต่เป็นโน้ตบนเส้นทางไม่กี่ใบ ไม่ใช่ทั้ง repo และตอนติดตั้งมีการโหลด grammar ครั้งเดียว
-          หลังจากนั้นไม่ต่อเน็ตอีกเลย
+          <span className="text-ink">โน้ตที่ AI อ่าน ยังวิ่งผ่าน API</span> — แต่ไม่กี่ใบ ไม่ใช่ทั้ง repo
         </p>
       </div>
     </Frame>

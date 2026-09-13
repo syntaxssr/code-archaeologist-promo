@@ -133,6 +133,32 @@ body {
   }
 }
 
+/* A lead: a mark that travels left to right after its row has arrived, so the
+   eye is carried from what a person says to what the tool runs instead of
+   being asked to pair the two columns itself. Motion does the explaining that
+   a sentence used to. */
+[data-lead] {
+  opacity: 0;
+}
+
+[data-live] [data-lead] {
+  animation: lead 520ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--enter-delay, 0ms) both;
+}
+
+@keyframes lead {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.85;
+    transform: none;
+  }
+}
+
 /* The same idea for a cut opening: a band that wipes outward from its centre. */
 [data-open] {
   transform: scaleY(0);
@@ -240,6 +266,10 @@ body {
      with no motion at all. */
   [data-enter] {
     opacity: 1;
+  }
+
+  [data-lead] {
+    opacity: 0.85;
   }
 
   [data-open] {

@@ -13,9 +13,9 @@ import type { ScreenProps } from "./index";
  * particular building.
  */
 const rows: [string, string, string][] = [
-  ["ถามเรื่องโค้ดของบริษัท", "เดาจากโค้ดทั่วโลกที่มันเคยเห็น", "เดินตามแผนที่ของ repo นั้นจริงๆ"],
-  ["ถามคำถามเดิมซ้ำ", "ตอบไม่เหมือนเดิมสักครั้ง", "ได้คำตอบเดิมทุกครั้ง"],
-  ["จะเริ่มใช้", "ต้องหาเครื่องมือใหม่มาต่อ", "วางไฟล์ไว้ในโปรเจ็ค แค่นั้น"],
+  ["ถามเรื่องโค้ดของบริษัท", "เดาจากโค้ดทั่วโลก", "เดินตามแผนที่ของ repo นั้น"],
+  ["ถามซ้ำ", "ตอบไม่เหมือนเดิม", "ตอบเหมือนเดิมทุกครั้ง"],
+  ["จะเริ่มใช้", "ต้องหาเครื่องมือใหม่", "วางไฟล์ในโปรเจ็ค"],
 ];
 
 export function Skill({ slide }: ScreenProps) {
@@ -28,15 +28,6 @@ export function Skill({ slide }: ScreenProps) {
       >
         skill คือคู่มือหน้างาน ที่ยื่นให้ AI อ่านก่อนลงมือ
       </h2>
-
-      <p
-        data-enter
-        style={{ "--enter-delay": "300ms" } as React.CSSProperties}
-        className="mt-[clamp(0.5rem,1.6svh,1rem)] max-w-[64ch] text-[clamp(1rem,1.35vw,1.375rem)] leading-[1.6] text-muted"
-      >
-        AI ที่บริษัทใช้อยู่ เหมือนพนักงานใหม่ที่เก่งมาก แต่ยังไม่รู้ว่าระบบของเราวางไว้ยังไง —
-        skill คือคู่มือที่ยื่นให้เขา
-      </p>
 
       <dl className="mt-[clamp(1rem,3svh,1.75rem)] border-t border-rule">
         <div className="flex gap-[clamp(1rem,2.4vw,2.5rem)] border-b border-rule py-[clamp(0.4rem,1.2svh,0.7rem)]">

@@ -22,9 +22,9 @@ import type { ScreenProps } from "./index";
  * cannot put an unjustified number on a screen.
  */
 const measured: [string, string, string][] = [
-  ["ONE TRACED ANSWER", "0.55%", "อ่าน 732 จาก 133,932 tokens — เส้นทาง 5 โหนดที่ trace คืนมา"],
-  ["ONE BLAST RADIUS", "4.3%", "อ่าน 5,824 tokens — ครอบ 42 โหนดที่กระทบกัน"],
-  ["FULL REBUILD", "0.5 วิ", "สแกน 11,881 บรรทัดใหม่ทั้งหมด ทั้งสองแผนที่"],
+  ["ONE TRACED ANSWER", "0.55%", "732 จาก 133,932 tokens"],
+  ["ONE BLAST RADIUS", "4.3%", "5,824 tokens · 42 โหนด"],
+  ["FULL REBUILD", "0.5 วิ", "11,881 บรรทัด ทั้งสองแผนที่"],
 ];
 
 export function Numbers({ slide }: ScreenProps) {
@@ -84,21 +84,16 @@ export function Numbers({ slide }: ScreenProps) {
             ตัวเลขนี้ไม่ครอบอะไรบ้าง
           </p>
           <ul className="mt-[clamp(0.75rem,2svh,1.25rem)] space-y-[clamp(0.45rem,1.3svh,0.85rem)] text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.55] text-muted">
+            <li>เทียบกับ <span className="text-ink">อ่านทั้ง repo</span> — กรณีแย่ที่สุด</li>
             <li>
-              <span className="text-ink">เทียบกับการอ่านทั้ง repo</span> ซึ่งเป็นกรณีแย่ที่สุด
+              นับด้วย tokenizer ของ <span className="text-ink">GPT</span> ไม่ใช่ของ Claude
             </li>
             <li>
-              <span className="text-ink">นับด้วย tokenizer ของ GPT</span> สัดส่วนใช้ได้ ตัวเลขดิบของ
-              Claude ไม่ตรงเป๊ะ
-            </li>
-            <li>
-              <span className="text-ink">รันกับโค้ดจริงแล้ว 3 ภาษา</span> คือ Python, JS/TS และ Java —
-              อีก 14 ภาษาผ่าน fixture
+              รันกับโค้ดจริง <span className="text-ink">3 ภาษา</span> · อีก 14 ผ่าน fixture
             </li>
           </ul>
           <p className="mt-[clamp(0.75rem,2svh,1.25rem)] border-t border-rule pt-[clamp(0.625rem,1.6svh,1rem)] text-[clamp(0.9375rem,1.2vw,1.1875rem)] leading-[1.6] text-faint">
-            เขียนแยกไว้ตรงนี้ เพราะตัวเลขที่ยังพิสูจน์ไม่ได้
-            ไม่ควรอยู่ปนกับตัวเลขที่พิสูจน์ได้
+            แยกไว้ เพราะไม่ควรปนกับตัวเลขที่พิสูจน์ได้
           </p>
         </div>
       </div>

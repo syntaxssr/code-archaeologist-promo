@@ -74,7 +74,7 @@ export function WhyFail({ slide }: ScreenProps) {
               Scope
             </dt>
             <dd className="mt-1 text-[clamp(1rem,1.5vw,1.5rem)] leading-[1.5] text-ink">
-              ชิ้นที่เหลือไม่รู้ว่าตัวเองอยู่ใน class ไหน
+              ไม่รู้ว่าอยู่ class ไหน
             </dd>
           </div>
           <div>
@@ -83,7 +83,7 @@ export function WhyFail({ slide }: ScreenProps) {
             </dt>
             <dd className="mt-1 text-[clamp(1rem,1.5vw,1.5rem)] leading-[1.5] text-ink">
               <span className="font-mono text-[0.92em] text-traced">self.repo.save</span>{" "}
-              เหลืออยู่ แต่ไม่มีใครรู้แล้วว่า repo คืออะไร
+              เหลืออยู่ แต่ repo คืออะไร ไม่รู้
             </dd>
           </div>
           <div>
@@ -91,7 +91,7 @@ export function WhyFail({ slide }: ScreenProps) {
               Retrieval
             </dt>
             <dd className="mt-1 text-[clamp(1rem,1.5vw,1.5rem)] leading-[1.5] text-ink">
-              ค้นด้วยความคล้าย ไม่ใช่ความเชื่อมโยง — ถามซ้ำได้คนละคำตอบ
+              ถามซ้ำ ได้คนละคำตอบ
             </dd>
           </div>
         </dl>

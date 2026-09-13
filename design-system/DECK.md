@@ -167,6 +167,29 @@ guess beside bars drawn from a count would cost more than it shows.
 
 Re-run the script and paste the numbers into `token-usage.ts` before the 26th.
 
+## Words are the last resort
+
+Rule set 13 September 2026, after a pass over the whole deck: **a screen
+carries the fewest words it can and lets the picture or the motion do the
+explaining.** The speaking script is written separately, so anything the
+presenter can say out loud does not belong on the projector.
+
+What that means in practice:
+
+- A row is a label and a value, not a sentence. "อ่าน 732 จาก 133,932 tokens —
+  เส้นทาง 5 โหนดที่ trace คืนมา" became "732 จาก 133,932 tokens".
+- A column that only explains another column is deleted. Screens 09·2 and 10·2
+  each lost one that way.
+- An explanatory paragraph under a headline is deleted; the headline already
+  said it, or the presenter will.
+- **Caveats stay.** The boxes on 08 and 09·2 are compressed, never removed —
+  they are what keeps the numbers beside them believable.
+
+`[data-lead]` is the motion primitive this rule needs: a mark that travels left
+to right a beat after its row arrives, used on both pages of section 10 to
+carry the eye from what a person types to what the tool runs. That pairing used
+to be done by a sentence.
+
 ## Pictures
 
 The deck's rule is that archaeology never appears in the imagery. The

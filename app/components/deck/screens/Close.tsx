@@ -21,14 +21,6 @@ export function Close({ slide }: ScreenProps) {
         ไม่ต้องขุดทั้งพื้นที่ ก็รู้ว่ามีอะไรอยู่ข้างใต้
       </h2>
 
-      <p
-        data-enter
-        style={{ "--enter-delay": "480ms" } as React.CSSProperties}
-        className="mt-[clamp(1rem,2.8svh,1.75rem)] max-w-[46ch] text-[clamp(1.125rem,1.8vw,1.875rem)] leading-[1.45] text-muted"
-      >
-        นั่นคือสิ่งที่โบราณคดีสมัยใหม่ทำกับพื้นดิน และเป็นสิ่งที่ skill นี้ทำกับโค้ดเบส
-      </p>
-
       <div
         data-enter
         style={{ "--enter-delay": "720ms" } as React.CSSProperties}

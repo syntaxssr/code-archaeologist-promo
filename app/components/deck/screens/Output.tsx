@@ -16,11 +16,7 @@ import security from "@/public/shots/security-findings.png";
  * proof. The one sentence that survives is the one the panels cannot say for
  * themselves — that every number on them can be traced back to a line of code.
  */
-const artefacts: [string, string][] = [
-  ["แผนที่ 2 ชุด", "โครงสร้าง และ การไหล"],
-  ["โน้ต 1 ใบ", "ต่อ 1 คลาส หรือ 1 เมธอด"],
-  ["ไฟล์เดียว", "explorer.html · ไม่ต้องต่อเน็ต"],
-];
+const artefacts: string[] = ["แผนที่ 2 ชุด", "โน้ต 1 ใบ ต่อ 1 เมธอด", "explorer.html ไฟล์เดียว"];
 
 export function Output({ slide }: ScreenProps) {
   return (
@@ -30,22 +26,21 @@ export function Output({ slide }: ScreenProps) {
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
         className="flex-none text-[clamp(1.5rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
       >
-        ทุกตัวเลขที่มันตอบ ชี้กลับไปที่บรรทัดได้
+        ทุกตัวเลข ชี้กลับไปที่บรรทัดได้
       </h2>
 
       <div className="mt-[clamp(1rem,3svh,2rem)] flex min-h-0 flex-1 items-stretch justify-between gap-[clamp(1.25rem,3vw,3rem)]">
         <dl className="flex w-[24%] shrink-0 flex-col justify-center border-t border-rule">
-          {artefacts.map(([k, th], n) => (
+          {artefacts.map((k, n) => (
             <div
               key={k}
               data-enter
               style={{ "--enter-delay": `${360 + n * 150}ms` } as React.CSSProperties}
-              className="border-b border-rule py-[clamp(0.6rem,2svh,1.2rem)]"
+              className="border-b border-rule py-[clamp(0.7rem,2.4svh,1.4rem)]"
             >
-              <dt className="text-[clamp(1.125rem,1.7vw,1.75rem)] font-medium text-ink">{k}</dt>
-              <dd className="mt-1 text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.45] text-muted">
-                {th}
-              </dd>
+              <dt className="text-[clamp(1.125rem,1.7vw,1.75rem)] leading-[1.3] font-medium text-ink">
+                {k}
+              </dt>
             </div>
           ))}
         </dl>

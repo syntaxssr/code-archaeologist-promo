@@ -17,9 +17,9 @@ import graph from "@/public/shots/explorer-graph.png";
  * buys.
  */
 const watch: [string, string][] = [
-  ["01", "ถามคำถามเดิม แล้วนับว่าเปิดกี่ไฟล์"],
-  ["02", "กด entity ไหนก็ได้ ดูว่าใครเรียกมัน"],
-  ["03", "แก้จุดเดียว ให้มันบอกว่ากระทบอะไร"],
+  ["01", "นับว่าเปิดกี่ไฟล์"],
+  ["02", "กดดูว่าใครเรียกใคร"],
+  ["03", "แก้จุดเดียว กระทบอะไรบ้าง"],
 ];
 
 export function Demo({ slide }: ScreenProps) {
@@ -34,16 +34,6 @@ export function Demo({ slide }: ScreenProps) {
           >
             ของจริง
           </h2>
-
-          <p
-            data-enter
-            style={{ "--enter-delay": "300ms" } as React.CSSProperties}
-            className="mt-[clamp(0.6rem,1.8svh,1.1rem)] text-[clamp(1rem,1.4vw,1.4375rem)] leading-[1.45] text-muted"
-          >
-            เปิด{" "}
-            <span className="font-mono text-[0.9em] text-ink">explorer.html</span>{" "}
-            จากเครื่องนี้ ปิดเน็ตก็เปิดได้
-          </p>
 
           <ol className="mt-[clamp(1.1rem,3svh,2rem)] border-t border-rule">
             {watch.map(([no, th], n) => (

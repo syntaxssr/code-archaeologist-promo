@@ -10,15 +10,15 @@ import type { ScreenProps } from "./index";
  * point is that there is nothing to install.
  */
 const roles: [string, string][] = [
-  ["Developer", "เข้าโปรเจกต์ใหม่แล้วรู้โครงสร้างภายในวันแรก แทนที่จะเป็นสัปดาห์แรก"],
-  ["Reviewer", "เห็นว่า PR นี้กระทบอะไรบ้าง ก่อนกด approve"],
-  ["MA / Support", "ตามรอยบั๊กจากอาการไปถึงจุดที่แก้ โดยไม่ต้องรอเจ้าของโค้ด"],
+  ["Developer", "เข้าโปรเจกต์ใหม่ รู้โครงสร้างวันแรก"],
+  ["Reviewer", "รู้ว่า PR กระทบอะไร ก่อน approve"],
+  ["MA / Support", "ไล่จากอาการถึงจุดแก้ ไม่ต้องรอเจ้าของโค้ด"],
 ];
 
 const steps: [string, string][] = [
-  ["01", "รันกับ repo เดียวที่ทีมปวดหัวที่สุด"],
-  ["02", "แชร์ explorer.html ให้ทั้งทีมเปิดดู"],
-  ["03", "ถ้ามีประโยชน์ ค่อยใส่เข้า pipeline ให้อัปเดตเอง"],
+  ["01", "รันกับ repo ที่ปวดหัวที่สุด"],
+  ["02", "แชร์ explorer.html ให้ทีม"],
+  ["03", "ค่อยใส่เข้า pipeline"],
 ];
 
 export function Use({ slide }: ScreenProps) {

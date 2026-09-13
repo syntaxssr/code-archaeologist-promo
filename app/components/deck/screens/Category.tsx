@@ -54,9 +54,8 @@ export function Category({ slide }: ScreenProps) {
         style={{ "--enter-delay": "1140ms" } as React.CSSProperties}
         className="mt-[clamp(0.875rem,2.4svh,1.5rem)] max-w-[62ch] text-[clamp(1rem,1.35vw,1.375rem)] leading-[1.6] text-muted"
       >
-        เราไม่ได้สร้างเครื่องมือใหม่ —{" "}
-        <span className="text-ink">เราสอนเครื่องมือที่บริษัทจ่ายค่าใช้อยู่แล้ว</span>{" "}
-        ให้ทำงานเฉพาะทางที่มันทำไม่ได้มาก่อน
+        ไม่ได้สร้างเครื่องมือใหม่ —{" "}
+        <span className="text-ink">สอนเครื่องมือที่บริษัทมีอยู่แล้ว</span>
       </p>
     </Frame>
   );

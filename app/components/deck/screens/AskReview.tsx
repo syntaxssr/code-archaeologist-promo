@@ -20,13 +20,13 @@ import type { ScreenProps } from "./index";
  * row is the one to say out loud — a judge does not have to run six commands,
  * because one writes the lot.
  */
-const asks: [string, string, string][] = [
-  ["โค้ดเบสนี้สุขภาพเป็นยังไง", "analyze.py", "ให้เกรด A–F พร้อมรายการหักคะแนน"],
-  ["มีช่องโหว่อะไรบ้างไหม", "scan_security.py", "secret ฝังโค้ด · SQL ต่อสตริง · eval / innerHTML"],
-  ["มีอะไรรกค้างอยู่ไหม", "debt.py", "TODO / FIXME และโค้ดที่ไม่มีใครเรียก"],
-  ["ตรงไหนยังไม่มีเทส", "tests_map.py", "โหนดไหนถูกเทสเรียกชื่อ โหนดไหนไม่เคย"],
-  ["มีโค้ดก็อปแปะกันไหม", "duplicates.py", "ทั้งฟังก์ชันซ้ำ และบล็อกที่ถูกแปะข้ามฟังก์ชัน"],
-  ["ใครดูแลส่วนไหน จุดไหนแก้บ่อย", "git_insights.py", "churn และเจ้าของ จาก git จริง"],
+const asks: [string, string][] = [
+  ["โค้ดเบสนี้สุขภาพเป็นยังไง", "analyze.py"],
+  ["มีช่องโหว่อะไรบ้างไหม", "scan_security.py"],
+  ["มีอะไรรกค้างอยู่ไหม", "debt.py"],
+  ["ตรงไหนยังไม่มีเทส", "tests_map.py"],
+  ["มีโค้ดก็อปแปะกันไหม", "duplicates.py"],
+  ["ใครดูแลส่วนไหน จุดไหนแก้บ่อย", "git_insights.py"],
 ];
 
 export function AskReview({ slide }: ScreenProps) {
@@ -45,12 +45,13 @@ export function AskReview({ slide }: ScreenProps) {
           <span className="w-[13em] shrink-0 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-faint uppercase">
             คนพิมพ์แบบนี้
           </span>
+          <span className="w-[1.5em] shrink-0" aria-hidden="true" />
           <span className="w-[13em] shrink-0 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-traced-deep uppercase">
             AI เรียกอันนี้ให้เอง
           </span>
         </div>
 
-        {asks.map(([th, cmd, note], n) => (
+        {asks.map(([th, cmd], n) => (
           <div
             key={cmd}
             data-enter
@@ -60,11 +61,16 @@ export function AskReview({ slide }: ScreenProps) {
             <dt className="w-[13em] shrink-0 text-[clamp(0.9375rem,1.3vw,1.375rem)] leading-[1.4] text-ink">
               “{th}”
             </dt>
-            <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
-              {cmd}
+            <dd
+              data-lead
+              style={{ "--enter-delay": `${410 + n * 130}ms` } as React.CSSProperties}
+              className="shrink-0 self-center font-mono text-[clamp(0.875rem,1.2vw,1.25rem)] text-traced"
+              aria-hidden="true"
+            >
+              →
             </dd>
-            <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.5] text-muted">
-              {note}
+            <dd className="min-w-0 flex-1 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] text-traced-deep">
+              {cmd}
             </dd>
           </div>
         ))}
@@ -78,11 +84,19 @@ export function AskReview({ slide }: ScreenProps) {
           <dt className="w-[13em] shrink-0 text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.4] font-semibold text-ink">
             “ขอรายงานรวมทีเดียว”
           </dt>
+          <dd
+            data-lead
+            style={{ "--enter-delay": "1210ms" } as React.CSSProperties}
+            className="shrink-0 self-center font-mono text-[clamp(0.875rem,1.2vw,1.25rem)] text-traced"
+            aria-hidden="true"
+          >
+            →
+          </dd>
           <dd className="w-[13em] shrink-0 font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] leading-[1.5] whitespace-nowrap text-traced">
             archaeologist.py report
           </dd>
           <dd className="min-w-0 flex-1 text-[clamp(0.9375rem,1.2vw,1.25rem)] leading-[1.5] text-muted">
-            รันทุกอันข้างบน แล้วเขียนออกมาเป็นรายงานเดียว พร้อมอัปเดตหน้า explorer
+            รันทุกอันข้างบน เป็นรายงานเดียว
           </dd>
         </div>
       </dl>
@@ -92,7 +106,7 @@ export function AskReview({ slide }: ScreenProps) {
         style={{ "--enter-delay": "1280ms" } as React.CSSProperties}
         className="mt-[clamp(0.6rem,2svh,1.1rem)] flex-none text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.6] text-faint"
       >
-        ทุกข้อคำนวณจากกราฟ ไม่มีข้อไหนที่โมเดลเดาเกี่ยวกับโค้ดของคุณ
+        ทุกข้อคำนวณจากกราฟ ไม่มีข้อไหนที่โมเดลเดา
       </p>
     </Frame>
   );

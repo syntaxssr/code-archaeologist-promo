@@ -12,7 +12,9 @@ import matrix from "@/public/shots/matrix-canvas.png";
  * concludes it has to memorise them, which is the opposite of the pitch.
  *
  * So the left column is what a person actually types, in their own words, and
- * the right is what the skill tells the agent to run. A non-developer can read
+ * the right is what the skill tells the agent to run. A mark travels between
+ * them a beat after each row lands: the motion carries the eye across the pair,
+ * which is the job a sentence of explanation used to do. A non-developer can read
  * the left and stop; a developer gets the proof on the right that the answer
  * came from a command and not from a model's memory.
  *
@@ -46,6 +48,7 @@ export function Ask({ slide }: ScreenProps) {
             <dt className="min-w-0 flex-[1.25] font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-faint uppercase">
               คนพิมพ์แบบนี้
             </dt>
+            <dd className="w-[1.5em] shrink-0" aria-hidden="true" />
             <dd className="min-w-0 flex-1 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.16em] text-traced-deep uppercase">
               AI เรียกอันนี้ให้เอง
             </dd>
@@ -61,6 +64,14 @@ export function Ask({ slide }: ScreenProps) {
               <dt className="min-w-0 flex-[1.25] text-[clamp(0.9375rem,1.3vw,1.375rem)] leading-[1.4] text-ink">
                 “{said}”
               </dt>
+              <dd
+                data-lead
+                style={{ "--enter-delay": `${430 + n * 130}ms` } as React.CSSProperties}
+                className="shrink-0 self-center font-mono text-[clamp(0.875rem,1.2vw,1.25rem)] text-traced"
+                aria-hidden="true"
+              >
+                →
+              </dd>
               <dd className="min-w-0 flex-1 font-mono text-[clamp(0.75rem,1vw,1.0625rem)] leading-[1.5] text-traced-deep">
                 {cmd}
               </dd>

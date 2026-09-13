@@ -72,12 +72,11 @@ export function Tokens({ slide }: ScreenProps) {
               ในนั้นเป็นอะไรบ้าง
             </dt>
             <dd className="mt-2 text-[clamp(0.9375rem,1.25vw,1.3125rem)] leading-[1.6] text-muted">
-              <span className="text-ink">0.9 ล้าน</span> คือสิ่งที่โมเดลเขียนออกมาจริง —{" "}
-              <span className="text-ink">อีก 348 ล้าน</span> คือการแบก repo
-              กับบริบทเดิมอ่านซ้ำทุกรอบ
+              <span className="text-ink">0.9 ล้าน</span> คือที่โมเดลเขียน ·{" "}
+              <span className="text-ink">348 ล้าน</span> คือบริบทที่อ่านซ้ำ
             </dd>
             <dd className="mt-2 text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.55] text-faint">
-              ซึ่งคือค่าใช้จ่ายก้อนที่ Code Archaeologist ตั้งใจตัดทิ้งพอดี
+              ก้อนที่ Code Archaeologist ตัดทิ้งพอดี
             </dd>
           </div>
         </dl>
