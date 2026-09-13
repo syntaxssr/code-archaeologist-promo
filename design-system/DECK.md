@@ -134,10 +134,18 @@ Screen 12 accounts for the tokens the company paid for. Every figure comes from
 `tools/usage.py`, which reads the presenter's own Claude Code transcripts,
 counts each assistant turn once (keyed by message id, files walked in sorted
 order so totals do not move between runs) and sums input + output + cache
-write + cache read.
+write + cache read. `--project` narrows it to one project.
 
-The chart shows **every** day the budget was used, with the challenge days in
-the accent — an account that hides the rest of the spending is not an account.
+**Scope is this project only**, decided 13 September 2026. The same budget paid
+for unrelated work, and a judging screen is not the place to account for that —
+so `token-usage.ts` holds the challenge days and nothing else.
+
+The composition line is the part worth saying out loud: of 353 million tokens,
+0.9 million is what the model wrote. The rest is carrying the repository and
+the argument in context across four days — which is the exact cost Code
+Archaeologist exists to cut, so the deck's own budget is evidence for its own
+argument.
+
 ณัฐวุฒิ's row stays empty until he runs the same script; a bar drawn from a
 guess beside bars drawn from a count would cost more than it shows.
 

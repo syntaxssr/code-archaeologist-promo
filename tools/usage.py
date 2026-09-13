@@ -4,7 +4,11 @@ One assistant turn can be written to the transcript more than once (a resumed
 or forked session repeats earlier lines), so every record is keyed by its
 message id and counted once.
 """
-import json, os, glob, collections, datetime
+import argparse, json, os, glob, collections
+
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--project", help="only count this project (substring of the folder name)")
+args = ap.parse_args()
 
 ROOT = os.path.expanduser("~/.claude/projects")
 seen = set()
@@ -13,6 +17,7 @@ by_day = collections.Counter()
 by_model = collections.Counter()
 by_day_project = collections.defaultdict(collections.Counter)
 turns = collections.Counter()
+day_turns = collections.defaultdict(collections.Counter)
 totals = collections.Counter()
 split = {}
 
@@ -51,10 +56,14 @@ for path in sorted(glob.glob(os.path.join(ROOT, "*", "*.jsonl"))):
             day = (d.get("timestamp") or "")[:10]
             by_project[project] += total
             by_model[msg.get("model") or "unknown"] += total
+            if args.project and args.project not in project:
+                continue
             if day:
                 by_day[day] += total
                 by_day_project[day][project] += total
             turns[project] += 1
+            if day:
+                day_turns[day][project] += 1
             totals["input"] += i
             totals["output"] += o
             totals["cache_write"] += cc
@@ -71,6 +80,7 @@ out = {
     "by_day": sorted(by_day.items()),
     "turns_by_project": turns.most_common(),
     "by_day_project": {d: dict(c) for d, c in sorted(by_day_project.items())},
+    "turns_by_day_project": {d: dict(c) for d, c in sorted(day_turns.items())},
     "split_by_project": {k: dict(v) for k, v in split.items()},
     "days": len(by_day),
     "first_day": min(by_day) if by_day else None,

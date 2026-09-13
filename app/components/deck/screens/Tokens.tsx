@@ -6,32 +6,28 @@ import { bb, days, udong } from "./token-usage";
  * Screen 12 — the token budget.
  *
  * The company paid for these tokens, so the company gets an account of them.
- * Every number here was counted by `tools/usage.py` from this machine's own
- * Claude Code transcripts; none of it is estimated, and the snapshot date is
- * printed so a stale figure is obvious rather than quiet.
+ * Every figure was counted by `tools/usage.py` from the presenter's own Claude
+ * Code transcripts; none of it is estimated, and the snapshot date is printed
+ * so a stale number is obvious rather than quiet.
  *
- * The chart shows every day the budget was used, not only the days that went
- * to this project — an account that hides the other spending is not an
- * account. The accent marks the days that went to the challenge, so the room
- * can see the shape of the sprint inside the whole.
+ * Scope is this project only, by decision — the same budget paid for other
+ * work, and a judging screen is not the place to account for that.
+ *
+ * The composition line is the part worth saying out loud: almost none of the
+ * spend is the model writing. It is the cost of carrying the repository, the
+ * design system and the argument in context across four days, which is exactly
+ * the cost Code Archaeologist exists to cut.
  *
  * ณัฐวุฒิ's row stays empty until he runs the same script. A bar drawn from a
- * guess, standing next to bars drawn from a count, would cost more than it
- * shows.
+ * guess, beside bars drawn from a count, would make both worthless.
  */
-const max = Math.max(...days.map((d) => d.all));
-const W = 520;
-const H = 150;
-const gap = 3;
+const max = Math.max(...days.map((d) => d.tokens));
+const W = 420;
+const H = 118;
+const gap = 26;
 const bw = (W - gap * (days.length - 1)) / days.length;
 
-const millions = (n: number) => `${(n / 1e6).toFixed(0)} ล้าน`;
-const billions = (n: number) => `${(n / 1e9).toFixed(2)} พันล้าน`;
-
-const stats: [string, string, string][] = [
-  ["ทั้งหมดที่ใช้ไป", billions(bb.total), `${bb.turns.toLocaleString("en-US")} รอบสนทนา · 25 วันที่ลงมือ`],
-  ["ลงกับงานแข่งนี้", millions(bb.workTotal), `${bb.workTurns.toLocaleString("en-US")} รอบ · 4 วัน`],
-];
+const m = (n: number) => `${Math.round(n / 1e6)}`;
 
 export function Tokens({ slide }: ScreenProps) {
   return (
@@ -45,25 +41,45 @@ export function Tokens({ slide }: ScreenProps) {
       </h2>
 
       <div className="mt-[clamp(1rem,3svh,2rem)] flex min-h-0 flex-1 items-stretch gap-[clamp(1.5rem,3.5vw,3.5rem)]">
-        <dl className="flex w-[30%] shrink-0 flex-col justify-center border-t border-rule">
-          {stats.map(([k, v, sub], n) => (
-            <div
-              key={k}
-              data-enter
-              style={{ "--enter-delay": `${340 + n * 170}ms` } as React.CSSProperties}
-              className="border-b border-rule py-[clamp(0.6rem,2svh,1.25rem)]"
-            >
-              <dt className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] tracking-[0.14em] text-faint uppercase">
-                {k}
-              </dt>
-              <dd className="mt-1 font-mono text-[clamp(1.5rem,2.8vw,2.75rem)] leading-none font-semibold text-traced">
-                {v}
-              </dd>
-              <dd className="mt-2 text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.5] text-muted">
-                {sub}
-              </dd>
-            </div>
-          ))}
+        <dl className="flex w-[34%] shrink-0 flex-col justify-center border-t border-rule">
+          <div
+            data-enter
+            style={{ "--enter-delay": "340ms" } as React.CSSProperties}
+            className="border-b border-rule py-[clamp(0.6rem,2svh,1.25rem)]"
+          >
+            <dt className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] tracking-[0.14em] text-faint uppercase">
+              ลงกับงานนี้
+            </dt>
+            <dd className="mt-1 flex items-baseline gap-2">
+              <span className="font-mono text-[clamp(2rem,3.6vw,3.5rem)] leading-none font-semibold text-traced tabular-nums">
+                {m(bb.total)}
+              </span>
+              <span className="text-[clamp(1rem,1.5vw,1.625rem)] font-medium text-ink">
+                ล้าน token
+              </span>
+            </dd>
+            <dd className="mt-2 text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.5] text-muted">
+              {bb.turns.toLocaleString("en-US")} รอบสนทนา · 4 วันที่ลงมือ
+            </dd>
+          </div>
+
+          <div
+            data-enter
+            style={{ "--enter-delay": "520ms" } as React.CSSProperties}
+            className="border-b border-rule py-[clamp(0.6rem,2svh,1.25rem)]"
+          >
+            <dt className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] tracking-[0.14em] text-faint uppercase">
+              ในนั้นเป็นอะไรบ้าง
+            </dt>
+            <dd className="mt-2 text-[clamp(0.9375rem,1.25vw,1.3125rem)] leading-[1.6] text-muted">
+              <span className="text-ink">0.9 ล้าน</span> คือสิ่งที่โมเดลเขียนออกมาจริง —{" "}
+              <span className="text-ink">อีก 348 ล้าน</span> คือการแบก repo
+              กับบริบทเดิมอ่านซ้ำทุกรอบ
+            </dd>
+            <dd className="mt-2 text-[clamp(0.875rem,1.15vw,1.1875rem)] leading-[1.55] text-faint">
+              ซึ่งคือค่าใช้จ่ายก้อนที่ Code Archaeologist ตั้งใจตัดทิ้งพอดี
+            </dd>
+          </div>
         </dl>
 
         <figure
@@ -72,37 +88,57 @@ export function Tokens({ slide }: ScreenProps) {
           className="flex min-w-0 flex-1 flex-col justify-center"
         >
           <svg
-            viewBox={`0 0 ${W} ${H + 10}`}
+            /* the top band leaves room for the value above the tallest bar */
+            viewBox={`0 -20 ${W} ${H + 66}`}
             className="h-auto w-full"
             role="img"
-            aria-label="กราฟแท่งรายวัน แสดง token ที่ใช้ทุกวันตั้งแต่ 31 กรกฎาคม ถึง 13 กันยายน 2026 โดยวันที่ลงกับงานแข่งถูกเน้นสี"
+            aria-label={`กราฟแท่ง token รายวันของงานนี้: ${days
+              .map((d) => `${d.label} ${m(d.tokens)} ล้าน`)
+              .join(", ")}`}
           >
             {days.map((d, i) => {
               const x = i * (bw + gap);
-              const h = (d.all / max) * H;
-              const wh = (d.work / max) * H;
+              const h = (d.tokens / max) * H;
               return (
                 <g key={d.d}>
-                  <rect x={x} y={H - h} width={bw} height={h} fill="var(--rule)" />
-                  {wh > 0 && (
-                    <rect x={x} y={H - wh} width={bw} height={wh} fill="var(--traced)" />
-                  )}
+                  <text
+                    x={x + bw / 2}
+                    y={H - h - 7}
+                    textAnchor="middle"
+                    fill="var(--ink)"
+                    fontSize="13"
+                    fontFamily="var(--font-mono)"
+                  >
+                    {m(d.tokens)}
+                  </text>
+                  <rect x={x} y={H - h} width={bw} height={h} fill="var(--traced)" />
+                  <text
+                    x={x + bw / 2}
+                    y={H + 18}
+                    textAnchor="middle"
+                    fill="var(--muted)"
+                    fontSize="12"
+                  >
+                    {d.label}
+                  </text>
+                  <text
+                    x={x + bw / 2}
+                    y={H + 35}
+                    textAnchor="middle"
+                    fill="var(--faint)"
+                    fontSize="10.5"
+                    fontFamily="var(--font-mono)"
+                  >
+                    {d.turns} รอบ
+                  </text>
                 </g>
               );
             })}
             <line x1="0" y1={H} x2={W} y2={H} stroke="var(--line)" strokeWidth="0.8" />
           </svg>
 
-          <figcaption className="mt-[clamp(0.5rem,1.5svh,0.9rem)] flex flex-wrap items-center gap-x-[clamp(1rem,2vw,2rem)] gap-y-1 font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.1em] text-faint uppercase">
-            <span>31 ก.ค. — 13 ก.ย. 2026</span>
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-2 w-4 bg-traced" />
-              วันที่ลงกับงานแข่ง
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-2 w-4 bg-rule" />
-              งานอื่นที่ใช้ token ก้อนเดียวกัน
-            </span>
+          <figcaption className="mt-[clamp(0.5rem,1.5svh,0.9rem)] font-mono text-[clamp(0.6875rem,0.9vw,0.9375rem)] tracking-[0.1em] text-faint uppercase">
+            ล้าน token ต่อวัน · นับถึง 13 ก.ย. 2026
           </figcaption>
         </figure>
       </div>
@@ -114,12 +150,12 @@ export function Tokens({ slide }: ScreenProps) {
       >
         <div className="flex items-baseline gap-3">
           <dt className="text-muted">พีรพล · ฝั่งงานนำเสนอ</dt>
-          <dd className="font-mono tabular-nums text-ink">{billions(bb.total)}</dd>
+          <dd className="font-mono tabular-nums text-ink">{m(bb.total)} ล้าน</dd>
         </div>
         <div className="flex items-baseline gap-3">
           <dt className="text-muted">ณัฐวุฒิ · ฝั่ง code</dt>
           <dd className="font-mono text-faint">
-            {udong ? billions(udong.total) : "รอข้อมูล — นับด้วยสคริปต์ตัวเดียวกัน"}
+            {udong ? `${m(udong.total)} ล้าน` : "รอข้อมูล — นับด้วยสคริปต์ตัวเดียวกัน"}
           </dd>
         </div>
       </dl>
