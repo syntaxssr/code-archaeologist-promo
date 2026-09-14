@@ -36,14 +36,7 @@ export default function OpengraphImage() {
             flex: 1,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
-              <rect x="2.5" y="2.5" width="19" height="19" stroke="#4A4640" strokeWidth="1.5" />
-              <path d="M3 9.5H21" stroke="#4A4640" strokeWidth="1.2" opacity="0.55" />
-              <path d="M3 15.5H21" stroke="#4A4640" strokeWidth="1.2" opacity="0.35" />
-              <path d="M12 5.5V14.6" stroke="#C2410C" strokeWidth="1.6" strokeDasharray="2 2.4" />
-              <circle cx="12" cy="17.6" r="2.2" fill="#C2410C" />
-            </svg>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div style={{ display: "flex", fontSize: 28, letterSpacing: -0.5, color: "#14120F" }}>
               Code<span style={{ color: "#9A3412" }}>Archaeologist</span>
             </div>
@@ -62,7 +55,7 @@ export default function OpengraphImage() {
           </div>
 
           <div style={{ display: "flex", fontSize: 20, color: "#726B62" }}>
-            SHEET 01 OF 01 · iCONEXT AI CHALLENGE DAY 2026 · TEAM 03
+            SHEET 01 OF 01 · iCONEXT AI CHALLENGE DAY 2026
           </div>
         </div>
 
