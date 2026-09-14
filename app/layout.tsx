@@ -6,6 +6,12 @@ import "./globals.css";
 // from Google at build time, which silently drops the site to system fonts
 // whenever that fetch fails — offline, behind a proxy, or from a cached failure.
 // next/font requires literal values, so each weight is spelled out.
+//
+// No `fallback` on any family: next/font appends it to the family's variable,
+// so a generic there sits between the Latin face and Plex Thai. On macOS, iOS
+// and Android `system-ui`/`sans-serif` carry Thai glyphs and win every Thai
+// character — only Windows, whose Segoe UI and Arial have none, ever reached
+// Plex Thai. The generics go at the end of the stacks in globals.css instead.
 const plexSans = localFont({
   src: [
     { path: "./fonts/IBMPlexSans-400.woff2", weight: "400", style: "normal" },
@@ -16,7 +22,6 @@ const plexSans = localFont({
   variable: "--font-plex-sans",
   display: "swap",
   preload: false,
-  fallback: ["system-ui", "sans-serif"],
 });
 
 // Thai glyphs only — Latin in a Thai paragraph falls through to Plex Sans,
@@ -31,7 +36,6 @@ const plexThai = localFont({
   variable: "--font-plex-thai",
   display: "swap",
   preload: false,
-  fallback: ["system-ui", "sans-serif"],
 });
 
 // Latin only. Mono is the drafting lettering of the sheet — annotation,
@@ -48,7 +52,6 @@ const plexMono = localFont({
   variable: "--font-plex-mono",
   display: "swap",
   preload: false,
-  fallback: ["ui-monospace", "monospace"],
 });
 
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL

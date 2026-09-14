@@ -82,9 +82,13 @@
   /* Latin first: each next/font family ships an adjusted fallback that covers
      Latin, so putting the Thai face first let that fallback win every Latin
      character before Plex Sans was ever reached. Thai still lands on Plex Thai —
-     neither Plex Sans nor its Arial-metric fallback has Thai glyphs. */
-  --font-sans: var(--font-plex-sans), var(--font-plex-thai);
-  --font-mono: var(--font-plex-mono);
+     neither Plex Sans nor its Arial-metric fallback has Thai glyphs.
+     Generics go last and nowhere else: any of them before Plex Thai carries Thai
+     on macOS, iOS and Android and takes every Thai glyph (see layout.tsx).
+     Mono sets Latin, but its lines hold Thai words ("0.5 วิ", "มี skill"), so
+     it falls through to Plex Thai too rather than to a system face. */
+  --font-sans: var(--font-plex-sans), var(--font-plex-thai), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), var(--font-plex-thai), ui-monospace, monospace;
 }
 
 /* Never remove the focus indicator. 4.95:1 on the sheet — well past the 3:1
