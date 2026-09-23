@@ -7,7 +7,7 @@ import stage3 from "@/public/shots/stage-3.png";
 import stage4 from "@/public/shots/stage-4.png";
 
 /**
- * Appendix A1 — how it works. Moved out of the talk and after the close: the
+ * Appendix A3 — how it works. Moved out of the talk and after the close: the
  * team tells the story as features and keeps this depth for questions.
  *
  * Four panels, and each one is the *same function* at a later stage rather than

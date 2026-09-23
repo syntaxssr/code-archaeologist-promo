@@ -55,6 +55,9 @@
   --traced: #c2410c; /* 4.95 — large text and 2px rules only */
   --traced-deep: #9a3412; /* 6.99 — small text */
   --on-traced: #ffffff; /* 5.18 on a traced fill */
+  /* A marker behind ink text. Lighter than --traced, because ink on --traced
+     is only 3.25:1; ink on this is 7.4:1. */
+  --highlight: #fb923c;
 
   --grade-good: #1f6b4e; /* 6.14 */
   --grade-bad: #9e2b1e; /* 7.13 */
@@ -76,6 +79,7 @@
 
   --color-traced: var(--traced);
   --color-traced-deep: var(--traced-deep);
+  --color-highlight: var(--highlight);
   --color-on-traced: var(--on-traced);
 
   --color-grade-good: var(--grade-good);
@@ -255,43 +259,15 @@ body {
   }
 }
 
-/* A background that drifts, and nothing else — the grid behind screen 00. It
-   moves exactly one cell (--cell) per loop along the diagonal, so the layer,
-   which is one cell larger than the screen on every side, never shows a seam.
-   Scoped to the live screen so twelve hidden screens are not animating. The
-   gradients here draw hard 1px lines, not a fade. */
-[data-live] [data-drift] {
-  animation: drift var(--drift-dur, 20s) linear infinite;
-}
-
-@keyframes drift {
-  to {
-    transform: translate(calc(-1 * var(--cell)), calc(-1 * var(--cell)));
-  }
-}
-
-/* A grid cell that fills with the grid's grey and empties again, on the
-   drifting grid of screen 00. Each cell has its own delay; together they read
-   as the grid quietly breathing, never as a pattern to follow. It peaks at 70%
-   of the line colour, so a filled cell is a shade lighter than the lines around
-   it and never reads as a block. */
-[data-glow] {
-  opacity: 0;
-}
-
-[data-live] [data-glow] {
-  animation: glow var(--glow-dur, 6s) ease-in-out var(--glow-delay, 0s) infinite;
-}
-
-@keyframes glow {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  30%,
-  60% {
-    opacity: 0.7;
-  }
+/* The ground of every screen: a faint square grid, still. The gradients draw
+   hard 1px lines, not a fade. It used to drift behind screen 00 only; now it
+   holds still and sits under every screen alike, so moving between screens
+   changes the content and never the ground. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 72px 72px;
 }
 
 /* A line drawing itself. The path starts fully retracted and plays out over
@@ -310,6 +286,29 @@ body {
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+/* A marker pen drawn across a phrase, left to right. The fill is a single
+   flat colour — the "gradient" is only how CSS paints a solid block that can be
+   sized — grown from nothing to the phrase's full width. It waits for
+   --mark-delay after the screen goes live, so the presenter can say the line
+   first and let the highlight land on it. */
+[data-mark] {
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+}
+
+[data-live] [data-mark] {
+  animation: mark var(--mark-dur, 800ms) cubic-bezier(0.4, 0, 0.2, 1)
+    var(--mark-delay, 0ms) both;
+}
+
+@keyframes mark {
+  to {
+    background-size: 100% 100%;
   }
 }
 
@@ -340,15 +339,12 @@ body {
     animation: none;
   }
 
-  /* Without this the blanket 0.01ms duration below would make an infinite
-     loop jitter in place. */
-  [data-live] [data-drift],
-  [data-live] [data-glow] {
-    animation: none;
-  }
-
   [data-draw] {
     stroke-dashoffset: 0;
+  }
+
+  [data-mark] {
+    background-size: 100% 100%;
   }
 
   *,

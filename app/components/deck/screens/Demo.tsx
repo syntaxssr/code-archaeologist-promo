@@ -4,7 +4,7 @@ import type { ScreenProps } from "./index";
 import graph from "@/public/shots/explorer-graph.png";
 
 /**
- * Screen 05 — the demo. Four minutes, the longest thing on the deck,
+ * Screen 05 — the demo. Five minutes, the longest thing on the deck,
  * because it is what decides the room.
  *
  * The board is not the demo; it is what the room should watch for while the

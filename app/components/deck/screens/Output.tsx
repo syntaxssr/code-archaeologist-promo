@@ -3,6 +3,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 import graph from "@/public/shots/explorer-graph.png";
 import health from "@/public/shots/health-panel.png";
+import note from "@/public/shots/stage-2.png";
 import security from "@/public/shots/security-findings.png";
 
 /**
@@ -17,11 +18,10 @@ import security from "@/public/shots/security-findings.png";
  * drawing — which is what lets the screen make its claim with one sentence
  * instead of six rows of text.
  *
- * The note tile has no capture yet. It is drawn as an empty slot on purpose:
- * an obviously missing picture is honest, and a stand-in that looks finished
- * would be on stage before anyone noticed it was invented.
+ * The note tile reuses the real note from screen 03 — one method, written up
+ * in markdown, its calls as wikilinks — so it is a capture, not a mock-up.
  */
-const tileBase = "overflow-hidden rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2";
+const tileBase = "overflow-hidden rounded-[clamp(0.75rem,1.1vw,1.5rem)]";
 
 function Caption({ children }: { children: string }) {
   return (
@@ -38,6 +38,7 @@ function ShotTile({
   delay,
   className = "",
   fit = "cover",
+  ground = "bg-sheet-2",
 }: {
   src: StaticImageData;
   alt: string;
@@ -45,6 +46,8 @@ function ShotTile({
   delay: number;
   className?: string;
   fit?: "cover" | "contain";
+  /** The tile colour behind a contained shot, so a dark capture has no pale bars. */
+  ground?: string;
 }) {
   return (
     <figure
@@ -52,7 +55,7 @@ function ShotTile({
       style={{ "--enter-delay": `${delay}ms` } as React.CSSProperties}
       className={`flex min-h-0 flex-col ${className}`}
     >
-      <div className={`${tileBase} min-h-0 flex-1`}>
+      <div className={`${tileBase} ${ground} min-h-0 flex-1`}>
         <Image
           src={src}
           alt={alt}
@@ -68,10 +71,20 @@ function ShotTile({
 export function Output({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
+      {/* How the map is made, in one line, before what it looks like. The team
+          wants tree-sitter credited by name — the library that reads the code
+          as a syntax tree — rather than the bare term "AST". */}
+      <p
+        data-enter
+        style={{ "--enter-delay": "100ms" } as React.CSSProperties}
+        className="flex-none text-[clamp(1rem,1.5vw,1.5rem)] leading-[1.4] text-muted"
+      >
+        สแกนด้วย tree-sitter ครั้งเดียว อ่านโค้ดเป็นโครงสร้าง
+      </p>
       <h2
         data-enter
-        style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        style={{ "--enter-delay": "200ms" } as React.CSSProperties}
+        className="mt-[clamp(0.25rem,0.8svh,0.5rem)] flex-none text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
       >
         สแกนเสร็จ เปิดอ่านได้ทันที
       </h2>
@@ -90,20 +103,15 @@ export function Output({ slide }: ScreenProps) {
             className="min-h-0 flex-[1.7]"
           />
 
-          {/* No capture yet — drawn as an empty slot rather than invented. */}
-          <figure
-            data-enter
-            style={{ "--enter-delay": "520ms" } as React.CSSProperties}
-            className="flex min-h-0 flex-1 flex-col"
-          >
-            <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-[clamp(0.25rem,0.8svh,0.5rem)] rounded-[clamp(0.75rem,1.1vw,1.5rem)] border-2 border-dashed border-rule px-[1rem] text-center">
-              <p className="text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.4] text-ink">โน้ต 1 ใบ ต่อ 1 เมธอด</p>
-              <p className="font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.14em] text-faint uppercase">
-                screenshot pending
-              </p>
-            </div>
-            <Caption>markdown · wikilink</Caption>
-          </figure>
+          <ShotTile
+            src={note}
+            alt="โน้ตของเมธอด langs_extract.extract_file เขียนเป็น markdown การเรียกต่อไปเป็น wikilink"
+            caption="markdown · wikilink"
+            delay={520}
+            fit="contain"
+            ground="bg-[#161412]"
+            className="min-h-0 flex-1"
+          />
         </div>
 
         <ShotTile

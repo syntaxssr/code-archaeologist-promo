@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 07 — what it can do.
+ * Appendix A4 — what it can do. For questions: the demo shows the main ones.
  *
  * Every command on one screen, in two tiles, because the split is the skill's
  * own: `scripts/query` walks the graph, `scripts/review` judges what it finds.

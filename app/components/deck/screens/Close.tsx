@@ -5,7 +5,7 @@ import type { ScreenProps } from "./index";
 const INSTALL = "npx github:non-nattawut/Code-Archaeologist-LLM-Agent-Skill --harness claude";
 
 /**
- * Screen 14 — the close.
+ * Screen 08 · 2/2 — the close, after the team.
  *
  * One sentence to leave the room with, and it is the claim the run was rebuilt
  * around: a developer opens a project they have never seen and understands it
