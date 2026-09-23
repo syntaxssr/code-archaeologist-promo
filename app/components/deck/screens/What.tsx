@@ -1,113 +1,74 @@
 import Image from "next/image";
-import { Bot, FolderCode, Map as MapIcon } from "lucide-react";
-import type { ReactNode } from "react";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
-import mole from "@/public/mascot/mole.png";
+import moleMap from "@/public/art/skill-mole-map.jpg";
 
 /**
  * Screen 02 · 2/3 — how Code Archaeologist helps, after the problem.
  *
- * Screen 01 ends on "a skill is the runner's map". This screen answers the
- * obvious next question — who draws the map — and the answer is the mole from
- * the cover. So the screen is one line of four, left to right: our code, the
- * mole reading every file of it, the map it draws, and the AI running the
- * right way. The map is the one tile in the orange marker, the same colour the
- * answer on 01 was highlighted in, so the two screens read as one thought.
+ * Screen 01 ends on "a skill is the runner's map", and the problem before this
+ * screen is the runner guessing. This screen says who draws the map: the mole
+ * from the cover digs through old code — curly-brace fossils, tangled cables,
+ * stone tablets of source — and hands an orange map to the same robot runner,
+ * a plaster on its forehead from the wall on 01.
  *
- * An earlier version showed the same calls tangled and then laid out. It was
- * accurate and did not say what the thing is; this one names it.
+ * It keeps screen 01's layout on purpose — picture left, words right, the
+ * answer in the orange marker three seconds in — so the two cartoons read as
+ * one story told in two frames.
  *
- * Latin appears only where it is a name (Code Archaeologist, AI); everything
- * the room needs to understand is in Thai.
+ * An earlier version drew the same idea as four tiles (code → mole → map →
+ * AI); the cartoon replaced it once it existed. Before that, the same calls
+ * tangled and then laid out, which was accurate and did not say what the
+ * thing is.
+ *
+ * The art is 2000 × 1116, shown whole.
  */
-type Step = { icon: ReactNode; title: string; detail: string; accent?: boolean };
-
-const iconClass = "h-[45%] w-[45%]";
-
-const steps: Step[] = [
-  { icon: <FolderCode className={iconClass} strokeWidth={1.5} aria-hidden />, title: "โค้ดของเรา", detail: "ทุกไฟล์ใน repo" },
-  {
-    icon: <Image src={mole} alt="" aria-hidden className="h-[82%] w-auto" />,
-    title: "Code Archaeologist",
-    detail: "ขุดอ่านทุกไฟล์",
-  },
-  { icon: <MapIcon className={iconClass} strokeWidth={1.5} aria-hidden />, title: "แผนที่", detail: "อะไรเรียกอะไร", accent: true },
-  { icon: <Bot className={iconClass} strokeWidth={1.5} aria-hidden />, title: "AI", detail: "วิ่งถูกทาง" },
-];
-
-function Arrow() {
-  return (
-    <svg
-      viewBox="0 0 48 16"
-      className="mt-[calc(var(--tile)/2-0.5rem)] w-[clamp(1.25rem,2.4vw,3rem)] flex-none self-start text-faint"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden
-    >
-      <path d="M0 8H46" />
-      <path d="M39 2L46 8L39 14" />
-    </svg>
-  );
-}
-
 export function What({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      {/* "Code Archaeologist คืออะไร" is the topic in the corner (Frame). */}
-      <h2
-        data-enter
-        style={{ "--enter-delay": "200ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(1.75rem,4vw,3.75rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-ink"
-      >
-        skill ที่วาดแผนที่ของโค้ดเราให้เอง
-      </h2>
+      <div className="flex min-h-0 items-center gap-[clamp(1.5rem,3.5vw,4rem)]">
+        <Image
+          src={moleMap}
+          alt="การ์ตูนตุ่นนักโบราณคดีขุดดินเจอฟอสซิลโค้ด แล้วยื่นแผนที่สีส้มให้หุ่นยนต์นักวิ่งที่มีพลาสเตอร์ติดหน้าผาก ตุ่นพูดว่า แผนที่มาแล้ว หุ่นยนต์ตอบว่า ขอบคุณครับ"
+          priority
+          data-enter
+          style={{ "--enter-delay": "120ms" } as React.CSSProperties}
+          className="h-auto w-[56%] shrink-0 rounded-[clamp(0.75rem,1.1vw,1.5rem)]"
+        />
 
-      {/* --tile sizes every square, so the arrows can sit on their centre line. */}
-      <div
-        style={{ "--tile": "clamp(5.5rem,14vw,15rem)" } as React.CSSProperties}
-        className="mt-[clamp(1.5rem,6svh,4rem)] flex items-start justify-between gap-[clamp(0.25rem,0.8vw,1rem)]"
-      >
-        {steps.map((s, n) => (
-          <div key={s.title} className="contents">
-            {n > 0 && (
-              <div data-enter style={{ "--enter-delay": `${560 + n * 380}ms` } as React.CSSProperties} className="flex">
-                <Arrow />
-              </div>
-            )}
-            <figure
-              data-enter
-              style={{ "--enter-delay": `${420 + n * 380}ms` } as React.CSSProperties}
-              className="flex w-[var(--tile)] flex-none flex-col items-center text-center"
+        <div className="min-w-0 flex-1">
+          <h2
+            data-enter
+            style={{ "--enter-delay": "420ms" } as React.CSSProperties}
+            className="text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] text-ink"
+          >
+            {/* One phrase per line, held whole, as on screen 01. */}
+            <span className="block whitespace-nowrap">Code Archaeologist</span>
+            <span className="block whitespace-nowrap">ขุดอ่านโค้ดทุกไฟล์</span>
+          </h2>
+          {/* The answer, in the same marker and at the same moment as 01. */}
+          <p
+            data-enter
+            style={{ "--enter-delay": "900ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] whitespace-nowrap text-ink"
+          >
+            <span
+              data-mark
+              style={{ "--mark-delay": "3000ms" } as React.CSSProperties}
+              className="-mx-[0.25em] rounded-[0.2em] px-[0.25em] py-[0.05em] box-decoration-clone"
             >
-              <div
-                className={`flex size-[var(--tile)] items-center justify-center rounded-[clamp(0.75rem,1.4vw,1.75rem)] ${
-                  s.accent ? "bg-highlight text-ink" : "bg-sheet-2 text-muted"
-                }`}
-              >
-                {s.icon}
-              </div>
-              <figcaption className="mt-[clamp(0.5rem,1.6svh,1rem)]">
-                {/* One line even where the name is wider than its tile: it spills into
-                    the gap beside it rather than breaking "Code Archaeologist". */}
-                <p className="text-[clamp(1rem,1.6vw,1.75rem)] leading-[1.25] font-semibold whitespace-nowrap text-ink">{s.title}</p>
-                <p className="mt-[clamp(0.15rem,0.5svh,0.35rem)] text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.35] text-muted">
-                  {s.detail}
-                </p>
-              </figcaption>
-            </figure>
-          </div>
-        ))}
+              แล้ววาดเป็นแผนที่ให้ AI
+            </span>
+          </p>
+          <p
+            data-enter
+            style={{ "--enter-delay": "1200ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
+          >
+            ทั้งคนและ AI เปิดอ่านแผนที่ชุดเดียวกัน
+          </p>
+        </div>
       </div>
-
-      <p
-        data-enter
-        style={{ "--enter-delay": "2000ms" } as React.CSSProperties}
-        className="mt-[clamp(1.5rem,5svh,3.5rem)] flex-none text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
-      >
-        ทั้งคนและ AI เปิดอ่านแผนที่ชุดเดียวกัน
-      </p>
     </Frame>
   );
 }

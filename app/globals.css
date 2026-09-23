@@ -59,6 +59,12 @@
      is only 3.25:1; ink on this is 7.4:1. */
   --highlight: #fb923c;
 
+  /* Chat bubbles on the problem screen, in the colours people know from a
+     phone: blue for what we send, grey for what comes back. The blue is a
+     shade deeper than the phone's so white text clears 4.5:1 (5.3:1). */
+  --chat-sent: #0066e0;
+  --chat-received: #e9e9eb;
+
   --grade-good: #1f6b4e; /* 6.14 */
   --grade-bad: #9e2b1e; /* 7.13 */
 }
@@ -80,6 +86,8 @@
   --color-traced: var(--traced);
   --color-traced-deep: var(--traced-deep);
   --color-highlight: var(--highlight);
+  --color-chat-sent: var(--chat-sent);
+  --color-chat-received: var(--chat-received);
   --color-on-traced: var(--on-traced);
 
   --color-grade-good: var(--grade-good);

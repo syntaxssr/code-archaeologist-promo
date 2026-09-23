@@ -8,11 +8,10 @@ import { slides, type Slide } from "../deck-data";
  * The topic is the slide's Thai name from deck-data, in the same place and the
  * same type on every screen, so anyone who looks up mid-sentence can tell what
  * the screen is about. It replaced an earlier header — the section number and
- * a rule — that told the room where it was but not what it was looking at; the
- * progress bar at the foot of the deck already does the where.
+ * a rule — that told the room where it was but not what it was looking at.
  *
  * A section that runs to several screens names itself instead, with its steps
- * in a row beneath: every step shown, the current one in ink with an orange
+ * on the same line straight after the name: every step shown, the current one in ink with an orange
  * rule under it, the others faint. The room sees both where it is in the story
  * and how much of it is left.
  */
@@ -28,11 +27,11 @@ export function Frame({ slide, children }: { slide: Slide; children: ReactNode }
         style={{ "--enter-delay": "40ms" } as React.CSSProperties}
         // Room under it: several screens open with a muted lead line of their
         // own, and the topic must not read as part of it.
-        className="mb-[clamp(1rem,3.5svh,2.25rem)] flex-none"
+        className="mb-[clamp(1rem,3.5svh,2.25rem)] flex flex-none flex-wrap items-baseline gap-x-[clamp(1.25rem,2.8vw,3rem)] gap-y-[0.35rem]"
       >
         <p className={topic}>{slide.section ?? slide.th}</p>
         {steps ? (
-          <ol className="mt-[clamp(0.35rem,1svh,0.75rem)] flex flex-wrap gap-x-[clamp(1rem,2.2vw,2.5rem)] gap-y-1">
+          <ol className="flex flex-wrap gap-x-[clamp(1rem,2.2vw,2.5rem)] gap-y-1">
             {steps.map((s, n) => {
               const current = s.id === slide.id;
               return (
