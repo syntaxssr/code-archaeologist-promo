@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 05 — versus RAG. The device the whole deck is built around.
+ * Appendix A2 — versus RAG. After the close, for questions.
  *
  * A solid line is a route that was traced through the dependency graph; a
  * dashed line is a guess. That is a real drafting convention — on a survey
@@ -12,6 +12,10 @@ import type { ScreenProps } from "./index";
  *
  * Both routes start at the same question and are drawn on the same field, or
  * the comparison proves nothing.
+ *
+ * The legend carries no counts. It used to say the guess "opened 6 files", but
+ * that number came from how many circles the drawing happens to have, not from
+ * a run — and a number nobody can check is the one a judge will ask about.
  */
 const W = 1000;
 const H = 420;
@@ -47,7 +51,7 @@ export function VsRag({ slide }: ScreenProps) {
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
         className="flex flex-wrap items-baseline gap-x-4 text-[clamp(1rem,1.5vw,1.5rem)] text-muted"
       >
-        <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-faint uppercase">
+        <span className="font-mono text-[clamp(1rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-faint uppercase">
           Q
         </span>
         <span>
@@ -151,10 +155,10 @@ export function VsRag({ slide }: ScreenProps) {
           <svg width="58" height="10" aria-hidden="true">
             <line x1="0" y1="5" x2="58" y2="5" stroke="var(--traced)" strokeWidth="3.5" />
           </svg>
-          <dt className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] tracking-[0.14em] text-traced-deep uppercase">
+          <dt className="font-mono text-[clamp(1rem,1vw,1.0625rem)] tracking-[0.14em] text-traced-deep uppercase">
             Traced
           </dt>
-          <dd className="text-[clamp(1rem,1.35vw,1.375rem)] text-ink">4 hop ทุก hop คือ edge จริง</dd>
+          <dd className="text-[clamp(1rem,1.35vw,1.375rem)] text-ink">ทุกช่วงคือการเรียกจริง</dd>
         </div>
         <div className="flex items-center gap-3.5">
           <svg width="58" height="10" aria-hidden="true">
@@ -168,10 +172,10 @@ export function VsRag({ slide }: ScreenProps) {
               strokeDasharray="7 5"
             />
           </svg>
-          <dt className="font-mono text-[clamp(0.8125rem,1vw,1.0625rem)] tracking-[0.14em] text-faint uppercase">
+          <dt className="font-mono text-[clamp(1rem,1vw,1.0625rem)] tracking-[0.14em] text-faint uppercase">
             Inferred
           </dt>
-          <dd className="text-[clamp(1rem,1.35vw,1.375rem)] text-muted">เปิด 6 ไฟล์ ไม่ถึงปลายทาง</dd>
+          <dd className="text-[clamp(1rem,1.35vw,1.375rem)] text-muted">เดาจากความคล้าย ไม่ถึงปลายทาง</dd>
         </div>
       </dl>
     </Frame>

@@ -1,5 +1,28 @@
 # Code Archaeologist — Brand & Design System
 
+> **Status, 14 September 2026 — direction changed to Apple keynote style.**
+> Every illustrated archaeology theme tried on standby and screen 00 (pyramid
+> linework, blueprint, strata, a torch-lit inscription wall) was judged not
+> good-looking enough. The deck now follows the restraint of an Apple product
+> launch: a lot of empty space, large sans type, one message per screen, a large
+> hero visual, smooth fade and zoom. Screens that carry several pieces of data
+> (output, numbers, commands, where the code goes, tokens) use a **Bento Grid**:
+> tile size follows importance, at most four or five tiles, flat tiles a step
+> lighter than the ground, no shadows.
+>
+> Still in force: **no gradients**, **one accent — orange**, no shadows, text
+> that carries meaning never below 16px, every number real, English and Thai
+> never mixed within one line. Archaeology lives in the words and the product
+> name only — never in the pictures. Screens are redesigned one at a time,
+> starting again at standby.
+>
+> **Type is the Mac's own:** SF Pro, SF Mono (Menlo in Chrome), and Sukhumvit
+> Set / Thonburi for Thai, reached by name because SF cannot be self-hosted. The
+> deck is presented from a Mac; IBM Plex (§3) stays loaded only as the fallback
+> on any other machine.
+>
+> The torch-wall exploration is parked on branch `explore/torch-wall`.
+
 > **Status, 13 September 2026 — the Survey Sheet build has been removed.**
 > BB judged the presentation not creative enough: the same plan drawing carried
 > five of seven beats, there was no contrast of scale, and one viewpoint ran

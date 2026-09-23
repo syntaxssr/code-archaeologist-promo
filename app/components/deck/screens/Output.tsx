@@ -1,22 +1,69 @@
+import Image, { type StaticImageData } from "next/image";
 import { Frame } from "./Frame";
-import { Shot } from "./Shot";
 import type { ScreenProps } from "./index";
+import graph from "@/public/shots/explorer-graph.png";
 import health from "@/public/shots/health-panel.png";
 import security from "@/public/shots/security-findings.png";
 
 /**
- * Screen 07 — what comes out.
+ * Screen 04 — what comes out, and who reads it.
  *
- * This screen used to be a six-row register of what the tool produces. It read
- * as a claim, in small type, at the back of a hall. The tool's own panels say
- * the same thing and are not a claim: the census counts files, functions and
- * links; the security tab names a file and a line for every finding.
+ * The screen the run is built to reach. The pitch no longer leads with what the
+ * scan costs; it leads with what a developer opens afterwards. So the screen is
+ * the artefacts themselves, at the size they deserve: the explorer fills the
+ * wide tile, and the three things you can do inside it sit beside it.
  *
- * So the words shrink to the three artefacts and the two panels carry the
- * proof. The one sentence that survives is the one the panels cannot say for
- * themselves — that every number on them can be traced back to a line of code.
+ * Everything here is the tool's own window on the sample repository, not a
+ * drawing — which is what lets the screen make its claim with one sentence
+ * instead of six rows of text.
+ *
+ * The note tile has no capture yet. It is drawn as an empty slot on purpose:
+ * an obviously missing picture is honest, and a stand-in that looks finished
+ * would be on stage before anyone noticed it was invented.
  */
-const artefacts: string[] = ["แผนที่ 2 ชุด", "โน้ต 1 ใบ ต่อ 1 เมธอด", "explorer.html ไฟล์เดียว"];
+const tileBase = "overflow-hidden rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2";
+
+function Caption({ children }: { children: string }) {
+  return (
+    <figcaption className="mt-[clamp(0.35rem,1svh,0.65rem)] font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.14em] text-faint uppercase">
+      {children}
+    </figcaption>
+  );
+}
+
+function ShotTile({
+  src,
+  alt,
+  caption,
+  delay,
+  className = "",
+  fit = "cover",
+}: {
+  src: StaticImageData;
+  alt: string;
+  caption: string;
+  delay: number;
+  className?: string;
+  fit?: "cover" | "contain";
+}) {
+  return (
+    <figure
+      data-enter
+      style={{ "--enter-delay": `${delay}ms` } as React.CSSProperties}
+      className={`flex min-h-0 flex-col ${className}`}
+    >
+      <div className={`${tileBase} min-h-0 flex-1`}>
+        <Image
+          src={src}
+          alt={alt}
+          priority
+          className={`h-full w-full ${fit === "contain" ? "object-contain object-center" : "object-cover object-left-top"}`}
+        />
+      </div>
+      <Caption>{caption}</Caption>
+    </figure>
+  );
+}
 
 export function Output({ slide }: ScreenProps) {
   return (
@@ -24,45 +71,67 @@ export function Output({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(1.5rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        className="flex-none text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
       >
-        ทุกตัวเลข ชี้กลับไปที่บรรทัดได้
+        สแกนเสร็จ เปิดอ่านได้ทันที
       </h2>
 
-      <div className="mt-[clamp(1rem,3svh,2rem)] flex min-h-0 flex-1 items-stretch justify-between gap-[clamp(1.25rem,3vw,3rem)]">
-        <dl className="flex w-[24%] shrink-0 flex-col justify-center border-t border-rule">
-          {artefacts.map((k, n) => (
-            <div
-              key={k}
-              data-enter
-              style={{ "--enter-delay": `${360 + n * 150}ms` } as React.CSSProperties}
-              className="border-b border-rule py-[clamp(0.7rem,2.4svh,1.4rem)]"
-            >
-              <dt className="text-[clamp(1.125rem,1.7vw,1.75rem)] leading-[1.3] font-medium text-ink">
-                {k}
-              </dt>
-            </div>
-          ))}
-        </dl>
+      {/* Two of the tool's panels are tall and narrow, so they get columns of
+          their own rather than short slots that would shrink them to nothing.
+          Every shot is shown whole: nothing is cropped to flatter it. */}
+      <div className="mt-[clamp(0.75rem,2.4svh,1.75rem)] flex min-h-0 flex-1 gap-[clamp(0.625rem,1vw,1.25rem)]">
+        <div className="flex min-h-0 w-[50%] shrink-0 flex-col gap-[clamp(0.625rem,1vw,1.25rem)]">
+          <ShotTile
+            src={graph}
+            alt="explorer.html แสดงกราฟการเรียกของโค้ดเบสตัวอย่าง แต่ละจุดคือเมธอด เส้นคือการเรียก"
+            caption="explorer.html · flow map"
+            delay={360}
+            fit="contain"
+            className="min-h-0 flex-[1.7]"
+          />
 
-        <Shot
+          {/* No capture yet — drawn as an empty slot rather than invented. */}
+          <figure
+            data-enter
+            style={{ "--enter-delay": "520ms" } as React.CSSProperties}
+            className="flex min-h-0 flex-1 flex-col"
+          >
+            <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-[clamp(0.25rem,0.8svh,0.5rem)] rounded-[clamp(0.75rem,1.1vw,1.5rem)] border-2 border-dashed border-rule px-[1rem] text-center">
+              <p className="text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.4] text-ink">โน้ต 1 ใบ ต่อ 1 เมธอด</p>
+              <p className="font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.14em] text-faint uppercase">
+                screenshot pending
+              </p>
+            </div>
+            <Caption>markdown · wikilink</Caption>
+          </figure>
+        </div>
+
+        <ShotTile
           src={health}
-          alt="แผงซ้ายของ explorer แสดงคะแนนสุขภาพ 68 จาก 100 เกรด D และสำมะโนของโค้ดเบส"
-          caption="census · health"
-          className="w-[20%] shrink-0"
+          alt="แผงสุขภาพของ explorer แสดงคะแนนรวมและสำมะโนของโค้ดเบส"
+          caption="health · census"
+          delay={660}
           fit="contain"
-          priority
+          className="min-h-0 flex-1"
         />
 
-        <Shot
+        <ShotTile
           src={security}
-          alt="แท็บ security ของ explorer แสดงช่องโหว่ 4 รายการ แต่ละรายการบอกไฟล์และเลขบรรทัด"
+          alt="แท็บ security ของ explorer แต่ละรายการบอกไฟล์และเลขบรรทัด"
           caption="security · file : line"
-          className="w-[24%] shrink-0"
+          delay={800}
           fit="contain"
-          priority
+          className="min-h-0 flex-1"
         />
       </div>
+
+      <p
+        data-enter
+        style={{ "--enter-delay": "1000ms" } as React.CSSProperties}
+        className="mt-[clamp(0.625rem,2svh,1.25rem)] flex-none text-[clamp(1.0625rem,1.6vw,1.75rem)] leading-[1.4] text-muted"
+      >
+        ทุกตัวเลข ชี้กลับไปที่บรรทัดได้
+      </p>
     </Frame>
   );
 }

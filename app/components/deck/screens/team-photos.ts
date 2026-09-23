@@ -14,9 +14,10 @@ import type { StaticImageData } from "next/image";
  *   import bbPhoto from "@/public/team/bb.jpg";
  *   export const bb: StaticImageData | null = bbPhoto;
  *
- * What to send: half-body, portrait, 3:4, at least 1400 × 1866 px. A plain dark
- * background sits best on this deck, but any background works — the frame
- * crops to fill, so leave a little room around the head and shoulders.
+ * What to send: half-body, portrait, 3:4, at least 1400 × 1866 px. A plain
+ * light grey or white background sits best now that the deck is white, but any
+ * background works — the frame crops to fill, so leave a little room around the
+ * head and shoulders.
  */
 export const bb: StaticImageData | null = null;
 export const udong: StaticImageData | null = null;

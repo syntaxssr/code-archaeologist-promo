@@ -1,14 +1,17 @@
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
-const REPO = "github.com/non-nattawut/Code-Archaeologist-LLM-Agent-Skill";
+/** Copied from the skill's README. */
+const INSTALL = "npx github:non-nattawut/Code-Archaeologist-LLM-Agent-Skill --harness claude";
 
 /**
- * Screen 12 — the close.
+ * Screen 14 — the close.
  *
- * One sentence to leave the room with, and it is the spine of the whole deck
- * stated plainly: you do not have to open a site to know what is under it. The
- * standby screen's cursor was waiting to do exactly this, and now it has.
+ * One sentence to leave the room with, and it is the claim the run was rebuilt
+ * around: a developer opens a project they have never seen and understands it
+ * on the first day. Then the one thing to do about it — the install command,
+ * verbatim, in a tile of its own so it reads as something to type rather than
+ * as part of the sentence.
  */
 export function Close({ slide }: ScreenProps) {
   return (
@@ -16,23 +19,26 @@ export function Close({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "200ms" } as React.CSSProperties}
-        className="max-w-[16ch] text-[clamp(2.5rem,7.4vw,7rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-ink"
+        className="max-w-[18ch] text-[clamp(2.5rem,6.4vw,6.25rem)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink"
       >
-        ไม่ต้องขุดทั้งพื้นที่ ก็รู้ว่ามีอะไรอยู่ข้างใต้
+        เปิดโปรเจกต์ที่ไม่เคยเห็น แล้วเข้าใจได้ตั้งแต่วันแรก
       </h2>
 
       <div
         data-enter
         style={{ "--enter-delay": "720ms" } as React.CSSProperties}
-        className="mt-[clamp(1.75rem,5svh,3.25rem)] flex flex-wrap items-baseline gap-x-[clamp(1.5rem,3vw,3rem)] gap-y-2 border-t border-rule pt-[clamp(1rem,2.6svh,1.75rem)]"
+        className="mt-[clamp(1.5rem,5svh,3.25rem)] rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 px-[clamp(1rem,2vw,2.25rem)] py-[clamp(0.875rem,2.4svh,1.75rem)]"
       >
-        <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] tracking-[0.16em] text-faint uppercase">
-          Repository
-        </span>
-        <span className="font-mono text-[clamp(0.9375rem,1.35vw,1.375rem)] break-all text-traced-deep">
-          {REPO}
-        </span>
+        <p className="font-mono text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.5] break-all text-ink">{INSTALL}</p>
       </div>
+
+      <p
+        data-enter
+        style={{ "--enter-delay": "880ms" } as React.CSSProperties}
+        className="mt-[clamp(0.625rem,1.8svh,1.25rem)] text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.4] text-muted"
+      >
+        ติดตั้งคำสั่งเดียว · ใช้ได้กับ Claude, Cursor, Windsurf และ Zed
+      </p>
     </Frame>
   );
 }
