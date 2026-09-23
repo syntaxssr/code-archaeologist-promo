@@ -9,52 +9,30 @@ import type { ScreenProps } from "./index";
  * hall has had, not a statement about the industry: you are asked to change one
  * thing in code you did not write, and nobody can tell you what it touches.
  *
- * Deliberately the opposite shape from screen 00. That screen was full of code;
- * this one is nearly empty, and what fills it is a question. Two screens in a
- * row built the same way is what made the previous design flat.
+ * Three tiles for the three ways that go today, and one tile twice their size
+ * for the thing none of them gives you. The size is the argument: the wide tile
+ * is where the eye lands, and what is in it is a question mark. The three above
+ * it are equal because they are equally bad.
  *
- * The accent lands once, on a question mark. On screen 00 it lit the one line
+ * They arrive one at a time so the presenter can walk them, and the wide one
+ * last.
+ *
+ * The accent lands once, on that question mark. On screen 00 it lit the line
  * that *was* read; here it marks the one thing nobody knows. Same colour, and
  * it means the same thing both times — this is the evidence, or its absence.
  */
 const routes: [string, string][] = [
   ["ไล่เปิดอ่านเอง", "หมดไปครึ่งเช้า"],
-  ["ให้ AI อ่านทั้ง repo", "ช้า และเปลือง token"],
-  ["ให้ AI เดาจากไฟล์ที่หน้าตาคล้ายกัน", "ผิดแล้วไม่รู้ตัว"],
+  // Not "wastes tokens": the deck no longer argues cost. What is true of every
+  // model is that a large repository does not fit in what it can read at once.
+  ["ให้ AI อ่านทั้ง repo", "ช้า และอ่านไม่หมด"],
+  ["ให้ AI เดาจากไฟล์ที่คล้ายกัน", "ผิดแล้วไม่รู้ตัว"],
 ];
 
-function Row({
-  label,
-  value,
-  delay,
-  accent,
-}: {
-  label: string;
-  value: string;
-  delay: number;
-  accent?: boolean;
-}) {
-  return (
-    <div
-      data-enter
-      style={{ "--enter-delay": `${delay}ms` } as React.CSSProperties}
-      className="flex items-baseline gap-4 py-[clamp(0.4rem,1.2svh,0.85rem)] text-[clamp(1.0625rem,1.7vw,1.75rem)]"
-    >
-      <dt className={accent ? "font-medium text-ink" : "text-muted"}>{label}</dt>
-      {/* Dot leaders, the way a contents page sets a thing against its cost. */}
-      <dd className="h-0 flex-1 translate-y-[-0.3em] border-b border-dotted border-rule" />
-      <dd
-        className={
-          accent
-            ? "font-mono text-[1.6em] leading-none font-semibold text-traced"
-            : "text-right text-ink"
-        }
-      >
-        {value}
-      </dd>
-    </div>
-  );
-}
+/** A tile: grey one step off the ground, no border and no shadow, because
+ *  depth on this deck is value and line weight only. */
+const tile =
+  "flex flex-col justify-between rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 p-[clamp(1rem,1.9vw,2.25rem)]";
 
 export function Pain({ slide }: ScreenProps) {
   return (
@@ -62,33 +40,42 @@ export function Pain({ slide }: ScreenProps) {
       <p
         data-enter
         style={{ "--enter-delay": "220ms" } as React.CSSProperties}
-        className="flex flex-wrap items-baseline gap-x-4 gap-y-1"
+        className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[clamp(1rem,1.5vw,1.5rem)] text-muted"
       >
-        <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-faint uppercase">
-          Task
-        </span>
-        <span className="text-[clamp(1rem,1.5vw,1.5rem)] text-muted">
-          เพิ่ม field เดียวใน <span className="font-mono text-[0.92em] text-ink">OrderService</span>
-        </span>
+        เพิ่ม field เดียวใน <span className="font-mono text-[0.92em] text-ink">OrderService</span>
       </p>
 
       <h2
         data-enter
         style={{ "--enter-delay": "340ms" } as React.CSSProperties}
-        className="mt-[clamp(0.75rem,2.4svh,1.75rem)] text-[clamp(2.5rem,6.4vw,6rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-ink"
+        className="mt-[clamp(0.5rem,1.6svh,1.25rem)] text-[clamp(2.25rem,5vw,5rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
       >
         แก้แล้วจะพังตรงไหน
       </h2>
 
-      <dl className="mt-[clamp(1.5rem,4.5svh,3rem)] max-w-[min(64rem,86%)]">
-        {routes.map(([label, value], n) => (
-          <Row key={label} label={label} value={value} delay={620 + n * 150} />
+      <div className="mt-[clamp(1.25rem,4svh,2.75rem)] grid grid-cols-3 gap-[clamp(0.625rem,1vw,1.25rem)]">
+        {routes.map(([label, cost], n) => (
+          <div
+            key={label}
+            data-enter
+            style={{ "--enter-delay": `${620 + n * 150}ms` } as React.CSSProperties}
+            className={`${tile} min-h-[clamp(7rem,17svh,11rem)] gap-[clamp(0.75rem,2svh,1.5rem)]`}
+          >
+            <p className="text-[clamp(1rem,1.5vw,1.75rem)] leading-[1.35] text-ink">{label}</p>
+            <p className="text-[clamp(1rem,1.6vw,1.875rem)] leading-none font-medium text-muted">{cost}</p>
+          </div>
         ))}
-        <div className="mt-[clamp(0.5rem,1.6svh,1rem)] border-t border-rule pt-[clamp(0.4rem,1.4svh,0.9rem)]">
-          {/* The answer, and the answer is that there isn't one. */}
-          <Row label="ไฟล์ที่กระทบจริง" value="?" delay={1240} accent />
-        </div>
-      </dl>
+      </div>
+
+      {/* The answer, and the answer is that there isn't one. */}
+      <div
+        data-enter
+        style={{ "--enter-delay": "1240ms" } as React.CSSProperties}
+        className={`${tile} mt-[clamp(0.625rem,1vw,1.25rem)] gap-[clamp(0.5rem,1.6svh,1.25rem)]`}
+      >
+        <p className="text-[clamp(1rem,1.5vw,1.75rem)] leading-none text-muted">ไฟล์ที่กระทบจริง</p>
+        <p className="font-mono text-[clamp(3rem,7vw,7.5rem)] leading-[0.8] font-semibold text-traced">?</p>
+      </div>
     </Frame>
   );
 }

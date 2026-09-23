@@ -2,23 +2,25 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 09 — at iCONEXT.
+ * Screen 08 — when you reach for it.
  *
- * A minute on the thing every internal pitch forgets: who here actually uses
- * this, on what, starting when. Three roles and a three-step adoption path, and
- * nothing that needs budget or a new platform — because the honest selling
- * point is that there is nothing to install.
+ * Four moments every developer in the hall has had, in the order they happen
+ * to a project rather than by job title: the first day on code you did not
+ * write, the pull request you are about to approve, the old code you are about
+ * to touch, and the night something breaks. A room remembers a moment it has
+ * lived through; it does not remember an org chart.
+ *
+ * The tiles are equal because none of the four is the main one — which moment
+ * matters most depends on who is watching.
+ *
+ * Latin mono names the moment, Thai says what the tool gives you in it; the two
+ * never share a line.
  */
-const roles: [string, string][] = [
-  ["Developer", "เข้าโปรเจกต์ใหม่ รู้โครงสร้างวันแรก"],
-  ["Reviewer", "รู้ว่า PR กระทบอะไร ก่อน approve"],
-  ["MA / Support", "ไล่จากอาการถึงจุดแก้ ไม่ต้องรอเจ้าของโค้ด"],
-];
-
-const steps: [string, string][] = [
-  ["01", "รันกับ repo ที่ปวดหัวที่สุด"],
-  ["02", "แชร์ explorer.html ให้ทีม"],
-  ["03", "ค่อยใส่เข้า pipeline"],
+const moments: [string, string, string][] = [
+  ["Day 1", "เข้าโปรเจกต์ที่ไม่ได้เขียนเอง", "รู้โครงสร้างตั้งแต่วันแรก"],
+  ["Pull request", "ก่อนกด approve", "รู้ว่าการแก้นี้กระทบอะไรบ้าง"],
+  ["Refactor", "ก่อนแตะของเก่า", "เห็นว่าใครเรียกมันอยู่"],
+  ["Incident", "ไล่จากอาการถึงจุดแก้", "ไม่ต้องรอเจ้าของโค้ด"],
 ];
 
 export function Use({ slide }: ScreenProps) {
@@ -27,54 +29,30 @@ export function Use({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="max-w-[24ch] text-[clamp(1.75rem,4.2vw,3.75rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        className="text-[clamp(2rem,4.6vw,4.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
       >
-        ไม่ต้องติดตั้งอะไร ไม่ต้องขอ budget
+        หยิบมาใช้ตอนไหน
       </h2>
 
-      <div className="mt-[clamp(1.25rem,3.5svh,2.25rem)] grid gap-[clamp(1.5rem,3.5vw,3.5rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
-        <dl className="border-t border-rule">
-          {roles.map(([who, th], n) => (
-            <div
-              key={who}
-              data-enter
-              style={{ "--enter-delay": `${380 + n * 150}ms` } as React.CSSProperties}
-              className="border-b border-rule py-[clamp(0.6rem,1.9svh,1.15rem)]"
-            >
-              <dt className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.14em] text-traced-deep uppercase">
-                {who}
-              </dt>
-              <dd className="mt-1.5 text-[clamp(1rem,1.4vw,1.4375rem)] leading-[1.5] text-ink">
-                {th}
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <div
-          data-enter
-          style={{ "--enter-delay": "900ms" } as React.CSSProperties}
-          className="border border-rule p-[clamp(1.25rem,2.2vw,2rem)]"
-        >
-          <p className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.2em] text-faint uppercase">
-            เริ่มพรุ่งนี้ได้
-          </p>
-          <ol className="mt-[clamp(0.75rem,2svh,1.25rem)]">
-            {steps.map(([no, th]) => (
-              <li
-                key={no}
-                className="flex items-baseline gap-4 border-t border-rule py-[clamp(0.5rem,1.6svh,0.95rem)] first:border-t-0 first:pt-0"
-              >
-                <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] tabular-nums text-faint">
-                  {no}
-                </span>
-                <span className="text-[clamp(0.9375rem,1.25vw,1.25rem)] leading-[1.5] text-muted">
-                  {th}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
+      <div className="mt-[clamp(1.25rem,4svh,2.5rem)] grid grid-cols-2 gap-[clamp(0.625rem,1vw,1.25rem)]">
+        {moments.map(([when, what, gives], n) => (
+          <div
+            key={when}
+            data-enter
+            style={{ "--enter-delay": `${420 + n * 150}ms` } as React.CSSProperties}
+            className="rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 p-[clamp(1rem,1.9vw,2.25rem)]"
+          >
+            <p className="font-mono text-[clamp(1rem,0.95vw,1.0625rem)] font-medium tracking-[0.16em] text-traced-deep uppercase">
+              {when}
+            </p>
+            <p className="mt-[clamp(0.5rem,1.4svh,0.9rem)] text-[clamp(1.125rem,1.9vw,2.125rem)] leading-[1.3] font-medium text-ink">
+              {what}
+            </p>
+            <p className="mt-[clamp(0.25rem,0.8svh,0.5rem)] text-[clamp(1rem,1.4vw,1.625rem)] leading-[1.4] text-muted">
+              {gives}
+            </p>
+          </div>
+        ))}
       </div>
     </Frame>
   );

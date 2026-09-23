@@ -8,8 +8,10 @@
  * many screens that idea needs.
  *
  * `seconds` is the rehearsal budget, not a countdown — it is here so the shape
- * of the talk is visible while the screens are still empty. The whole run is
- * about ten minutes and the demo is deliberately the longest thing on it.
+ * of the talk is visible while the screens are still empty. The slot is 15 to
+ * 25 minutes; the run is about eighteen, in the four parts the brief asks for —
+ * what we built, why it helps, how we built it with AI, and the close — and the
+ * demo is deliberately the longest thing on it.
  */
 export type Slide = {
   id: string;
@@ -26,34 +28,60 @@ export type Slide = {
 export const slides: Slide[] = [
   // Before the run. It holds the stage until the judges give the signal, so it
   // carries no number and no budget — it is not part of the ten minutes.
-  { id: "standby", no: "—", th: "พร้อมเริ่ม", en: "STANDBY", seconds: 0 },
-  { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20 },
-  { id: "pain", no: "01", th: "เจ็บตรงไหน", en: "THE PAIN", seconds: 60 },
-  { id: "why-fail", no: "02", th: "ทำไม AI ที่มีอยู่ยังตอบไม่ได้", en: "WHY IT FAILS TODAY", seconds: 45 },
-  // Section 03 runs to three screens. The room holds people who have never
-  // installed anything, and "what a skill is" has to land with them before
-  // "what ours is" can mean anything.
-  { id: "category", no: "03", th: "เราอยู่หมวดไหน", en: "WHERE THIS SITS", seconds: 25 },
-  { id: "skill", no: "03", th: "skill คืออะไร", en: "WHAT A SKILL IS", seconds: 40 },
-  { id: "what", no: "03", th: "นี่คืออะไร", en: "WHAT IT IS", seconds: 30 },
-  { id: "how", no: "04", th: "ทำงานยังไง", en: "HOW IT WORKS", seconds: 60 },
-  { id: "vs-rag", no: "05", th: "ต่างจาก RAG ยังไง", en: "VERSUS RAG", seconds: 45 },
-  { id: "demo", no: "06", th: "เดโม", en: "DEMO", seconds: 150 },
-  { id: "output", no: "07", th: "ได้อะไรออกมา", en: "WHAT YOU GET", seconds: 45 },
-  { id: "numbers", no: "08", th: "ตัวเลข", en: "THE NUMBERS", seconds: 45 },
-  // Section 09 runs to two screens. Adoption is the question, and in a company
-  // the first thing that blocks adoption is "where does our code go".
-  { id: "use", no: "09", th: "ใช้กับงานเราจริงยังไง", en: "AT iCONEXT", seconds: 45 },
-  { id: "local", no: "09", th: "โค้ดเราออกจากเครื่องแค่ไหน", en: "IT STAYS LOCAL", seconds: 35 },
-  // Section 10 runs to two screens: the commands that walk the graph, then
-  // the ones that judge it. The split is the skill's own — scripts/query
-  // against scripts/review.
-  { id: "ask", no: "10", th: "สั่งอะไรได้บ้าง — กลุ่มเดิน", en: "NAVIGATE", seconds: 30 },
-  { id: "ask-review", no: "10", th: "สั่งอะไรได้บ้าง — กลุ่มตรวจ", en: "REVIEW", seconds: 30 },
-  { id: "team", no: "11", th: "ทีม", en: "TEAM", seconds: 20 },
-  { id: "tokens", no: "12", th: "token ที่บริษัทออกให้ ใช้ไปกับอะไร", en: "THE TOKEN BUDGET", seconds: 45 },
-  { id: "close", no: "13", th: "ปิด", en: "CLOSE", seconds: 20 },
+  { id: "standby", no: "—", th: "พร้อมเริ่ม", en: "STANDBY", seconds: 0, tone: "light" },
+
+  // Part 1 — what we built.
+  { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20, tone: "light" },
+  { id: "pain", no: "01", th: "แก้แล้วจะพังตรงไหน", en: "THE PAIN", seconds: 60, tone: "light" },
+  { id: "why-fail", no: "02", th: "เครื่องมือที่มีอยู่เดาจากความคล้าย", en: "WHY IT FAILS TODAY", seconds: 45, tone: "light" },
+  { id: "what", no: "03", th: "สแกนครั้งเดียว ได้แผนที่ทั้ง repo", en: "WHAT IT IS", seconds: 45, tone: "light" },
+
+  // Part 2 — why it helps. Told as features and one real case; the deep
+  // technical material moved to the appendix, for questions.
+  { id: "output", no: "04", th: "ได้อะไรออกมาให้คนอ่าน", en: "WHAT YOU GET", seconds: 90, tone: "light" },
+  { id: "demo", no: "05", th: "เดโม", en: "DEMO", seconds: 240, tone: "light" },
+  { id: "case", no: "06", th: "เจอจริง — entity เรียก service ผิด layer", en: "A REAL FINDING", seconds: 90, tone: "light" },
+  { id: "ask", no: "07", th: "ทำอะไรได้บ้าง", en: "WHAT IT CAN DO", seconds: 60, tone: "light" },
+  { id: "use", no: "08", th: "ใช้ตอนไหน", en: "WHEN YOU REACH FOR IT", seconds: 60, tone: "light" },
+  // The one screen that talks about tokens, and it says what is true: the map
+  // is rebuilt by scripts at no token cost; tokens are spent only on asking.
+  { id: "fresh", no: "09", th: "อัปเดตทุกครั้งที่มีโค้ดใหม่", en: "ALWAYS UP TO DATE", seconds: 60, tone: "light" },
+  { id: "local", no: "10", th: "โค้ดไม่ออกจากเครื่อง", en: "IT STAYS LOCAL", seconds: 45, tone: "light" },
+
+  // Part 3 — how we built it with AI. The brief's own question.
+  { id: "built", no: "11", th: "เราใช้ AI สร้าง skill นี้ยังไง", en: "BUILT WITH AI", seconds: 90, tone: "light" },
+  { id: "steps", no: "12", th: "ขั้นตอนคร่าว ๆ", en: "HOW WE GOT HERE", seconds: 120, tone: "light" },
+
+  // Part 4 — the close.
+  { id: "team", no: "13", th: "ทีม", en: "TEAM", seconds: 30, tone: "light" },
+  { id: "close", no: "14", th: "ปิด", en: "CLOSE", seconds: 30, tone: "light" },
+
+  // Appendix. After the close, for questions only — the technical depth the
+  // team wants on hand but not in the talk. Lettered, so they sit outside the
+  // numbered run and add nothing to its budget.
+  { id: "how", no: "A1", th: "ทำงานยังไง", en: "HOW IT WORKS", seconds: 0, tone: "light" },
+  { id: "vs-rag", no: "A2", th: "ต่างจาก RAG ยังไง", en: "VERSUS RAG", seconds: 0, tone: "light" },
 ];
+
+/* Reshaped on 23 September 2026 after the team's review: the slot is 15–25
+ * minutes, the brief asks how AI was used to build the thing, and testing
+ * showed the skill does not reliably save tokens — sometimes it costs more,
+ * because the skill's own context is loaded too. So the run tells features and
+ * a real finding, adds a part on building it with AI, says the one true thing
+ * about tokens (screen 09), and moves how-it-works and versus-RAG to an
+ * appendix.
+ *
+ * Cut earlier the same day, when the pitch stopped leading with token cost and
+ * started leading with what a developer reads. Their screens are still in
+ * `screens/`, so any of them can come back by adding a row above:
+ *
+ *   category, skill — 65 seconds spent teaching what an agent skill is, which
+ *     is not our idea and not what the room is judging.
+ *   numbers, tokens — both argued cost. The one number worth keeping, the
+ *     architectural health grade, belongs on screen 04 with the rest of the
+ *     output.
+ *   ask-review — folded into one screen for every command (now screen 07).
+ */
 
 /** The numbered screens — the run itself, without the standby in front of it. */
 export const run = slides.filter((s) => /^\d+$/.test(s.no));
