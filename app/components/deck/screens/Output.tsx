@@ -7,7 +7,7 @@ import note from "@/public/shots/stage-2.png";
 import security from "@/public/shots/security-findings.png";
 
 /**
- * Screen 04 — what comes out, and who reads it.
+ * Screen 02 · 3/3 — what comes out, and who reads it.
  *
  * The screen the run is built to reach. The pitch no longer leads with what the
  * scan costs; it leads with what a developer opens afterwards. So the screen is
@@ -18,7 +18,7 @@ import security from "@/public/shots/security-findings.png";
  * drawing — which is what lets the screen make its claim with one sentence
  * instead of six rows of text.
  *
- * The note tile reuses the real note from screen 03 — one method, written up
+ * The note tile reuses the real note from appendix A3 — one method, written up
  * in markdown, its calls as wikilinks — so it is a capture, not a mock-up.
  */
 const tileBase = "overflow-hidden rounded-[clamp(0.75rem,1.1vw,1.5rem)]";

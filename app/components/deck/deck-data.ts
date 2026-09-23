@@ -25,6 +25,11 @@ export type Slide = {
    *  differently from the one before it — tone is the cheapest pacing device a
    *  deck has. */
   tone?: "light";
+  /** For a section that runs to several screens: the section's own name. The
+   *  frame then prints it over a row of the section's steps — each screen's
+   *  `th` — with the current one marked, so the room sees where it is in the
+   *  story and how much of it is left. */
+  section?: string;
 };
 
 export const slides: Slide[] = [
@@ -32,26 +37,28 @@ export const slides: Slide[] = [
   // carries no number and no budget — it is not part of the run.
   { id: "standby", no: "—", th: "พร้อมเริ่ม", en: "STANDBY", seconds: 0, tone: "light" },
 
-  // What it is: the name says "skill", the next screen says what a skill is,
-  // and the one after says what this skill does.
+  // The name says "skill", and the next screen says what a skill is.
   { id: "title", no: "00", th: "Code Archaeologist", en: "TITLE", seconds: 20, tone: "light" },
   { id: "skill", no: "01", th: "skill คืออะไร", en: "WHAT A SKILL IS", seconds: 40, tone: "light" },
-  { id: "what", no: "02", th: "Code Archaeologist คืออะไร", en: "WHAT IT IS", seconds: 45, tone: "light" },
 
-  // Why it helps: the pain, then what comes out, then the real thing.
-  { id: "pain", no: "03", th: "ปัญหาที่เจอ", en: "THE PAIN", seconds: 120, tone: "light" },
-  { id: "output", no: "04", th: "ได้อะไรออกมาให้คนอ่าน", en: "WHAT YOU GET", seconds: 90, tone: "light" },
-  { id: "demo", no: "05", th: "เดโม", en: "DEMO", seconds: 300, tone: "light" },
-  { id: "company", no: "06", th: "ใช้ในบริษัทได้จริง", en: "READY FOR WORK", seconds: 75, tone: "light" },
+  // What this skill is, told in three steps: the problem, how it helps, and
+  // what comes out. One section, so the three read as one answer.
+  { id: "pain", no: "02", section: "Code Archaeologist คืออะไร", th: "ปัญหาที่เจอ", en: "THE PAIN", seconds: 120, tone: "light" },
+  { id: "what", no: "02", section: "Code Archaeologist คืออะไร", th: "Code Archaeologist เข้ามาช่วยยังไง", en: "HOW IT HELPS", seconds: 45, tone: "light" },
+  { id: "output", no: "02", section: "Code Archaeologist คืออะไร", th: "ผลลัพธ์ที่ได้", en: "WHAT YOU GET", seconds: 90, tone: "light" },
+
+  // Then the real thing, and whether a company can use it.
+  { id: "demo", no: "03", th: "เดโม", en: "DEMO", seconds: 300, tone: "light" },
+  { id: "company", no: "04", th: "ใช้ในบริษัทได้จริง", en: "READY FOR WORK", seconds: 75, tone: "light" },
 
   // How we built it with AI — the brief's own question, told after the room
   // has seen why the thing is worth building.
-  { id: "built", no: "07", th: "เราใช้ AI สร้าง skill นี้ยังไง", en: "BUILT WITH AI", seconds: 180, tone: "light" },
+  { id: "built", no: "05", th: "เราใช้ AI สร้าง skill นี้ยังไง", en: "BUILT WITH AI", seconds: 180, tone: "light" },
 
   // Two screens, one section: the faces first, then the line to leave with. The
   // close ends the run, so its install command stays up through the questions.
-  { id: "team", no: "08", th: "ทีม", en: "TEAM", seconds: 20, tone: "light" },
-  { id: "close", no: "08", th: "สรุป", en: "CLOSE", seconds: 25, tone: "light" },
+  { id: "team", no: "06", th: "ทีม", en: "TEAM", seconds: 20, tone: "light" },
+  { id: "close", no: "06", th: "สรุป", en: "CLOSE", seconds: 25, tone: "light" },
 
   // Appendix. After the close, for questions only — the technical depth the
   // team wants on hand but not in the talk. Lettered, so they sit outside the
@@ -65,11 +72,15 @@ export const slides: Slide[] = [
 /* Cut to nine screens on 23 September 2026: sixteen was too many to present,
  * and several said the same thing twice. Merged, not lost —
  *
- *   case (a real finding: an entity calling a service) goes into screen 03,
- *     as the pain the team actually hit.
- *   fresh (always up to date) and local (it stays local) become screen 06.
- *   built and steps (building it with AI) become screen 07.
- *   team becomes the first of screen 08's two screens, before the close.
+ *   case (a real finding: an entity calling a service) is meant for the pain
+ *     screen, as the pain the team actually hit.
+ *   fresh (always up to date) and local (it stays local) become "company".
+ *   built and steps (building it with AI) become "built".
+ *   team becomes the first of the last section's two screens, before the close.
+ *
+ * Later the same day, what, pain and output became one section — "what Code
+ * Archaeologist is" — in three steps (the problem, how it helps, what comes
+ * out), and the sections after it were renumbered 03 to 06.
  *   use (the four moments) is cut; the presenter can say it over the demo.
  *   why-fail, how, vs-rag and ask move to the appendix.
  *

@@ -1,92 +1,56 @@
+import Image from "next/image";
+import { Bot, FolderCode, Map as MapIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
+import mole from "@/public/mascot/mole.png";
 
 /**
- * Screen 02 — what Code Archaeologist is.
+ * Screen 02 · 2/3 — how Code Archaeologist helps, after the problem.
  *
- * Screen 01 ends on a map: the AI is a good runner who does not know the route,
- * and a skill is the runner's map. This screen says who draws that map. It is a
- * before and after, for the half of the room that does not write code — the
- * technical words (tree-sitter, AST, explorer.html) moved to screen 04, where
- * the output is shown.
+ * Screen 01 ends on "a skill is the runner's map". This screen answers the
+ * obvious next question — who draws the map — and the answer is the mole from
+ * the cover. So the screen is one line of four, left to right: our code, the
+ * mole reading every file of it, the map it draws, and the AI running the
+ * right way. The map is the one tile in the orange marker, the same colour the
+ * answer on 01 was highlighted in, so the two screens read as one thought.
  *
- * Both pictures are the same eight functions and the same calls between them.
- * Before, they sit where they happen to fall and the calls cross into a knot
- * nobody can follow. After, they are laid out in the order they call each
- * other, and one route through them is drawn in orange — the route a runner
- * would take. Nothing is added between the two; only the order changes, which
- * is the honest version of what a scan does.
+ * An earlier version showed the same calls tangled and then laid out. It was
+ * accurate and did not say what the thing is; this one names it.
  *
- * The last line is the claim the whole run rests on: what comes out is read by
- * a person, not only by an agent.
+ * Latin appears only where it is a name (Code Archaeologist, AI); everything
+ * the room needs to understand is in Thai.
  */
+type Step = { icon: ReactNode; title: string; detail: string; accent?: boolean };
 
-/** The calls, by node index. The same list draws both pictures. */
-const edges: [number, number][] = [
-  [0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [2, 5], [3, 6], [4, 6], [4, 7], [5, 7],
+const iconClass = "h-[45%] w-[45%]";
+
+const steps: Step[] = [
+  { icon: <FolderCode className={iconClass} strokeWidth={1.5} aria-hidden />, title: "โค้ดของเรา", detail: "ทุกไฟล์ใน repo" },
+  {
+    icon: <Image src={mole} alt="" aria-hidden className="h-[82%] w-auto" />,
+    title: "Code Archaeologist",
+    detail: "ขุดอ่านทุกไฟล์",
+  },
+  { icon: <MapIcon className={iconClass} strokeWidth={1.5} aria-hidden />, title: "แผนที่", detail: "อะไรเรียกอะไร", accent: true },
+  { icon: <Bot className={iconClass} strokeWidth={1.5} aria-hidden />, title: "AI", detail: "วิ่งถูกทาง" },
 ];
 
-/** Where each node falls before the scan: scattered, so the calls cross. */
-const scattered: [number, number][] = [
-  [120, 20], [220, 120], [24, 110], [40, 30], [200, 24], [130, 128], [150, 70], [60, 70],
-];
-
-/** After: in calling order, left to right. */
-const ordered: [number, number][] = [
-  [28, 70], [92, 36], [92, 104], [156, 18], [156, 70], [156, 122], [216, 44], [216, 96],
-];
-
-/** One route through the ordered map: 0 → 1 → 4 → 7. */
-const route = "M28 70 L92 36 L156 70 L216 96";
-const routeNodes = new Set([0, 1, 4, 7]);
-
-function Graph({ nodes, withRoute }: { nodes: [number, number][]; withRoute?: boolean }) {
+function Arrow() {
   return (
-    <svg viewBox="0 0 244 144" className="h-full w-full" aria-hidden>
-      <g className="text-rule" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke">
-        {edges.map(([a, b]) => (
-          <line
-            key={`${a}-${b}`}
-            x1={nodes[a][0]}
-            y1={nodes[a][1]}
-            x2={nodes[b][0]}
-            y2={nodes[b][1]}
-            vectorEffect="non-scaling-stroke"
-          />
-        ))}
-      </g>
-      {withRoute ? (
-        <path
-          d={route}
-          data-draw
-          style={{ "--draw-delay": "1300ms", "--draw-dur": "1100ms" } as React.CSSProperties}
-          className="text-traced"
-          fill="none"
-          stroke="currentColor"
-          // In user units, not non-scaling: the draw animation measures the
-          // dash in the same units as the path, so the whole route is drawn.
-          strokeWidth="2"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
-      ) : null}
-      {nodes.map(([x, y], n) => (
-        <circle
-          key={n}
-          cx={x}
-          cy={y}
-          r="5"
-          className={withRoute && routeNodes.has(n) ? "fill-traced" : "fill-line"}
-        />
-      ))}
+    <svg
+      viewBox="0 0 48 16"
+      className="mt-[calc(var(--tile)/2-0.5rem)] w-[clamp(1.25rem,2.4vw,3rem)] flex-none self-start text-faint"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden
+    >
+      <path d="M0 8H46" />
+      <path d="M39 2L46 8L39 14" />
     </svg>
   );
 }
-
-const panels = [
-  { label: "Before", caption: "ไม่มีใครจำได้ว่าอะไรเรียกอะไร", nodes: scattered, withRoute: false },
-  { label: "After", caption: "เห็นเส้นทางของโค้ด", nodes: ordered, withRoute: true },
-];
 
 export function What({ slide }: ScreenProps) {
   return (
@@ -95,44 +59,52 @@ export function What({ slide }: ScreenProps) {
       <h2
         data-enter
         style={{ "--enter-delay": "200ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(2rem,4.6vw,4.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
+        className="flex-none text-[clamp(1.75rem,4vw,3.75rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-ink"
       >
-        ขุดโค้ดเก่า วาดเป็นแผนที่
+        skill ที่วาดแผนที่ของโค้ดเราให้เอง
       </h2>
 
-      <div className="mt-[clamp(1rem,3.5svh,2.5rem)] grid min-h-0 flex-1 grid-cols-2 gap-[clamp(0.75rem,2vw,2.5rem)]">
-        {panels.map((p, n) => (
-          <figure
-            key={p.label}
-            data-enter
-            style={{ "--enter-delay": `${420 + n * 420}ms` } as React.CSSProperties}
-            className="flex min-h-0 flex-col"
-          >
-            <div className="min-h-0 flex-1 rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 p-[clamp(0.75rem,2vw,2.25rem)]">
-              <Graph nodes={p.nodes} withRoute={p.withRoute} />
-            </div>
-            {/* Latin mono names the panel, Thai says what it shows — the two
-                never share a line. */}
-            <figcaption className="mt-[clamp(0.5rem,1.4svh,1rem)]">
-              <p
-                className={`font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.16em] uppercase ${
-                  p.withRoute ? "text-traced-deep" : "text-faint"
+      {/* --tile sizes every square, so the arrows can sit on their centre line. */}
+      <div
+        style={{ "--tile": "clamp(5.5rem,14vw,15rem)" } as React.CSSProperties}
+        className="mt-[clamp(1.5rem,6svh,4rem)] flex items-start justify-between gap-[clamp(0.25rem,0.8vw,1rem)]"
+      >
+        {steps.map((s, n) => (
+          <div key={s.title} className="contents">
+            {n > 0 && (
+              <div data-enter style={{ "--enter-delay": `${560 + n * 380}ms` } as React.CSSProperties} className="flex">
+                <Arrow />
+              </div>
+            )}
+            <figure
+              data-enter
+              style={{ "--enter-delay": `${420 + n * 380}ms` } as React.CSSProperties}
+              className="flex w-[var(--tile)] flex-none flex-col items-center text-center"
+            >
+              <div
+                className={`flex size-[var(--tile)] items-center justify-center rounded-[clamp(0.75rem,1.4vw,1.75rem)] ${
+                  s.accent ? "bg-highlight text-ink" : "bg-sheet-2 text-muted"
                 }`}
               >
-                {p.label}
-              </p>
-              <p className="mt-[clamp(0.2rem,0.6svh,0.4rem)] text-[clamp(1.0625rem,1.6vw,1.75rem)] leading-[1.4] text-ink">
-                {p.caption}
-              </p>
-            </figcaption>
-          </figure>
+                {s.icon}
+              </div>
+              <figcaption className="mt-[clamp(0.5rem,1.6svh,1rem)]">
+                {/* One line even where the name is wider than its tile: it spills into
+                    the gap beside it rather than breaking "Code Archaeologist". */}
+                <p className="text-[clamp(1rem,1.6vw,1.75rem)] leading-[1.25] font-semibold whitespace-nowrap text-ink">{s.title}</p>
+                <p className="mt-[clamp(0.15rem,0.5svh,0.35rem)] text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.35] text-muted">
+                  {s.detail}
+                </p>
+              </figcaption>
+            </figure>
+          </div>
         ))}
       </div>
 
       <p
         data-enter
-        style={{ "--enter-delay": "1600ms" } as React.CSSProperties}
-        className="mt-[clamp(0.75rem,2.6svh,1.75rem)] flex-none text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
+        style={{ "--enter-delay": "2000ms" } as React.CSSProperties}
+        className="mt-[clamp(1.5rem,5svh,3.5rem)] flex-none text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
       >
         ทั้งคนและ AI เปิดอ่านแผนที่ชุดเดียวกัน
       </p>

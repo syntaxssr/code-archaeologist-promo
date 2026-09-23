@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 06 — ready for work.
+ * Screen 04 — ready for work.
  *
  * Merges the old "always up to date" and "it stays local" screens. In a company
  * the question is never features first; it is the three things someone asks

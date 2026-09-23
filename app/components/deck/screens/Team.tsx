@@ -4,7 +4,7 @@ import type { ScreenProps } from "./index";
 import { bb, udong } from "./team-photos";
 
 /**
- * Screen 08 · 1/2 — the team, just before the close.
+ * Screen 06 · 1/2 — the team, just before the close.
  *
  * Two portraits side by side in the middle of the screen, a name and one line
  * under each — the plainest way to put faces to the work. At this point in the

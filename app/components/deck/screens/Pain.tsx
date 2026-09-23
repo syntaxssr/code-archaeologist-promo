@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 03 — the pain.
+ * Screen 02 · 1/3 — the problem, first step of "what Code Archaeologist is".
  *
  * Its only job is to make the room feel the problem before anyone offers a
  * solution: you change one line in code you did not write, and nobody can say
@@ -10,9 +10,9 @@ import type { ScreenProps } from "./index";
  * a picture rather than a list — one orange dot where the change is, lines
  * running out from it, and a question mark at the end of every line.
  *
- * It speaks the same language as screen 02: dots are pieces of code, lines are
- * calls. On 02 the map made the route readable; here there is no map yet, so
- * every place the change could reach is a guess. Screen 04 answers it.
+ * Dots are pieces of code and lines are calls. There is no map yet, so every
+ * place the change could reach is a guess; the next step (2/3) brings the map,
+ * and the last (3/3) shows what it looks like.
  *
  * The lines draw outward from the change, first ring then second, so the
  * question marks arrive as the reach grows. The accent lands once, on the dot
