@@ -252,8 +252,9 @@ body {
   }
 }
 
-/* The caret on the standby screen is the only thing on the deck that loops, and
-   that screen is the only place it is right: nobody is speaking over it. */
+/* The caret on the standby and demo screens is the only thing on the deck that
+   loops, and those screens are the only places it is right: nobody is speaking
+   over them. */
 /* A caret, because "waiting for input" needs no translation and no
    instruction printed on a screen the room can see. */
 @keyframes caret {
