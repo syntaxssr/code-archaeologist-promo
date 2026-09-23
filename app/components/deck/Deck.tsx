@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { currentIndex, goTo, lastNo, slides, subscribeIndex } from "./deck-data";
+import { currentIndex, goTo, slides, subscribeIndex } from "./deck-data";
 import { MeasureDraw } from "./MeasureDraw";
 import { Slide } from "./Slide";
 
@@ -166,35 +166,11 @@ function Controls({
       className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 transition-opacity duration-500 ${className}`}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="pointer-events-auto flex items-center gap-6 px-7 py-5">
-        <span className="font-mono text-base tabular-nums text-faint">
-          {slides[i].no} / {lastNo}
-        </span>
-
-        {/* One tick per screen. Clickable, because rehearsing means jumping. */}
-        <div className="flex flex-1 items-center gap-1.5">
-          {slides.map((s, n) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => onGo(n)}
-              aria-label={`ไปจอ ${s.no} ${s.th}`}
-              aria-current={n === i ? "true" : undefined}
-              className="group h-6 flex-1 cursor-pointer"
-            >
-              <span
-                className={`block h-[3px] w-full transition-colors duration-200 ${
-                  n === i
-                    ? "bg-traced"
-                    : n < i
-                      ? "bg-line/45 group-hover:bg-line"
-                      : "bg-rule group-hover:bg-line/60"
-                }`}
-              />
-            </button>
-          ))}
-        </div>
-
+      {/* Only the three buttons, in the corner. The screen counter and the row
+          of ticks across the foot were taken out: the topic in each screen's
+          corner already tells the room where it is, and the foot of the stage
+          stays clear. A deep link (#pain, #demo…) still jumps to any screen. */}
+      <div className="pointer-events-auto flex items-center justify-end px-7 py-5">
         <div className="flex items-center gap-2">
           <NavButton label="จอก่อนหน้า" onClick={() => onGo(i - 1)} disabled={i === 0}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">

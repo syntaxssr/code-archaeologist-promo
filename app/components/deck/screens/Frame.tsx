@@ -1,42 +1,54 @@
 import type { ReactNode } from "react";
-import { part, type Slide } from "../deck-data";
+import { slides, type Slide } from "../deck-data";
 
 /**
- * The frame every content screen sits in: its number, a rule, and its name.
+ * The frame every content screen sits in: the margins, and the screen's topic
+ * in the top-left corner.
  *
- * It is the deck's only piece of repeated furniture, which is the point — the
- * previous design repeated its *content* and went flat. Here what repeats is
- * the edge, and the middle of each screen is free to be a different thing.
+ * The topic is the slide's Thai name from deck-data, in the same place and the
+ * same type on every screen, so anyone who looks up mid-sentence can tell what
+ * the screen is about. It replaced an earlier header — the section number and
+ * a rule — that told the room where it was but not what it was looking at.
  *
- * The number, the part marker when the section runs to several screens, and a
- * rule. Nothing else. The screen's English name and its
- * rehearsal budget used to sit at the right, but both are notes to the
- * presenter and the room can read them too — the budgets live in DECK.md and in
- * deck-data, which is where a note to the presenter belongs.
+ * A section that runs to several screens names itself instead, with its steps
+ * on the same line straight after the name: every step shown, the current one in ink with an orange
+ * rule under it, the others faint. The room sees both where it is in the story
+ * and how much of it is left.
  */
+const topic = "text-[clamp(1.25rem,1.9vw,2.125rem)] leading-[1.3] font-semibold text-ink";
+
 export function Frame({ slide, children }: { slide: Slide; children: ReactNode }) {
-  const p = part(slide.id);
+  const steps = slide.section ? slides.filter((s) => s.no === slide.no) : null;
 
   return (
     <div className="absolute inset-0 flex flex-col px-[7%] pt-[clamp(2.25rem,6svh,4rem)] pb-[clamp(4rem,9svh,6rem)]">
       <header
         data-enter
         style={{ "--enter-delay": "40ms" } as React.CSSProperties}
-        className="flex flex-none items-center gap-5"
+        // Room under it: several screens open with a muted lead line of their
+        // own, and the topic must not read as part of it.
+        className="mb-[clamp(1rem,3.5svh,2.25rem)] flex flex-none flex-wrap items-baseline gap-x-[clamp(1.25rem,2.8vw,3rem)] gap-y-[0.35rem]"
       >
-        <span className="font-mono text-[clamp(0.8125rem,1.05vw,1.125rem)] font-medium tracking-[0.16em] tabular-nums text-traced-deep">
-          {slide.no}
-        </span>
-        {/* A section that runs to several screens says so, so the room knows it
-            is still inside the same idea rather than watching it restart. */}
-        {p ? (
-          <span className="font-mono text-[clamp(0.75rem,0.95vw,1rem)] tracking-[0.14em] tabular-nums text-faint">
-            {p.n}/{p.of}
-          </span>
+        <p className={topic}>{slide.section ?? slide.th}</p>
+        {steps ? (
+          <ol className="flex flex-wrap gap-x-[clamp(1rem,2.2vw,2.5rem)] gap-y-1">
+            {steps.map((s, n) => {
+              const current = s.id === slide.id;
+              return (
+                <li
+                  key={s.id}
+                  aria-current={current ? "step" : undefined}
+                  className={`border-b-2 pb-[0.15em] text-[clamp(1rem,1.35vw,1.5rem)] leading-[1.35] ${
+                    current ? "border-traced font-semibold text-ink" : "border-transparent text-faint"
+                  }`}
+                >
+                  <span className="tabular-nums">{n + 1}</span> {s.th}
+                </li>
+              );
+            })}
+          </ol>
         ) : null}
-        <span className="h-px flex-1 bg-rule" />
       </header>
-
       <div className="flex min-h-0 flex-1 flex-col justify-center">{children}</div>
     </div>
   );

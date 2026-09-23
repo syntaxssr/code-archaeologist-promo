@@ -1,81 +1,74 @@
+import { Message } from "./Chat";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 01 — the pain.
+ * Screen 02 · 1/3 — the problem, first step of "what Code Archaeologist is".
  *
- * One minute, and its only job is to make the room feel the problem before
- * anyone offers a solution. So it is a single moment every developer in the
- * hall has had, not a statement about the industry: you are asked to change one
- * thing in code you did not write, and nobody can tell you what it touches.
+ * One exchange everyone in the room has had with an AI: ask it about your own
+ * code, get a confident answer, push back, get a corrected answer just as
+ * confident — and find out later it was still a guess. It is the
+ * runner from screen 01 hitting the wall — strong, fast, and not knowing the
+ * route — told in the form people actually meet it.
  *
- * Three tiles for the three ways that go today, and one tile twice their size
- * for the thing none of them gives you. The size is the argument: the wide tile
- * is where the eye lands, and what is in it is a question mark. The three above
- * it are equal because they are equally bad.
+ * The example is in plain words (a discount, a cart, a receipt) so the half of
+ * the room that does not write code can follow it. It is illustrative, not a
+ * case from a real repository; the presenter should say "for example". If the
+ * team supplies its real case (an entity calling a service directly), it
+ * belongs here instead.
  *
- * They arrive one at a time so the presenter can walk them, and the wide one
- * last.
+ * The messages arrive in the order of a conversation, then the reality line,
+ * and last the orange marker sweeps across what the AI missed — the same
+ * marker as the answer on screen 01. The results screen (3/3) asks the same
+ * question again, with the map. The chat itself is drawn in Chat.tsx.
  *
- * The accent lands once, on that question mark. On screen 00 it lit the line
- * that *was* read; here it marks the one thing nobody knows. Same colour, and
- * it means the same thing both times — this is the evidence, or its absence.
+ * An earlier version drew one orange dot with a question mark at the end of
+ * every line; it was accurate and too abstract to read.
  */
-const routes: [string, string][] = [
-  ["ไล่เปิดอ่านเอง", "หมดไปครึ่งเช้า"],
-  // Not "wastes tokens": the deck no longer argues cost. What is true of every
-  // model is that a large repository does not fit in what it can read at once.
-  ["ให้ AI อ่านทั้ง repo", "ช้า และอ่านไม่หมด"],
-  ["ให้ AI เดาจากไฟล์ที่คล้ายกัน", "ผิดแล้วไม่รู้ตัว"],
-];
 
-/** A tile: grey one step off the ground, no border and no shadow, because
- *  depth on this deck is value and line weight only. */
-const tile =
-  "flex flex-col justify-between rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 p-[clamp(1rem,1.9vw,2.25rem)]";
+/**
+ * The exchange: asked, answered with confidence, pushed once, and "fixed" with
+ * the same confidence — still missing two places. Emoji carry each speaker's
+ * mood, the way people actually write in a chat.
+ */
+const chat: { from: "us" | "ai"; text: string; delay: number }[] = [
+  { from: "us", text: "ถ้าแก้ส่วนคิดส่วนลด จะกระทบตรงไหนบ้าง? 🤔", delay: 600 },
+  { from: "ai", text: "กระทบแค่หน้าตะกร้าสินค้าครับ แก้ได้เลย 😎", delay: 1500 },
+  { from: "us", text: "แน่ใจนะ? แล้วใบเสร็จล่ะ 🤨", delay: 2500 },
+  { from: "ai", text: "ขออภัยครับ 🙏 ใบเสร็จด้วย ตอนนี้ครบแล้วครับ ✅", delay: 3400 },
+];
 
 export function Pain({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      <p
-        data-enter
-        style={{ "--enter-delay": "220ms" } as React.CSSProperties}
-        className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[clamp(1rem,1.5vw,1.5rem)] text-muted"
-      >
-        เพิ่ม field เดียวใน <span className="font-mono text-[0.92em] text-ink">OrderService</span>
-      </p>
-
-      <h2
-        data-enter
-        style={{ "--enter-delay": "340ms" } as React.CSSProperties}
-        className="mt-[clamp(0.5rem,1.6svh,1.25rem)] text-[clamp(2.25rem,5vw,5rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
-      >
-        แก้แล้วจะพังตรงไหน
-      </h2>
-
-      <div className="mt-[clamp(1.25rem,4svh,2.75rem)] grid grid-cols-3 gap-[clamp(0.625rem,1vw,1.25rem)]">
-        {routes.map(([label, cost], n) => (
-          <div
-            key={label}
-            data-enter
-            style={{ "--enter-delay": `${620 + n * 150}ms` } as React.CSSProperties}
-            className={`${tile} min-h-[clamp(7rem,17svh,11rem)] gap-[clamp(0.75rem,2svh,1.5rem)]`}
-          >
-            <p className="text-[clamp(1rem,1.5vw,1.75rem)] leading-[1.35] text-ink">{label}</p>
-            <p className="text-[clamp(1rem,1.6vw,1.875rem)] leading-none font-medium text-muted">{cost}</p>
-          </div>
+      {/* No heading: the topic bar already says "the problem", and the chat
+          says the rest. The chat's type size is set once here. */}
+      <div className="flex flex-col gap-[clamp(0.5rem,1.6svh,1rem)] text-[clamp(1.125rem,2vw,2.25rem)]">
+        {chat.map((m) => (
+          <Message key={m.text} from={m.from} delay={m.delay}>
+            {m.text}
+          </Message>
         ))}
       </div>
 
-      {/* The answer, and the answer is that there isn't one. */}
-      <div
+      <p
         data-enter
-        style={{ "--enter-delay": "1240ms" } as React.CSSProperties}
-        className={`${tile} mt-[clamp(0.625rem,1vw,1.25rem)] gap-[clamp(0.5rem,1.6svh,1.25rem)]`}
+        style={{ "--enter-delay": "4400ms" } as React.CSSProperties}
+        // Centred under the chat: it is neither side of the conversation, it is
+        // what the room finds out afterwards.
+        className="mt-[clamp(1.25rem,4svh,3rem)] text-center text-[clamp(1.125rem,2vw,2.25rem)] leading-[1.45] font-semibold text-ink"
       >
-        <p className="text-[clamp(1rem,1.5vw,1.75rem)] leading-none text-muted">ไฟล์ที่กระทบจริง</p>
-        <p className="font-mono text-[clamp(3rem,7vw,7.5rem)] leading-[0.8] font-semibold text-traced">?</p>
-      </div>
+        ของจริง: ยังมี{" "}
+        {/* The marker lands after the line has been read. */}
+        <span
+          data-mark
+          style={{ "--mark-delay": "5200ms" } as React.CSSProperties}
+          className="-mx-[0.15em] rounded-[0.2em] px-[0.15em] box-decoration-clone"
+        >
+          อีเมลยืนยัน และรายงานยอดขาย
+        </span>{" "}
+        อีก
+      </p>
     </Frame>
   );
 }

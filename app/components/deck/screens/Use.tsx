@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 08 — when you reach for it.
+ * Cut from the run on 23 September; the presenter says the four moments over the demo.
  *
  * Four moments every developer in the hall has had, in the order they happen
  * to a project rather than by job title: the first day on code you did not

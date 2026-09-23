@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 10 — where the code goes.
+ * Not in the run — merged into screen 04, ready for work (Company.tsx).
  *
  * In a company the first thing that blocks adoption is not price or features,
  * it is "does our source leave the building". Most tools in this space index

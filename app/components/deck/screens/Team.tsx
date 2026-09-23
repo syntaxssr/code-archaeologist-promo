@@ -4,11 +4,11 @@ import type { ScreenProps } from "./index";
 import { bb, udong } from "./team-photos";
 
 /**
- * Screen 13 — the team.
+ * Screen 06 · 1/2 — the team, just before the close.
  *
  * Two portraits side by side in the middle of the screen, a name and one line
  * under each — the plainest way to put faces to the work. At this point in the
- * run the room has watched ten minutes of a tool and has not yet seen the two
+ * run the room has watched fifteen minutes of a tool and has not yet seen the two
  * people who built it; nothing else on the screen should compete with that.
  *
  * Left is the presentation side, right is the code side — the same split the

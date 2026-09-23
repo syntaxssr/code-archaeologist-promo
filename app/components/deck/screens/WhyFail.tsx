@@ -2,7 +2,7 @@ import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 
 /**
- * Screen 02 — why today's answer does not work.
+ * Appendix A1 — why today's answer does not work. For questions.
  *
  * The damage is the image. A retriever cuts a codebase into fixed-size pieces,
  * and the cut does not care where it lands: it goes through the middle of a

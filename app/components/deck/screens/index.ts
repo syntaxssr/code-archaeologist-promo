@@ -4,6 +4,7 @@ import { Ask } from "./Ask";
 import { AskReview } from "./AskReview";
 import { Category } from "./Category";
 import { Close } from "./Close";
+import { Company } from "./Company";
 import { Demo } from "./Demo";
 import { How } from "./How";
 import { Local } from "./Local";
@@ -37,6 +38,7 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   "vs-rag": VsRag,
   demo: Demo,
   output: Output,
+  company: Company,
   numbers: Numbers,
   use: Use,
   local: Local,

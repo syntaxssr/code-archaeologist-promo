@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 
 /**
- * The two portraits on screen 11.
+ * The two portraits on screen 06 · 1/2.
  *
  * They are null until the real photographs exist, and the screen draws a marked
  * empty frame rather than a silhouette or a stock face — an obviously missing

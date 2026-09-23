@@ -1,97 +1,74 @@
+import Image from "next/image";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
+import moleMap from "@/public/art/skill-mole-map.jpg";
 
 /**
- * Screen 03 — what it is.
+ * Screen 02 · 2/3 — how Code Archaeologist helps, after the problem.
  *
- * Thirty seconds, and the judges have to leave the hall able to repeat it. So
- * the sentence is the heading and the rest of the screen is the same sentence
- * as a picture: the repository, one scan, and what comes out — left to right,
- * two arrows, nothing to read that is not on the path.
+ * Screen 01 ends on "a skill is the runner's map", and the problem before this
+ * screen is the runner guessing. This screen says who draws the map: the mole
+ * from the cover digs through old code — curly-brace fossils, tangled cables,
+ * stone tablets of source — and hands an orange map to the same robot runner,
+ * a plaster on its forehead from the wall on 01.
  *
- * The last line is the claim the whole run now rests on: what comes out is read
- * by a person, not only by an agent.
+ * It keeps screen 01's layout on purpose — picture left, words right, the
+ * answer in the orange marker three seconds in — so the two cartoons read as
+ * one story told in two frames.
  *
- * No accent. This is the one screen with no evidence on it — it is a
- * definition, and the colour would be decoration.
+ * An earlier version drew the same idea as four tiles (code → mole → map →
+ * AI); the cartoon replaced it once it existed. Before that, the same calls
+ * tangled and then laid out, which was accurate and did not say what the
+ * thing is.
+ *
+ * The art is 2000 × 1116, shown whole.
  */
-const steps: { label: string; lines: string[] }[] = [
-  { label: "Repo", lines: ["โค้ดที่มีอยู่แล้ว", "17 ภาษา"] },
-  // tree-sitter by name, with what it does underneath: the team wants the
-  // library credited rather than the bare term "AST".
-  { label: "Scan", lines: ["tree-sitter", "อ่านโค้ดเป็นโครงสร้าง AST"] },
-  { label: "Output", lines: ["แผนที่และโน้ต", "explorer.html"] },
-];
-
-function Arrow() {
-  return (
-    <svg
-      viewBox="0 0 48 16"
-      className="w-[clamp(1.5rem,3vw,3.5rem)] flex-none self-center text-line"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden
-    >
-      <path d="M0 8H46" />
-      <path d="M39 2L46 8L39 14" />
-    </svg>
-  );
-}
-
 export function What({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      <h2
-        data-enter
-        style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="text-[clamp(2rem,4.6vw,4.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
-      >
-        สแกนครั้งเดียว ได้แผนที่ทั้ง repo
-      </h2>
+      <div className="flex min-h-0 items-center gap-[clamp(1.5rem,3.5vw,4rem)]">
+        <Image
+          src={moleMap}
+          alt="การ์ตูนตุ่นนักโบราณคดีขุดดินเจอฟอสซิลโค้ด แล้วยื่นแผนที่สีส้มให้หุ่นยนต์นักวิ่งที่มีพลาสเตอร์ติดหน้าผาก ตุ่นพูดว่า แผนที่มาแล้ว หุ่นยนต์ตอบว่า ขอบคุณครับ"
+          priority
+          data-enter
+          style={{ "--enter-delay": "120ms" } as React.CSSProperties}
+          className="h-auto w-[56%] shrink-0 rounded-[clamp(0.75rem,1.1vw,1.5rem)]"
+        />
 
-      <div className="mt-[clamp(1.5rem,5svh,3rem)] flex items-stretch gap-[clamp(0.5rem,1vw,1.25rem)]">
-        {steps.map((step, n) => (
-          <div key={step.label} className="contents">
-            {n > 0 && (
-              <div data-enter style={{ "--enter-delay": `${560 + n * 260}ms` } as React.CSSProperties} className="flex">
-                <Arrow />
-              </div>
-            )}
-            <div
-              data-enter
-              style={{ "--enter-delay": `${420 + n * 260}ms` } as React.CSSProperties}
-              className="flex-1 rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 p-[clamp(1rem,1.9vw,2.25rem)]"
+        <div className="min-w-0 flex-1">
+          <h2
+            data-enter
+            style={{ "--enter-delay": "420ms" } as React.CSSProperties}
+            className="text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] text-ink"
+          >
+            {/* One phrase per line, held whole, as on screen 01. */}
+            <span className="block whitespace-nowrap">Code Archaeologist</span>
+            <span className="block whitespace-nowrap">ขุดอ่านโค้ดทุกไฟล์</span>
+          </h2>
+          {/* The answer, in the same marker and at the same moment as 01. */}
+          <p
+            data-enter
+            style={{ "--enter-delay": "900ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] whitespace-nowrap text-ink"
+          >
+            <span
+              data-mark
+              style={{ "--mark-delay": "3000ms" } as React.CSSProperties}
+              className="-mx-[0.25em] rounded-[0.2em] px-[0.25em] py-[0.05em] box-decoration-clone"
             >
-              {/* Latin mono names the step, Thai says what happens — the two
-                  never share a line. */}
-              <p className="font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.18em] text-faint uppercase">
-                {step.label}
-              </p>
-              <div className="mt-[clamp(0.5rem,1.6svh,1rem)] text-[clamp(1.0625rem,1.6vw,1.875rem)] leading-[1.45] text-ink">
-                {step.lines.map((line) => (
-                  <p
-                    key={line}
-                    // Mono runs wider than the Thai beside it, so it is set a
-                    // little smaller — but never under the 16px floor.
-                    className={/^[\x00-\x7F]+$/.test(line) ? "font-mono text-[max(1rem,0.86em)]" : undefined}
-                  >
-                    {line}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+              แล้ววาดเป็นแผนที่ให้ AI
+            </span>
+          </p>
+          <p
+            data-enter
+            style={{ "--enter-delay": "1200ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
+          >
+            ทั้งคนและ AI เปิดอ่านแผนที่ชุดเดียวกัน
+          </p>
+        </div>
       </div>
-
-      <p
-        data-enter
-        style={{ "--enter-delay": "1240ms" } as React.CSSProperties}
-        className="mt-[clamp(1.25rem,4svh,2.5rem)] text-[clamp(1.125rem,1.7vw,1.875rem)] leading-[1.45] text-muted"
-      >
-        ทั้งคนและ AI เปิดอ่านของชุดเดียวกัน
-      </p>
     </Frame>
   );
 }

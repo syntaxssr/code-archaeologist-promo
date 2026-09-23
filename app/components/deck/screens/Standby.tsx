@@ -18,14 +18,14 @@
  *
  * The cursor loops because nobody is speaking over this screen, and a
  * completely still screen carrying one word reads as a page that failed to
- * load. The only other loop on the deck is the faint grid behind screen 00.
+ * load. It is the only loop on the deck; the grid behind it holds still.
  *
  * The torch-wall version is parked on branch explore/torch-wall; the seven
  * earlier alternatives are at commit cd54697.
  */
 export function Standby() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-sheet">
+    <div className="absolute inset-0 flex items-center justify-center">
       <p className="relative font-mono text-[clamp(1.75rem,3.4vw,4rem)] leading-none tracking-[-0.01em] text-muted">
         ~/standby
         <span
