@@ -1,14 +1,20 @@
+import Image from "next/image";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
+import moleOffice from "@/public/art/company-mole-office.jpg";
 
 /**
  * Screen 04 — ready for work.
  *
- * Merges the old "always up to date" and "it stays local" screens. In a company
- * the question is never features first; it is the three things someone asks
- * before they let a tool near the source. So the screen is those questions,
- * asked in the room's own words, each with a short answer — read one row at a
- * time, which is about what seventy-five seconds holds.
+ * The third frame of the cartoon story. Screen 01 is the runner without a
+ * route, 02 is the mole handing it a map; here the mole digs under the
+ * company's own building, behind a locked door, and the runner reads the map
+ * at a desk inside. The question a company asks before it lets a tool near its
+ * source — does our code leave the building? — is answered by the picture
+ * before a word is read.
+ *
+ * It keeps the layout of 01 and 02 — picture left, words right, the answer in
+ * the orange marker three seconds in — so the three cartoons read as one story.
  *
  * The facts, and where they come from:
  *   - local: scanning, building the map and opening the explorer are scripts
@@ -17,55 +23,71 @@ import type { ScreenProps } from "./index";
  *   - fresh: the map is rebuilt by scripts, so rebuilding it costs no tokens.
  *   - install: one npx command.
  *
- * The line under the rule is the honest half, kept from Local.tsx: when someone
- * asks the agent a question, the notes it reads do go to the model.
+ * The small last line is the honest half, kept from Local.tsx: when someone
+ * asks the agent a question, the notes it reads do go to the model. So the
+ * screen says "scanned on our machine", never "the code never leaves".
+ *
+ * An earlier version asked the three questions as a table, each with a short
+ * answer and a mono tag; it was accurate and read like a form.
+ *
+ * The art is 2000 × 1116, shown whole.
  */
-const rows = [
-  { q: "โค้ดออกนอกเครื่องไหม", a: "ไม่ · ทำในเครื่องทั้งหมด", tag: "offline · no vector database" },
-  { q: "แผนที่จะเก่าไหม", a: "สแกนใหม่ ไม่เสีย token", tag: "scripts, not the model" },
-  { q: "ติดตั้งยากไหม", a: "คำสั่งเดียว", tag: "npx" },
-];
-
 export function Company({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      <h2
-        data-enter
-        style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-        className="flex-none text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.1] font-semibold tracking-[-0.02em] text-ink"
-      >
-        คำถามแรกของบริษัท
-      </h2>
+      <div className="flex min-h-0 items-center gap-[clamp(1.5rem,3.5vw,4rem)]">
+        <Image
+          src={moleOffice}
+          alt="การ์ตูนตุ่นนักโบราณคดีขุดอุโมงค์ใต้ตึกบริษัทที่ประตูล็อกกุญแจ เจอฟอสซิลโค้ด ส่วนหุ่นยนต์นักวิ่งนั่งอ่านแผนที่สีส้มอยู่ในห้องทำงานข้างบน ตุ่นพูดว่า ขุดในบ้านเรานี่แหละ"
+          priority
+          data-enter
+          style={{ "--enter-delay": "120ms" } as React.CSSProperties}
+          className="h-auto w-[56%] shrink-0 rounded-[clamp(0.75rem,1.1vw,1.5rem)]"
+        />
 
-      <dl className="mt-[clamp(1.25rem,4.5svh,3rem)] flex flex-col">
-        {rows.map((r, i) => (
-          <div
-            key={r.q}
+        <div className="min-w-0 flex-1">
+          <h2
             data-enter
-            style={{ "--enter-delay": `${400 + i * 220}ms` } as React.CSSProperties}
-            className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-baseline gap-x-[clamp(1rem,3vw,3rem)] border-t border-rule py-[clamp(0.75rem,2.6svh,1.75rem)]"
+            style={{ "--enter-delay": "420ms" } as React.CSSProperties}
+            className="text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] whitespace-nowrap text-ink"
           >
-            <dt className="text-[clamp(1.125rem,1.8vw,2rem)] leading-[1.35] text-muted">{r.q}</dt>
-            <dd>
-              <p className="text-[clamp(1.5rem,2.9vw,2.75rem)] leading-[1.2] font-semibold tracking-[-0.015em] text-ink">
-                {r.a}
-              </p>
-              <p className="mt-[clamp(0.2rem,0.6svh,0.4rem)] font-mono text-[clamp(1rem,1.05vw,1.125rem)] tracking-[0.08em] text-traced-deep">
-                {r.tag}
-              </p>
-            </dd>
-          </div>
-        ))}
-      </dl>
-
-      {/* The honest half. */}
-      <p
-        data-enter
-        style={{ "--enter-delay": "1200ms" } as React.CSSProperties}
-        className="border-t border-rule pt-[clamp(0.75rem,2.2svh,1.5rem)] text-[clamp(1rem,1.35vw,1.5rem)] leading-[1.4] text-muted"
-      >
-        ที่ออกไปมีแค่ตอนถาม AI — ส่งเฉพาะโน้ตที่เกี่ยวกับคำถาม ไม่ใช่ทั้ง repo
-      </p>
+            ตุ่นขุดอยู่ในบ้านเรา
+          </h2>
+          {/* The answer, in the same marker and at the same moment as 01 and 02. */}
+          <p
+            data-enter
+            style={{ "--enter-delay": "900ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] whitespace-nowrap text-ink"
+          >
+            <span
+              data-mark
+              style={{ "--mark-delay": "3000ms" } as React.CSSProperties}
+              className="-mx-[0.25em] rounded-[0.2em] px-[0.25em] py-[0.05em] box-decoration-clone"
+            >
+              สแกนในเครื่องทั้งหมด
+            </span>
+          </p>
+          {/* Thai has no spaces between words; each phrase is held whole. */}
+          <p
+            data-enter
+            style={{ "--enter-delay": "1200ms" } as React.CSSProperties}
+            className="mt-[clamp(1rem,3.5svh,2.25rem)] text-[clamp(1.0625rem,1.5vw,1.625rem)] leading-[1.45] text-muted"
+          >
+            <span className="inline-block">สแกนใหม่ไม่เสีย token</span>
+            {" · "}
+            <span className="inline-block">ติดตั้งคำสั่งเดียว</span>
+          </p>
+          {/* The honest half. */}
+          <p
+            data-enter
+            style={{ "--enter-delay": "1500ms" } as React.CSSProperties}
+            className="mt-[clamp(0.5rem,1.6svh,1rem)] text-[clamp(1rem,1.1vw,1.25rem)] leading-[1.45] text-faint"
+          >
+            <span className="inline-block">ที่ออกไปมีแค่ตอนถาม AI —</span>{" "}
+            <span className="inline-block">ส่งเฉพาะโน้ตที่เกี่ยว</span>
+          </p>
+        </div>
+      </div>
     </Frame>
   );
 }

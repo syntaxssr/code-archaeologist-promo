@@ -55,18 +55,9 @@ export const slides: Slide[] = [
   // has seen why the thing is worth building.
   { id: "built", no: "05", th: "เราใช้ AI สร้าง skill นี้ยังไง", en: "BUILT WITH AI", seconds: 180, tone: "light" },
 
-  // Two screens, one section: the faces first, then the line to leave with. The
-  // close ends the run, so its install command stays up through the questions.
-  { id: "team", no: "06", th: "ทีม", en: "TEAM", seconds: 20, tone: "light" },
-  { id: "close", no: "06", th: "สรุป", en: "CLOSE", seconds: 25, tone: "light" },
-
-  // Appendix. After the close, for questions only — the technical depth the
-  // team wants on hand but not in the talk. Lettered, so they sit outside the
-  // numbered run and add nothing to its budget.
-  { id: "why-fail", no: "A1", th: "ทำไม RAG ตอบไม่ได้", en: "WHY IT FAILS TODAY", seconds: 0, tone: "light" },
-  { id: "vs-rag", no: "A2", th: "ต่างจาก RAG ยังไง", en: "VERSUS RAG", seconds: 0, tone: "light" },
-  { id: "how", no: "A3", th: "ทำงานยังไง", en: "HOW IT WORKS", seconds: 0, tone: "light" },
-  { id: "ask", no: "A4", th: "ทำอะไรได้บ้าง", en: "WHAT IT CAN DO", seconds: 0, tone: "light" },
+  // The faces and the line to leave with, on one screen. It ends the run, so its
+  // install command stays up through the questions.
+  { id: "team", no: "06", th: "ทีม", en: "TEAM", seconds: 45, tone: "light" },
 ];
 
 /* Cut to nine screens on 23 September 2026: sixteen was too many to present,
@@ -83,6 +74,10 @@ export const slides: Slide[] = [
  * out), and the sections after it were renumbered 03 to 06.
  *   use (the four moments) is cut; the presenter can say it over the demo.
  *   why-fail, how, vs-rag and ask move to the appendix.
+ *
+ * On 24 September the close was folded into the team screen, so the run ends on
+ * the team, and the appendix (why-fail, vs-rag, how, ask) came off the deck:
+ * the team keeps it as preparation for the judges' questions, not as screens.
  *
  * Earlier the same day, when the pitch stopped leading with token cost — testing
  * showed the skill does not reliably save tokens, sometimes it costs more,

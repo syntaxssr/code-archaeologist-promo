@@ -1,62 +1,118 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
-import { bb, udong } from "./team-photos";
+import photo from "@/public/art/team-dig.jpg";
+
+/** Copied from the skill's README. */
+const INSTALL = "npx github:non-nattawut/Code-Archaeologist-LLM-Agent-Skill --harness claude";
 
 /**
- * Screen 06 · 1/2 — the team, just before the close.
+ * Screen 06 — the team, and the end of the run.
  *
- * Two portraits side by side in the middle of the screen, a name and one line
- * under each — the plainest way to put faces to the work. At this point in the
- * run the room has watched fifteen minutes of a tool and has not yet seen the two
- * people who built it; nothing else on the screen should compete with that.
+ * The last screen, so it carries both the faces and the line to leave with; it
+ * stays up through the judges' questions. The close used to be a screen of its
+ * own after this one, and was folded in on 24 September so the run ends on the
+ * people who built the thing.
  *
- * Left is the presentation side, right is the code side — the same split the
- * work actually had.
+ * Left, one photograph of the two of us at a dig, dressed for the name, with
+ * each name directly under the person it belongs to — so the room pairs a face
+ * with a name without working it out. No roles: the names are enough. Right,
+ * the claim the run was rebuilt around, the answer in the orange marker three
+ * seconds in as on every screen before it, and under it the install command,
+ * verbatim, in a tile of its own so it reads as something to type.
  *
- * A portrait that has not been taken yet draws a marked empty frame. A
- * silhouette or a stock face would read as a real answer to a question we have
- * not answered.
+ * Each name sits in a column 27% of the photo wide, the two side by side and
+ * centred, which puts their centres at 36.5% and 63.5% across — where the two
+ * people stand in the photo. If the photo is replaced, measure again. Each name
+ * is English and the nickname Thai, on lines of their own, so no line mixes the
+ * two scripts.
+ *
+ * The photo is 2000 × 1116.
  */
 const people = [
-  { photo: bb, name: "พีรพล จันทะแจ่ม", nick: "BB", role: "ฝั่งงานนำเสนอ" },
-  { photo: udong, name: "ณัฐวุฒิ รอดทอง", nick: "อุด้ง", role: "ฝั่งโค้ด ทั้ง skill" },
+  { first: "Peerapon", last: "Chanthachaem", nick: "บาส" },
+  { first: "Nattawut", last: "Rodthong", nick: "อุด้ง" },
 ];
 
 export function Team({ slide }: ScreenProps) {
   return (
     <Frame slide={slide}>
-      <div className="flex min-h-0 flex-1 items-center justify-center gap-[clamp(1.5rem,4vw,4.5rem)]">
-        {people.map((p, n) => (
-          <figure
-            key={p.name}
+      <div className="flex min-h-0 items-center gap-[clamp(1.5rem,3.5vw,4rem)]">
+        <figure className="flex w-[56%] shrink-0 flex-col">
+          <Image
+            src={photo}
+            alt="Peerapon (บาส) ใส่หมวกเฟดอร่าและแจ็กเก็ตหนัง ชี้ไปที่ Nattawut (อุด้ง) ที่ใส่หมวกกันแดดและถือแว่นขยายส่องเศษภาชนะ ยืนอยู่ในหลุมขุดค้นโบราณคดี"
+            priority
             data-enter
-            style={{ "--enter-delay": `${220 + n * 200}ms` } as React.CSSProperties}
-            className="flex min-h-0 flex-col items-center"
-          >
-            {/* Height-driven, so both portraits are the same size whatever the
-                screen's shape, and the names underneath always fit. */}
-            <div className="aspect-[3/4] h-[min(52svh,30vw)] overflow-hidden rounded-[clamp(0.75rem,1.4vw,1.75rem)] bg-sheet-2">
-              {p.photo ? (
-                <Image src={p.photo} alt={`${p.name} (${p.nick})`} className="h-full w-full object-cover object-center" />
-              ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 text-center">
-                  <span className="text-[clamp(1rem,1.2vw,1.25rem)] text-muted">รอรูป</span>
-                  <span className="font-mono text-[clamp(1rem,0.95vw,1.0625rem)] tracking-[0.08em] text-faint">
-                    3:4 · 1400 × 1866
-                  </span>
-                </div>
-              )}
-            </div>
+            style={{ "--enter-delay": "120ms" } as React.CSSProperties}
+            className="h-auto w-full rounded-[clamp(0.75rem,1.1vw,1.5rem)]"
+          />
+          <figcaption className="mt-[clamp(0.75rem,2.4svh,1.5rem)] flex justify-center">
+            {people.map((p, n) => (
+              <div
+                key={p.first}
+                data-enter
+                style={{ "--enter-delay": `${420 + n * 160}ms` } as React.CSSProperties}
+                className="w-[27%] text-center"
+              >
+                <p className="text-[clamp(1.0625rem,1.6vw,1.75rem)] leading-[1.2] font-semibold tracking-[-0.01em] text-ink">
+                  <span className="block">{p.first}</span>
+                  <span className="block">{p.last}</span>
+                </p>
+                <p className="mt-[clamp(0.2rem,0.7svh,0.45rem)] text-[clamp(1rem,1.3vw,1.5rem)] leading-[1.4] text-muted">
+                  {p.nick}
+                </p>
+              </div>
+            ))}
+          </figcaption>
+        </figure>
 
-            <figcaption className="mt-[clamp(0.75rem,2.4svh,1.5rem)] text-center">
-              <p className="text-[clamp(1.25rem,2.1vw,2.25rem)] leading-[1.2] font-semibold text-ink">{p.name}</p>
-              <p className="mt-[clamp(0.25rem,0.8svh,0.5rem)] text-[clamp(1rem,1.35vw,1.5rem)] leading-[1.4] text-muted">
-                {p.role}
-              </p>
-            </figcaption>
-          </figure>
-        ))}
+        <div className="min-w-0 flex-1">
+          <h2
+            data-enter
+            style={{ "--enter-delay": "900ms" } as React.CSSProperties}
+            className="text-[clamp(1.25rem,2.3vw,2.75rem)] leading-[1.3] font-semibold tracking-[-0.02em] text-ink"
+          >
+            {/* One phrase per line, held whole, as on screens 01 to 04. */}
+            <span className="block whitespace-nowrap">เปิดโปรเจกต์ที่ไม่เคยเห็น</span>
+            <span className="mt-[clamp(0.25rem,1svh,0.6rem)] block whitespace-nowrap">
+              <span
+                data-mark
+                style={{ "--mark-delay": "3000ms" } as React.CSSProperties}
+                className="-mx-[0.25em] rounded-[0.2em] px-[0.25em] py-[0.05em] box-decoration-clone"
+              >
+                แล้วเข้าใจได้ตั้งแต่วันแรก
+              </span>
+            </span>
+          </h2>
+
+          <div
+            data-enter
+            style={{ "--enter-delay": "1400ms" } as React.CSSProperties}
+            className="mt-[clamp(1.25rem,4svh,2.75rem)] rounded-[clamp(0.75rem,1.1vw,1.5rem)] bg-sheet-2 px-[clamp(0.875rem,1.4vw,1.75rem)] py-[clamp(0.75rem,2svh,1.25rem)]"
+          >
+            {/* Breaks at a space or after the slash first; mid-token only if a
+                piece is still wider than the tile. */}
+            <p className="font-mono text-[clamp(1rem,1.05vw,1.25rem)] leading-[1.5] [overflow-wrap:anywhere] text-ink">
+              {INSTALL.split("/").map((piece, n) => (
+                <Fragment key={n}>
+                  {n > 0 ? "/" : null}
+                  {n > 0 ? <wbr /> : null}
+                  {piece}
+                </Fragment>
+              ))}
+            </p>
+          </div>
+          <p
+            data-enter
+            style={{ "--enter-delay": "1600ms" } as React.CSSProperties}
+            className="mt-[clamp(0.5rem,1.4svh,0.9rem)] text-[clamp(1rem,1.2vw,1.375rem)] leading-[1.45] text-muted"
+          >
+            <span className="inline-block">ติดตั้งคำสั่งเดียว ·</span>{" "}
+            <span className="inline-block">ใช้ได้กับ Claude, Cursor, Windsurf และ Zed</span>
+          </p>
+        </div>
       </div>
     </Frame>
   );

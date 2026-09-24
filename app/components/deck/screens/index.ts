@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import type { Slide } from "../deck-data";
 import { Ask } from "./Ask";
 import { AskReview } from "./AskReview";
+import { Built } from "./Built";
 import { Category } from "./Category";
 import { Close } from "./Close";
 import { Company } from "./Company";
@@ -39,6 +40,7 @@ export const screens: Record<string, ComponentType<ScreenProps>> = {
   demo: Demo,
   output: Output,
   company: Company,
+  built: Built,
   numbers: Numbers,
   use: Use,
   local: Local,
