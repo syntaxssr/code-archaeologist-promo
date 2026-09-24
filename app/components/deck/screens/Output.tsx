@@ -2,7 +2,7 @@ import { Message } from "./Chat";
 import { Frame } from "./Frame";
 import type { ScreenProps } from "./index";
 import { Zoomable } from "./Zoomable";
-import graph from "@/public/shots/explorer-graph.png";
+import graph from "@/public/shots/explorer-flowchart.jpg";
 
 /**
  * Screen 02 · 3/3 — what comes out, last step of "what Code Archaeologist is".
@@ -15,7 +15,10 @@ import graph from "@/public/shots/explorer-graph.png";
  *
  * The chat is illustrative, as on the problem screen; the explorer is a real
  * capture of the sample repository, and its caption says so, so nobody takes
- * it for a map of the discount system in the chat. The caption also credits
+ * it for a map of the discount system in the chat. It is the Flowchart view with
+ * OrderService.place_order selected: the route from the web page through the
+ * controller to the repository and payment, and the four places a change would
+ * reach listed on the right. The caption also credits
  * tree-sitter by name — the team wants the library credited rather than the
  * bare term "AST".
  *
@@ -66,7 +69,7 @@ export function Output({ slide }: ScreenProps) {
         >
           <Zoomable
             src={graph}
-            alt="explorer.html แสดงแผนที่การเรียกของ repo ตัวอย่าง แต่ละจุดคือเมธอด เส้นคือการเรียก"
+            alt="explorer.html หน้า Flowchart ของ repo ตัวอย่าง เลือก OrderService.place_order แล้วเห็นเส้นทางจากหน้าเว็บ ผ่าน controller ไปถึง repository และ payment พร้อมรายการจุดที่กระทบ 4 จุด"
             className="h-auto w-full rounded-[clamp(0.75rem,1.1vw,1.5rem)]"
           />
           <figcaption className="mt-[clamp(0.4rem,1.2svh,0.8rem)] text-[clamp(1rem,1.1vw,1.25rem)] leading-[1.4] text-muted">
